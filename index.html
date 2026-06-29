@@ -6,33 +6,28 @@
     <title>JOELL SHOP · Bot & Hosting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* ============================================================
-           RESET & DARK MODE VARIABEL
-           ============================================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         :root {
-            --bg-primary: #0b0e14;
-            --bg-secondary: #141820;
+            --bg-primary: #0f1218;
             --bg-card: #21262d;
             --bg-card-hover: #2c333a;
-            --text-primary: #f0f4ff;
+            --text-primary: #ffffff;
             --text-secondary: #e0e0e0;
             --text-muted: #6b7e9e;
             --border-subtle: #2a3340;
             --accent: #4d7bfd;
             --accent-glow: rgba(77, 123, 253, 0.25);
             --green: #00b894;
-            --radius: 12px;
-            --radius-sm: 10px;
+            --radius: 10px;
             --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.5);
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --bottom-nav-height: 76px;
+            --transition: 0.2s ease;
+            --bottom-nav-height: 70px;
         }
 
         body {
@@ -41,41 +36,22 @@
             line-height: 1.6;
             padding-bottom: calc(var(--bottom-nav-height) + 20px);
             min-height: 100vh;
-            font-weight: 400;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .app-container {
             max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
             padding: 0 16px 20px;
         }
 
-        /* ============================================================
-           HEADER ATAS
-           ============================================================ */
+        /* ===== HEADER ===== */
         .top-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
             padding: 16px 0 10px;
-            gap: 10px;
             border-bottom: 1px solid var(--border-subtle);
             margin-bottom: 12px;
         }
@@ -83,17 +59,16 @@
         .top-header .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 700;
             font-size: 1.3rem;
             color: var(--text-primary);
-            letter-spacing: -0.5px;
         }
 
         .top-header .logo-area img {
-            height: 40px;
+            height: 38px;
             width: auto;
-            border-radius: 10px;
+            border-radius: 8px;
             background: rgba(255, 255, 255, 0.06);
             padding: 4px;
             border: 1px solid var(--border-subtle);
@@ -106,13 +81,11 @@
             background-clip: text;
         }
 
-        /* ============================================================
-           SEARCH
-           ============================================================ */
+        /* ===== SEARCH ===== */
         .search-wrap {
             display: flex;
             justify-content: center;
-            margin: 6px 0 24px;
+            margin: 6px 0 20px;
         }
 
         .search-box {
@@ -120,25 +93,24 @@
             align-items: center;
             background: var(--bg-card);
             border-radius: 60px;
-            padding: 4px 6px 4px 22px;
-            box-shadow: var(--shadow-card), inset 0 0 0 1px var(--border-subtle);
+            padding: 4px 6px 4px 20px;
+            box-shadow: var(--shadow-card);
             width: 100%;
-            max-width: 540px;
+            border: 1px solid var(--border-subtle);
             transition: var(--transition);
-            border: 1px solid transparent;
         }
 
         .search-box:focus-within {
             border-color: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-card);
+            box-shadow: 0 0 0 4px var(--accent-glow);
         }
 
         .search-box input {
             border: none;
             outline: none;
             flex: 1;
-            padding: 14px 6px;
-            font-size: 1rem;
+            padding: 12px 6px;
+            font-size: 0.95rem;
             background: transparent;
             color: var(--text-primary);
         }
@@ -151,33 +123,25 @@
             background: var(--accent);
             border: none;
             color: #fff;
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: 60px;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .search-box button:hover {
             background: #3a6ae0;
-            transform: scale(1.02);
         }
 
-        /* ============================================================
-           HERO
-           ============================================================ */
+        /* ===== HERO & STATS ===== */
         .hero {
             border-radius: var(--radius);
             overflow: hidden;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             background: var(--bg-card);
-            box-shadow: var(--shadow-card);
             border: 1px solid var(--border-subtle);
-            position: relative;
         }
 
         .hero img {
@@ -192,28 +156,23 @@
         .hero-logo {
             display: flex;
             justify-content: center;
-            padding: 10px 0 4px;
+            padding: 8px 0 4px;
         }
 
         .hero-logo img {
-            height: 60px;
+            height: 56px;
             width: auto;
-            filter: drop-shadow(0 4px 20px rgba(77, 123, 253, 0.15));
         }
 
-        /* ============================================================
-           STATS
-           ============================================================ */
         .stats {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px 40px;
+            gap: 16px 36px;
             background: var(--bg-card);
-            padding: 18px 20px;
+            padding: 14px 18px;
             border-radius: var(--radius);
-            margin: 8px 0 28px;
-            box-shadow: var(--shadow-card);
+            margin: 6px 0 20px;
             border: 1px solid var(--border-subtle);
         }
 
@@ -222,42 +181,35 @@
         }
 
         .stats .stat-item .number {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--accent), #a29bfe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            letter-spacing: -0.5px;
         }
 
         .stats .stat-item .label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
-        /* ============================================================
-           SECTION TITLE
-           ============================================================ */
+        /* ===== SECTION TITLE ===== */
         .section-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin: 24px 0 14px;
             color: var(--accent);
-            letter-spacing: -0.2px;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 22px 0 12px 4px;
         }
 
-        /* ============================================================
-           MENU GRID — seperti contoh (icon + nama, tanpa harga/deskripsi)
-           ============================================================ */
+        /* ===== MENU GRID ===== */
         .grid-menu {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .menu-card {
@@ -272,19 +224,19 @@
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid var(--border-subtle);
-            min-height: 100px;
+            min-height: 95px;
         }
 
         .menu-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--accent);
             transform: translateY(-3px);
-            box-shadow: var(--shadow-card), var(--accent-glow);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
         .menu-card i {
             color: var(--accent);
-            font-size: 28px;
+            font-size: 30px;
             margin-bottom: 10px;
         }
 
@@ -295,13 +247,11 @@
             color: var(--text-secondary);
         }
 
-        /* ============================================================
-           DETAIL MODAL — seperti contoh (dengan varian + tombol keranjang)
-           ============================================================ */
+        /* ===== DETAIL MODAL ===== */
         .detail-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
             z-index: 1000;
             display: none;
@@ -315,19 +265,18 @@
         }
 
         .detail-modal {
-            background: var(--bg-secondary);
+            background: var(--bg-card);
             max-width: 480px;
             width: 100%;
             border-radius: var(--radius);
-            padding: 24px 22px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            padding: 24px 20px;
             border: 1px solid var(--border-subtle);
-            animation: slideIn 0.25s ease;
+            animation: slideUp 0.25s ease;
             max-height: 90vh;
             overflow-y: auto;
         }
 
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
                 transform: translateY(30px);
                 opacity: 0.6;
@@ -353,13 +302,14 @@
         }
 
         .detail-modal h2 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 2px;
             color: var(--text-primary);
         }
 
         .detail-modal .price {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--accent);
             margin: 2px 0 8px;
@@ -367,16 +317,17 @@
 
         .detail-modal .desc {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-            line-height: 1.5;
+            font-size: 0.88rem;
+            margin-bottom: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
         }
 
         .detail-modal .variant-list {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            margin: 8px 0 4px;
+            margin: 6px 0 4px;
         }
 
         .detail-modal .variant-item {
@@ -384,27 +335,31 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 14px;
-            background: var(--bg-card);
-            border-radius: var(--radius-sm);
+            background: var(--bg-primary);
+            border-radius: 6px;
             border: 1px solid var(--border-subtle);
             transition: var(--transition);
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .detail-modal .variant-item:hover {
             border-color: var(--accent);
-            background: var(--bg-card-hover);
         }
 
         .detail-modal .variant-item .vname {
             font-weight: 500;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 100px;
         }
 
         .detail-modal .variant-item .vprice {
             font-weight: 700;
             color: var(--accent);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
 
         .detail-modal .variant-item .vbtn {
@@ -420,6 +375,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
         }
 
         .detail-modal .variant-item .vbtn:hover {
@@ -427,9 +383,7 @@
             box-shadow: 0 0 16px var(--accent-glow);
         }
 
-        /* ============================================================
-           KERANJANG SIDEBAR
-           ============================================================ */
+        /* ===== KERANJANG ===== */
         .cart-overlay {
             position: fixed;
             inset: 0;
@@ -445,20 +399,19 @@
         }
 
         .cart-panel {
-            background: var(--bg-secondary);
+            background: var(--bg-card);
             width: 100%;
-            max-width: 380px;
+            max-width: 370px;
             height: 100vh;
-            padding: 24px 20px;
+            padding: 22px 18px;
             overflow-y: auto;
-            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.5);
             border-left: 1px solid var(--border-subtle);
-            animation: slideInRight 0.3s ease;
+            animation: slideRight 0.25s ease;
         }
 
-        @keyframes slideInRight {
+        @keyframes slideRight {
             from {
-                transform: translateX(60px);
+                transform: translateX(50px);
                 opacity: 0.6;
             }
             to {
@@ -471,19 +424,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .cart-panel .cart-close {
-            background: var(--bg-card);
+            background: var(--bg-primary);
             border: 1px solid var(--border-subtle);
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             color: var(--text-secondary);
             transition: var(--transition);
@@ -498,20 +451,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid var(--border-subtle);
         }
 
         .cart-item .ci-name {
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .cart-item .ci-price {
             font-weight: 700;
             color: var(--accent);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .cart-item .ci-remove {
@@ -519,29 +472,28 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             opacity: 0.6;
             transition: var(--transition);
         }
 
         .cart-item .ci-remove:hover {
             opacity: 1;
-            transform: scale(1.1);
         }
 
         .cart-total {
-            margin-top: 16px;
-            font-size: 1.1rem;
+            margin-top: 14px;
+            font-size: 1.05rem;
             font-weight: 700;
             display: flex;
             justify-content: space-between;
             border-top: 2px solid var(--border-subtle);
-            padding-top: 16px;
+            padding-top: 14px;
             color: var(--text-primary);
         }
 
         .cart-checkout {
-            margin-top: 14px;
+            margin-top: 12px;
             width: 100%;
             padding: 12px;
             background: var(--green);
@@ -549,7 +501,7 @@
             border: none;
             border-radius: 60px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -561,23 +513,20 @@
 
         .cart-payment {
             background: linear-gradient(135deg, #4d7bfd, #a29bfe);
-            margin-top: 8px;
+            margin-top: 6px;
         }
 
         .cart-payment:hover {
             box-shadow: 0 0 30px var(--accent-glow);
         }
 
-        /* ============================================================
-           PROFIL
-           ============================================================ */
+        /* ===== PROFIL ===== */
         .profile-page {
             background: var(--bg-card);
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow-card);
-            margin: 20px 0;
             border: 1px solid var(--border-subtle);
+            margin: 16px 0;
         }
 
         .profile-cover {
@@ -589,81 +538,75 @@
         }
 
         .profile-body {
-            padding: 20px 22px 26px;
+            padding: 18px 20px 24px;
             text-align: center;
         }
 
         .profile-body .profile-logo {
-            margin-top: -55px;
-            margin-bottom: 10px;
+            margin-top: -50px;
+            margin-bottom: 8px;
         }
 
         .profile-body .profile-logo img {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             border: 4px solid var(--bg-card);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             background: var(--bg-card);
             object-fit: contain;
-            padding: 6px;
+            padding: 4px;
         }
 
         .profile-body h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin: 4px 0 2px;
-            font-weight: 700;
         }
 
         .profile-body .bio {
-            max-width: 480px;
-            margin: 8px auto 16px;
+            max-width: 450px;
+            margin: 6px auto 14px;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .profile-contact {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px 24px;
-            background: var(--bg-secondary);
-            padding: 14px 18px;
+            gap: 10px 20px;
+            background: var(--bg-primary);
+            padding: 12px 16px;
             border-radius: 60px;
-            margin-top: 8px;
             border: 1px solid var(--border-subtle);
         }
 
         .profile-contact span {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-weight: 500;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
         .profile-contact i {
             color: var(--accent);
-            width: 18px;
+            width: 16px;
         }
 
-        /* ============================================================
-           PAGE HIDE/SHOW
-           ============================================================ */
+        /* ===== PAGE ===== */
         .page {
             display: none;
         }
-
         .page.active {
             display: block;
-            animation: fadeIn 0.25s ease;
+            animation: fadeIn 0.2s ease;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px);
+                transform: translateY(6px);
             }
             to {
                 opacity: 1;
@@ -671,24 +614,21 @@
             }
         }
 
-        /* ============================================================
-           BOTTOM NAVIGATION
-           ============================================================ */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 200;
-            background: rgba(20, 24, 32, 0.95);
-            backdrop-filter: blur(16px);
+            background: rgba(18, 22, 30, 0.95);
+            backdrop-filter: blur(14px);
             border-top: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: space-around;
             align-items: center;
             height: var(--bottom-nav-height);
-            padding: 6px 4px 12px;
+            padding: 6px 4px 10px;
         }
 
         .bottom-nav .nav-item {
@@ -696,24 +636,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2px;
-            font-size: 0.6rem;
+            gap: 1px;
+            font-size: 0.55rem;
             font-weight: 500;
             color: var(--text-muted);
             cursor: pointer;
             transition: var(--transition);
-            padding: 4px 8px;
+            padding: 4px 6px;
             border-radius: 40px;
             position: relative;
-            min-width: 50px;
+            min-width: 44px;
             background: transparent;
             border: none;
-            text-decoration: none;
         }
 
         .bottom-nav .nav-item i {
-            font-size: 1.3rem;
-            margin-bottom: 1px;
+            font-size: 1.2rem;
             transition: var(--transition);
         }
 
@@ -723,7 +661,7 @@
 
         .bottom-nav .nav-item.active i {
             transform: translateY(-2px);
-            filter: drop-shadow(0 0 12px var(--accent-glow));
+            filter: drop-shadow(0 0 10px var(--accent-glow));
         }
 
         .bottom-nav .nav-item .badge {
@@ -732,14 +670,13 @@
             right: 0;
             background: var(--accent);
             color: #fff;
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             font-weight: 700;
-            padding: 0 6px;
+            padding: 0 5px;
             border-radius: 30px;
-            min-width: 18px;
+            min-width: 16px;
             text-align: center;
-            line-height: 18px;
-            box-shadow: 0 0 16px var(--accent-glow);
+            line-height: 16px;
         }
 
         .bottom-nav .nav-item.payment-item {
@@ -750,14 +687,8 @@
             color: #a29bfe;
         }
 
-        .bottom-nav .nav-item.payment-item.active i {
-            filter: drop-shadow(0 0 16px rgba(162, 155, 254, 0.3));
-        }
-
-        /* ============================================================
-           RESPONSIF
-           ============================================================ */
-        @media (max-width: 500px) {
+        /* ===== RESPONSIF ===== */
+        @media (max-width: 480px) {
             .grid-menu {
                 gap: 10px;
             }
@@ -767,65 +698,61 @@
             }
             .menu-card i {
                 font-size: 24px;
+                margin-bottom: 6px;
             }
             .menu-card span {
-                font-size: 12px;
+                font-size: 11px;
             }
             .detail-modal {
-                padding: 18px 16px;
+                padding: 16px 14px;
             }
             .bottom-nav .nav-item {
-                min-width: 42px;
-                font-size: 0.5rem;
+                min-width: 36px;
+                font-size: 0.45rem;
             }
             .bottom-nav .nav-item i {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             .stats {
-                gap: 12px 24px;
-                padding: 14px;
+                gap: 10px 20px;
+                padding: 12px;
             }
             .stats .stat-item .number {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             .stats .stat-item .label {
-                font-size: 0.65rem;
+                font-size: 0.6rem;
             }
         }
 
-        @media (max-width: 380px) {
+        @media (max-width: 360px) {
             .grid-menu {
-                grid-template-columns: 1fr 1fr;
                 gap: 8px;
             }
             .menu-card {
                 padding: 12px 6px;
-                min-height: 70px;
+                min-height: 68px;
             }
             .menu-card i {
                 font-size: 20px;
-                margin-bottom: 6px;
+                margin-bottom: 4px;
             }
             .menu-card span {
                 font-size: 10px;
             }
             .bottom-nav .nav-item {
-                min-width: 34px;
-                font-size: 0.45rem;
+                min-width: 30px;
+                font-size: 0.4rem;
             }
             .bottom-nav .nav-item i {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             .bottom-nav .nav-item .badge {
                 font-size: 0.4rem;
                 min-width: 14px;
                 line-height: 14px;
-                padding: 0 4px;
+                padding: 0 3px;
             }
-        }
-
-        .text-muted {
-            color: var(--text-muted);
         }
     </style>
 </head>
@@ -833,7 +760,7 @@
 
     <div class="app-container">
 
-        <!-- ====== HEADER ATAS ====== -->
+        <!-- ===== HEADER ===== -->
         <header class="top-header">
             <div class="logo-area">
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
@@ -841,7 +768,7 @@
             </div>
         </header>
 
-        <!-- ====== SEARCH ====== -->
+        <!-- ===== SEARCH ===== -->
         <div class="search-wrap">
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Cari produk..." />
@@ -849,10 +776,10 @@
             </div>
         </div>
 
-        <!-- ====== HALAMAN BERANDA ====== -->
+        <!-- ===== BERANDA ===== -->
         <div class="page active" id="page-home">
             <div class="hero">
-                <img src="https://files.catbox.moe/iai8aa.png" alt="hero 16:9" />
+                <img src="https://files.catbox.moe/iai8aa.png" alt="hero" />
             </div>
             <div class="hero-logo">
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
@@ -863,35 +790,33 @@
                 <div class="stat-item"><span class="number">98%</span><div class="label">Kepuasan</div></div>
             </div>
 
-            <!-- ====== KATEGORI 1 ====== -->
             <div class="section-title">Hosting Dan Kebutuhan Bot WhatsApp</div>
             <div class="grid-menu" id="gridHosting"></div>
 
-            <!-- ====== KATEGORI 2 ====== -->
             <div class="section-title">Jasa Script Bot WhatsApp</div>
             <div class="grid-menu" id="gridScript"></div>
         </div>
 
-        <!-- ====== HALAMAN PROFIL ====== -->
+        <!-- ===== PROFIL ===== -->
         <div class="page" id="page-profile">
             <div class="profile-page">
-                <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover profil 16:9" />
+                <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover" />
                 <div class="profile-body">
                     <div class="profile-logo">
-                        <img src="https://files.catbox.moe/ijemcy.png" alt="logo profil" />
+                        <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
                     </div>
                     <h2>JOELL SHOP</h2>
-                    <p class="bio">Toko online terpercaya untuk kebutuhan bot WhatsApp, hosting, domain, dan layanan digital. Berdiri sejak 2021, melayani ribuan pelanggan dengan kepuasan terbaik.</p>
+                    <p class="bio">Toko online terpercaya untuk kebutuhan bot WhatsApp, hosting, domain, dan layanan digital.</p>
                     <div class="profile-contact">
                         <span><i class="fas fa-envelope"></i> joellshop@gmail.com</span>
                         <span><i class="fab fa-whatsapp"></i> 0877-5175-5160</span>
-                        <span><i class="fas fa-clock"></i> Senin–Jumat: 08.00–21.00</span>
+                        <span><i class="fas fa-clock"></i> 08.00–21.00</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ====== KERANJANG SIDEBAR ====== -->
+        <!-- ===== KERANJANG ===== -->
         <div class="cart-overlay" id="cartOverlay">
             <div class="cart-panel">
                 <div class="cart-header">
@@ -904,7 +829,7 @@
                     <span id="cartTotalPrice">Rp 0</span>
                 </div>
                 <button class="cart-checkout" id="checkoutBtn">
-                    <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
+                    <i class="fab fa-whatsapp"></i> Checkout WA
                 </button>
                 <button class="cart-checkout cart-payment" id="paymentBtn">
                     <i class="fas fa-credit-card"></i> Payment
@@ -912,7 +837,7 @@
             </div>
         </div>
 
-        <!-- ====== DETAIL PRODUK MODAL ====== -->
+        <!-- ===== DETAIL MODAL ===== -->
         <div class="detail-overlay" id="detailOverlay">
             <div class="detail-modal">
                 <button class="detail-close" id="detailCloseBtn"><i class="fas fa-times"></i></button>
@@ -925,7 +850,7 @@
 
     </div>
 
-    <!-- ====== BOTTOM NAVIGATION ====== -->
+    <!-- ===== BOTTOM NAV ===== -->
     <nav class="bottom-nav" id="bottomNav">
         <button class="nav-item active" data-page="home" id="navHome">
             <i class="fas fa-home"></i> Beranda
@@ -947,10 +872,10 @@
 
     <script>
         // ============================================================
-        //  DATA PRODUK — JOELL SHOP
+        //  DATA PRODUK
         // ============================================================
         const products = [
-            // ====== KATEGORI 1: Hosting Dan Kebutuhan Bot WhatsApp ======
+            // KATEGORI 1
             {
                 id: 1,
                 name: 'Panel Pterodactyl',
@@ -1044,7 +969,7 @@
                     { name: 'Domain xyz 1 Tahun + Hosting', price: 550000 }
                 ]
             },
-            // ====== KATEGORI 2: Jasa Script Bot WhatsApp ======
+            // KATEGORI 2
             {
                 id: 7,
                 name: 'Bot Multi Device',
@@ -1126,7 +1051,7 @@
         ];
 
         // ============================================================
-        //  STATE & FUNGSI
+        //  STATE
         // ============================================================
         let cart = [];
         let currentProductId = null;
@@ -1138,7 +1063,7 @@
             window.open(url, '_blank');
         }
 
-        // ====== RENDER MENU GRID (icon + nama saja) ======
+        // ====== RENDER MENU ======
         function renderMenus() {
             const gridHosting = document.getElementById('gridHosting');
             const gridScript = document.getElementById('gridScript');
@@ -1179,6 +1104,7 @@
             cart.forEach((item, idx) => {
                 const subtotal = item.price * item.qty;
                 total += subtotal;
+                const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${subtotal.toLocaleString()}`;
                 html += `
                     <div class="cart-item">
                         <div>
@@ -1186,14 +1112,14 @@
                             <div style="font-size:0.75rem;color:var(--text-muted);">${item.variant} × ${item.qty}</div>
                         </div>
                         <div style="display:flex;align-items:center;gap:10px;">
-                            <span class="ci-price">Rp ${subtotal.toLocaleString()}</span>
+                            <span class="ci-price">${priceText}</span>
                             <button class="ci-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
                 `;
             });
             container.innerHTML = html;
-            document.getElementById('cartTotalPrice').textContent = `Rp ${total.toLocaleString()}`;
+            document.getElementById('cartTotalPrice').textContent = total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`;
             document.querySelectorAll('.ci-remove').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.index);
@@ -1222,7 +1148,7 @@
             document.getElementById('cartOverlay').classList.add('open');
         }
 
-        // ====== DETAIL PRODUK (modal dengan varian + tombol keranjang) ======
+        // ====== DETAIL MODAL ======
         function openDetail(productId) {
             const p = products.find(x => x.id === productId);
             if (!p) return;
@@ -1253,10 +1179,6 @@
                     e.stopPropagation();
                     const variant = this.dataset.variant;
                     const price = parseInt(this.dataset.price);
-                    if (price === 0) {
-                        alert('Harga Custom Request akan diinformasikan lebih lanjut.');
-                        return;
-                    }
                     addToCart(currentProductId, variant, price);
                 });
             });
@@ -1339,7 +1261,6 @@
             if (e.key === 'Enter') doSearch();
         });
 
-        // Klik menu card -> buka detail modal
         document.querySelectorAll('.grid-menu').forEach(grid => {
             grid.addEventListener('click', function(e) {
                 const card = e.target.closest('.menu-card');
@@ -1351,7 +1272,6 @@
             });
         });
 
-        // Detail modal tutup
         document.getElementById('detailCloseBtn').addEventListener('click', function() {
             document.getElementById('detailOverlay').classList.remove('open');
         });
@@ -1359,7 +1279,6 @@
             if (e.target === this) this.classList.remove('open');
         });
 
-        // Checkout & Payment
         document.getElementById('checkoutBtn').addEventListener('click', function() {
             if (cart.length === 0) {
                 alert('Keranjang kosong.');
@@ -1370,9 +1289,10 @@
             cart.forEach(item => {
                 const sub = item.price * item.qty;
                 total += sub;
-                msg += `- ${item.name} (${item.variant}) × ${item.qty} = Rp ${sub.toLocaleString()}\n`;
+                const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${sub.toLocaleString()}`;
+                msg += `- ${item.name} (${item.variant}) × ${item.qty} = ${priceText}\n`;
             });
-            msg += `\nTotal: Rp ${total.toLocaleString()}`;
+            msg += `\nTotal: ${total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`}`;
             window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
         });
 
@@ -1395,4 +1315,4 @@
         updateCartUI();
     </script>
 </body>
-                                           </html>
+</html>

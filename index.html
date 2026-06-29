@@ -247,7 +247,7 @@
             color: var(--text-secondary);
         }
 
-        /* ===== DETAIL MODAL — UKURAN BESAR ===== */
+        /* ===== DETAIL MODAL — VARIAN 2 KOLOM ===== */
         .detail-overlay {
             position: fixed;
             inset: 0;
@@ -330,9 +330,10 @@
             margin: 16px 0 12px;
         }
 
+        /* === VARIAN 2 KOLOM === */
         .detail-modal .variant-list {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin: 6px 0 18px;
         }
@@ -340,7 +341,7 @@
         .detail-modal .variant-item {
             display: flex;
             flex-direction: column;
-            padding: 14px 18px;
+            padding: 12px 14px;
             background: var(--bg-primary);
             border-radius: 8px;
             border: 1px solid var(--border-subtle);
@@ -362,13 +363,13 @@
         .detail-modal .variant-item .vname {
             font-weight: 500;
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
         .detail-modal .variant-item .vprice {
             font-weight: 700;
             color: var(--accent);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             margin-top: 2px;
         }
 
@@ -727,6 +728,19 @@
             .detail-modal .desc {
                 font-size: 0.95rem;
             }
+            .detail-modal .variant-list {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .detail-modal .variant-item {
+                padding: 10px 12px;
+            }
+            .detail-modal .variant-item .vname {
+                font-size: 0.9rem;
+            }
+            .detail-modal .variant-item .vprice {
+                font-size: 0.85rem;
+            }
             .bottom-nav .nav-item {
                 min-width: 40px;
                 font-size: 0.55rem;
@@ -761,6 +775,19 @@
             .menu-card span {
                 font-size: 12px;
             }
+            .detail-modal .variant-list {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .detail-modal .variant-item {
+                padding: 8px 10px;
+            }
+            .detail-modal .variant-item .vname {
+                font-size: 0.8rem;
+            }
+            .detail-modal .variant-item .vprice {
+                font-size: 0.75rem;
+            }
             .bottom-nav .nav-item {
                 min-width: 34px;
                 font-size: 0.45rem;
@@ -785,15 +812,6 @@
             }
             .detail-modal .desc {
                 font-size: 0.85rem;
-            }
-            .detail-modal .variant-item {
-                padding: 10px 14px;
-            }
-            .detail-modal .variant-item .vname {
-                font-size: 0.95rem;
-            }
-            .detail-modal .variant-item .vprice {
-                font-size: 0.9rem;
             }
             .detail-modal .add-cart-btn {
                 font-size: 0.95rem;
@@ -1381,4 +1399,4 @@
         updateCartUI();
     </script>
 </body>
-    </html>
+</html>

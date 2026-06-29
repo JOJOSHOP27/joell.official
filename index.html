@@ -51,7 +51,6 @@
             color: inherit;
         }
 
-        /* Scrollbar kustom */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -262,7 +261,7 @@
         }
 
         /* ============================================================
-           PRODUK GRID — MODERN GLASSMORPHISM
+           PRODUK GRID — TANPA TOMBOL KERANJANG/DETAIL
            ============================================================ */
         .product-grid {
             display: grid;
@@ -282,6 +281,7 @@
             flex-direction: column;
             position: relative;
             backdrop-filter: blur(2px);
+            cursor: pointer;
         }
 
         .product-card:hover {
@@ -330,13 +330,6 @@
             color: var(--text-secondary);
             flex: 1;
             line-height: 1.4;
-        }
-
-        .product-card .btn-group {
-            display: flex;
-            gap: 6px;
-            margin-top: 14px;
-            flex-wrap: wrap;
         }
 
         /* ============================================================
@@ -628,7 +621,7 @@
         }
 
         /* ============================================================
-           DETAIL MODAL
+           DETAIL MODAL — DENGAN DAFTAR VARIAN + HARGA
            ============================================================ */
         .detail-overlay {
             position: fixed;
@@ -661,53 +654,70 @@
         .detail-modal h2 {
             margin-bottom: 4px;
             color: var(--text-primary);
+            font-size: 1.5rem;
         }
 
         .detail-modal .price {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent);
-            margin: 4px 0 14px;
+            margin: 4px 0 6px;
         }
 
-        .detail-modal .variant-group {
-            margin: 16px 0;
-        }
-
-        .detail-modal .variant-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
+        .detail-modal .desc {
             color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
         }
 
-        .detail-modal .variant-group select {
-            width: 100%;
-            padding: 12px;
+        .detail-modal .variant-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 12px 0 18px;
+        }
+
+        .detail-modal .variant-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--bg-card);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-subtle);
-            font-size: 0.95rem;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            outline: none;
+            transition: var(--transition);
         }
 
-        .detail-modal .variant-group select:focus {
+        .detail-modal .variant-item:hover {
             border-color: var(--accent);
+            background: var(--bg-card-hover);
         }
 
-        .detail-modal .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-            flex-wrap: wrap;
+        .detail-modal .variant-item .vname {
+            font-weight: 500;
+            color: var(--text-primary);
         }
 
-        .detail-modal .btn-group .btn {
-            flex: 1;
-            justify-content: center;
-            padding: 13px;
-            font-size: 0.9rem;
+        .detail-modal .variant-item .vprice {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .detail-modal .variant-item .vbtn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .detail-modal .variant-item .vbtn:hover {
+            background: #7c6df0;
+            box-shadow: 0 0 16px var(--accent-glow);
         }
 
         .detail-close {
@@ -719,6 +729,7 @@
             font-weight: 600;
             color: var(--text-secondary);
             transition: var(--transition);
+            margin-bottom: 12px;
         }
 
         .detail-close:hover {
@@ -862,16 +873,15 @@
             .bottom-nav .nav-item i {
                 font-size: 1.2rem;
             }
+            .detail-modal {
+                padding: 20px 16px;
+            }
         }
 
         @media (max-width: 450px) {
             .product-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
                 gap: 12px;
-            }
-            .btn {
-                font-size: 0.65rem;
-                padding: 5px 10px;
             }
             .bottom-nav .nav-item {
                 min-width: 38px;
@@ -973,21 +983,11 @@
         <!-- ====== DETAIL PRODUK MODAL ====== -->
         <div class="detail-overlay" id="detailOverlay">
             <div class="detail-modal">
-                <div style="display:flex;justify-content:space-between;align-items:start;">
-                    <h2 id="detailName">Nama Produk</h2>
-                    <button class="detail-close" id="detailCloseBtn"><i class="fas fa-times"></i> Tutup</button>
-                </div>
+                <button class="detail-close" id="detailCloseBtn"><i class="fas fa-times"></i> Tutup</button>
+                <h2 id="detailName">Nama Produk</h2>
                 <div class="price" id="detailPrice">Rp 0</div>
-                <p id="detailDesc" class="text-muted">Deskripsi produk.</p>
-                <div class="variant-group">
-                    <label for="variantSelect">Pilih Varian:</label>
-                    <select id="variantSelect"></select>
-                </div>
-                <div class="btn-group">
-                    <button class="btn btn-primary" id="detailAddCart"><i class="fas fa-cart-plus"></i> Keranjang</button>
-                    <button class="btn btn-accent" id="detailOrderNow"><i class="fab fa-whatsapp"></i> Pesan</button>
-                    <button class="btn btn-payment" id="detailPaymentBtn"><i class="fas fa-credit-card"></i> Payment</button>
-                </div>
+                <p class="desc" id="detailDesc">Deskripsi produk.</p>
+                <div class="variant-list" id="variantList"></div>
             </div>
         </div>
 
@@ -1015,31 +1015,55 @@
 
     <script>
         // ============================================================
-        //  DATA PRODUK (22 produk dengan varian)
+        //  DATA PRODUK — dengan varian + harga per varian
         // ============================================================
         const products = [
-            { id: 1, name: 'Domain .com', price: 120000, desc: 'Domain internasional .com untuk bisnis & personal.', variants: ['1 Tahun', '2 Tahun', '5 Tahun'], icon: '🌐' },
-            { id: 2, name: 'Domain .id', price: 85000, desc: 'Domain lokal .id, cocok untuk usaha di Indonesia.', variants: ['1 Tahun', '3 Tahun'], icon: '🇮🇩' },
-            { id: 3, name: 'Domain .xyz', price: 45000, desc: 'Domain modern .xyz dengan harga terjangkau.', variants: ['1 Tahun', '2 Tahun'], icon: '🔮' },
-            { id: 4, name: 'Hosting Basic', price: 150000, desc: 'Hosting 5GB, cocok untuk blog & website sederhana.', variants: ['1 Bulan', '6 Bulan', '1 Tahun'], icon: '🖥️' },
-            { id: 5, name: 'Hosting Pro', price: 350000, desc: 'Hosting 20GB, SSD, support 100+ pengunjung/hari.', variants: ['1 Bulan', '1 Tahun'], icon: '⚡' },
-            { id: 6, name: 'Hosting Business', price: 650000, desc: 'Hosting 100GB, unlimited bandwidth, untuk bisnis besar.', variants: ['1 Bulan', '1 Tahun'], icon: '🏢' },
-            { id: 7, name: 'SSL Certificate', price: 200000, desc: 'Sertifikat SSL untuk keamanan website.', variants: ['1 Tahun', '2 Tahun'], icon: '🔒' },
-            { id: 8, name: 'Email Hosting', price: 80000, desc: 'Email profesional dengan domain sendiri.', variants: ['1 Akun', '5 Akun', '10 Akun'], icon: '📧' },
-            { id: 9, name: 'VPS 1 Core', price: 280000, desc: 'VPS 1 vCPU, 2GB RAM, 25GB SSD.', variants: ['1 Bulan', '3 Bulan'], icon: '🧠' },
-            { id: 10, name: 'VPS 2 Core', price: 480000, desc: 'VPS 2 vCPU, 4GB RAM, 50GB SSD.', variants: ['1 Bulan', '3 Bulan'], icon: '🚀' },
-            { id: 11, name: 'Dedicated Server', price: 1250000, desc: 'Server dedicated penuh untuk kebutuhan enterprise.', variants: ['1 Bulan', '1 Tahun'], icon: '🖥️' },
-            { id: 12, name: 'CDN Service', price: 180000, desc: 'Content Delivery Network untuk percepatan akses global.', variants: ['100GB', '500GB', '1TB'], icon: '🌍' },
-            { id: 13, name: 'Backup Otomatis', price: 75000, desc: 'Backup website & database secara terjadwal.', variants: ['1 Bulan', '1 Tahun'], icon: '💾' },
-            { id: 14, name: 'Migration Service', price: 250000, desc: 'Jasa pindah hosting/domain tanpa downtime.', variants: ['1 Website', '3 Website'], icon: '📦' },
-            { id: 15, name: 'Security Audit', price: 450000, desc: 'Audit keamanan website & rekomendasi perbaikan.', variants: ['Basic', 'Pro'], icon: '🛡️' },
-            { id: 16, name: 'WordPress Optimasi', price: 190000, desc: 'Optimasi kecepatan & SEO untuk WordPress.', variants: ['1 Site', '3 Site'], icon: '⚙️' },
-            { id: 17, name: 'Domain .org', price: 110000, desc: 'Domain .org untuk organisasi & komunitas.', variants: ['1 Tahun', '3 Tahun'], icon: '🏛️' },
-            { id: 18, name: 'Domain .net', price: 115000, desc: 'Domain .net untuk jaringan & teknologi.', variants: ['1 Tahun', '2 Tahun'], icon: '🔗' },
-            { id: 19, name: 'Hosting Unlimited', price: 450000, desc: 'Hosting unlimited storage & bandwidth.', variants: ['1 Bulan', '1 Tahun'], icon: '♾️' },
-            { id: 20, name: 'Panel Reseller', price: 750000, desc: 'Panel untuk menjual domain/hosting sendiri.', variants: ['Bulanan', 'Tahunan'], icon: '📊' },
-            { id: 21, name: 'Website Builder', price: 99000, desc: 'Buat website sendiri tanpa coding dengan drag & drop.', variants: ['1 Bulan', '1 Tahun'], icon: '🧩' },
-            { id: 22, name: 'Domain .shop', price: 135000, desc: 'Domain .shop untuk toko online & e-commerce.', variants: ['1 Tahun', '2 Tahun'], icon: '🛍️' }
+            // Produk lama dengan varian sederhana
+            { id: 1, name: 'Domain .com', price: 120000, desc: 'Domain internasional .com untuk bisnis & personal.', icon: '🌐', variants: [{ name: '1 Tahun', price: 120000 }, { name: '2 Tahun', price: 220000 }, { name: '5 Tahun', price: 500000 }] },
+            { id: 2, name: 'Domain .id', price: 85000, desc: 'Domain lokal .id, cocok untuk usaha di Indonesia.', icon: '🇮🇩', variants: [{ name: '1 Tahun', price: 85000 }, { name: '3 Tahun', price: 240000 }] },
+            { id: 3, name: 'Domain .xyz', price: 45000, desc: 'Domain modern .xyz dengan harga terjangkau.', icon: '🔮', variants: [{ name: '1 Tahun', price: 45000 }, { name: '2 Tahun', price: 85000 }] },
+            { id: 4, name: 'Hosting Basic', price: 150000, desc: 'Hosting 5GB, cocok untuk blog & website sederhana.', icon: '🖥️', variants: [{ name: '1 Bulan', price: 150000 }, { name: '6 Bulan', price: 800000 }, { name: '1 Tahun', price: 1500000 }] },
+            { id: 5, name: 'Hosting Pro', price: 350000, desc: 'Hosting 20GB, SSD, support 100+ pengunjung/hari.', icon: '⚡', variants: [{ name: '1 Bulan', price: 350000 }, { name: '1 Tahun', price: 3500000 }] },
+            { id: 6, name: 'Hosting Business', price: 650000, desc: 'Hosting 100GB, unlimited bandwidth, untuk bisnis besar.', icon: '🏢', variants: [{ name: '1 Bulan', price: 650000 }, { name: '1 Tahun', price: 6500000 }] },
+            { id: 7, name: 'SSL Certificate', price: 200000, desc: 'Sertifikat SSL untuk keamanan website.', icon: '🔒', variants: [{ name: '1 Tahun', price: 200000 }, { name: '2 Tahun', price: 380000 }] },
+            { id: 8, name: 'Email Hosting', price: 80000, desc: 'Email profesional dengan domain sendiri.', icon: '📧', variants: [{ name: '1 Akun', price: 80000 }, { name: '5 Akun', price: 350000 }, { name: '10 Akun', price: 650000 }] },
+            { id: 9, name: 'VPS 1 Core', price: 280000, desc: 'VPS 1 vCPU, 2GB RAM, 25GB SSD.', icon: '🧠', variants: [{ name: '1 Bulan', price: 280000 }, { name: '3 Bulan', price: 780000 }] },
+            { id: 10, name: 'VPS 2 Core', price: 480000, desc: 'VPS 2 vCPU, 4GB RAM, 50GB SSD.', icon: '🚀', variants: [{ name: '1 Bulan', price: 480000 }, { name: '3 Bulan', price: 1380000 }] },
+            { id: 11, name: 'Dedicated Server', price: 1250000, desc: 'Server dedicated penuh untuk kebutuhan enterprise.', icon: '🖥️', variants: [{ name: '1 Bulan', price: 1250000 }, { name: '1 Tahun', price: 12500000 }] },
+            { id: 12, name: 'CDN Service', price: 180000, desc: 'Content Delivery Network untuk percepatan akses global.', icon: '🌍', variants: [{ name: '100GB', price: 180000 }, { name: '500GB', price: 800000 }, { name: '1TB', price: 1500000 }] },
+            { id: 13, name: 'Backup Otomatis', price: 75000, desc: 'Backup website & database secara terjadwal.', icon: '💾', variants: [{ name: '1 Bulan', price: 75000 }, { name: '1 Tahun', price: 750000 }] },
+            { id: 14, name: 'Migration Service', price: 250000, desc: 'Jasa pindah hosting/domain tanpa downtime.', icon: '📦', variants: [{ name: '1 Website', price: 250000 }, { name: '3 Website', price: 650000 }] },
+            { id: 15, name: 'Security Audit', price: 450000, desc: 'Audit keamanan website & rekomendasi perbaikan.', icon: '🛡️', variants: [{ name: 'Basic', price: 450000 }, { name: 'Pro', price: 850000 }] },
+            { id: 16, name: 'WordPress Optimasi', price: 190000, desc: 'Optimasi kecepatan & SEO untuk WordPress.', icon: '⚙️', variants: [{ name: '1 Site', price: 190000 }, { name: '3 Site', price: 500000 }] },
+            { id: 17, name: 'Domain .org', price: 110000, desc: 'Domain .org untuk organisasi & komunitas.', icon: '🏛️', variants: [{ name: '1 Tahun', price: 110000 }, { name: '3 Tahun', price: 310000 }] },
+            { id: 18, name: 'Domain .net', price: 115000, desc: 'Domain .net untuk jaringan & teknologi.', icon: '🔗', variants: [{ name: '1 Tahun', price: 115000 }, { name: '2 Tahun', price: 210000 }] },
+            { id: 19, name: 'Hosting Unlimited', price: 450000, desc: 'Hosting unlimited storage & bandwidth.', icon: '♾️', variants: [{ name: '1 Bulan', price: 450000 }, { name: '1 Tahun', price: 4500000 }] },
+            { id: 20, name: 'Panel Reseller', price: 750000, desc: 'Panel untuk menjual domain/hosting sendiri.', icon: '📊', variants: [{ name: 'Bulanan', price: 750000 }, { name: 'Tahunan', price: 7500000 }] },
+            { id: 21, name: 'Website Builder', price: 99000, desc: 'Buat website sendiri tanpa coding dengan drag & drop.', icon: '🧩', variants: [{ name: '1 Bulan', price: 99000 }, { name: '1 Tahun', price: 990000 }] },
+            { id: 22, name: 'Domain .shop', price: 135000, desc: 'Domain .shop untuk toko online & e-commerce.', icon: '🛍️', variants: [{ name: '1 Tahun', price: 135000 }, { name: '2 Tahun', price: 250000 }] },
+            // ====== PRODUK BARU: PANEL PTERODACTYL (seperti contoh gambar) ======
+            {
+                id: 23,
+                name: 'Panel Pterodactyl',
+                price: 2000,
+                desc: 'Panel Pterodactyl hosting bot/game dengan performa stabil dan harga terjangkau.',
+                icon: '🐉',
+                variants: [
+                    { name: '1GB RAM', price: 2000 },
+                    { name: '2GB RAM', price: 3000 },
+                    { name: '3GB RAM', price: 4000 },
+                    { name: '4GB RAM', price: 5000 },
+                    { name: '5GB RAM', price: 6000 },
+                    { name: '6GB RAM', price: 7000 },
+                    { name: '7GB RAM', price: 8000 },
+                    { name: '8GB RAM', price: 9000 },
+                    { name: '9GB RAM', price: 10000 },
+                    { name: '11GB RAM', price: 11000 },
+                    { name: 'Unlimited RAM', price: 13000 },
+                    { name: 'Reseller Panel', price: 16000 },
+                    { name: 'Admin Panel', price: 18000 }
+                ]
+            }
         ];
 
         let cart = [];
@@ -1052,7 +1076,7 @@
             window.open(url, '_blank');
         }
 
-        // ====== RENDER PRODUK ======
+        // ====== RENDER PRODUK (tanpa tombol aksi) ======
         function renderProducts(filter = '') {
             const grid = document.getElementById('productGrid');
             const keyword = filter.toLowerCase().trim();
@@ -1067,16 +1091,14 @@
                 return;
             }
             filtered.forEach(p => {
+                // Tampilkan harga termurah sebagai harga awal
+                const minPrice = Math.min(...p.variants.map(v => v.price));
                 html += `
                         <div class="product-card" data-id="${p.id}">
                             <div class="product-img">${p.icon}</div>
                             <div class="product-name">${p.name}</div>
-                            <div class="product-price">Rp ${p.price.toLocaleString()}</div>
+                            <div class="product-price">Rp ${minPrice.toLocaleString()}</div>
                             <div class="product-desc">${p.desc}</div>
-                            <div class="btn-group">
-                                <button class="btn btn-primary add-cart-btn" data-id="${p.id}"><i class="fas fa-cart-plus"></i> Keranjang</button>
-                                <button class="btn btn-outline detail-btn" data-id="${p.id}"><i class="fas fa-eye"></i> Detail</button>
-                            </div>
                         </div>
                     `;
             });
@@ -1086,7 +1108,6 @@
         // ====== KERANJANG ======
         function updateCartUI() {
             const count = cart.reduce((sum, i) => sum + i.qty, 0);
-            document.getElementById('cartCount').textContent = count;
             document.getElementById('navCartBadge').textContent = count;
 
             const container = document.getElementById('cartItems');
@@ -1124,35 +1145,62 @@
             });
         }
 
-        function addToCart(productId, variant) {
+        function addToCart(productId, variantName, variantPrice) {
             const p = products.find(x => x.id === productId);
             if (!p) return;
-            const existing = cart.find(item => item.id === productId && item.variant === variant);
+            const existing = cart.find(item => item.id === productId && item.variant === variantName);
             if (existing) {
                 existing.qty += 1;
             } else {
-                cart.push({ id: p.id, name: p.name, price: p.price, variant: variant, qty: 1 });
+                cart.push({
+                    id: p.id,
+                    name: p.name,
+                    price: variantPrice,
+                    variant: variantName,
+                    qty: 1
+                });
             }
             updateCartUI();
             document.getElementById('cartOverlay').classList.add('open');
         }
 
-        // ====== DETAIL PRODUK ======
+        // ====== DETAIL PRODUK (modal dengan daftar varian) ======
         function openDetail(productId) {
             const p = products.find(x => x.id === productId);
             if (!p) return;
             currentProductId = p.id;
             document.getElementById('detailName').textContent = p.name;
-            document.getElementById('detailPrice').textContent = `Rp ${p.price.toLocaleString()}`;
+            // Tampilkan harga termurah
+            const minPrice = Math.min(...p.variants.map(v => v.price));
+            document.getElementById('detailPrice').textContent = `Rp ${minPrice.toLocaleString()}`;
             document.getElementById('detailDesc').textContent = p.desc;
-            const select = document.getElementById('variantSelect');
-            select.innerHTML = '';
+
+            const list = document.getElementById('variantList');
+            list.innerHTML = '';
             p.variants.forEach(v => {
-                const opt = document.createElement('option');
-                opt.value = v;
-                opt.textContent = v;
-                select.appendChild(opt);
+                const div = document.createElement('div');
+                div.className = 'variant-item';
+                div.innerHTML = `
+                        <span class="vname">${v.name}</span>
+                        <span class="vprice">Rp ${v.price.toLocaleString()}</span>
+                        <button class="vbtn" data-variant="${v.name}" data-price="${v.price}">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                    `;
+                list.appendChild(div);
             });
+
+            // Event listener untuk tombol "+" di setiap varian
+            list.querySelectorAll('.vbtn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const variant = this.dataset.variant;
+                    const price = parseInt(this.dataset.price);
+                    addToCart(currentProductId, variant, price);
+                    // Tidak menutup modal agar user bisa lanjut tambah varian lain
+                });
+            });
+
             document.getElementById('detailOverlay').classList.add('open');
         }
 
@@ -1215,53 +1263,22 @@
             if (e.key === 'Enter') doSearch();
         });
 
-        // Delegasi event produk
+        // Klik kartu produk -> buka detail modal
         document.getElementById('productGrid').addEventListener('click', function(e) {
-            const target = e.target.closest('button');
-            if (!target) return;
-            const productId = parseInt(target.dataset.id);
-            if (isNaN(productId)) return;
-
-            if (target.classList.contains('add-cart-btn')) {
-                const p = products.find(x => x.id === productId);
-                if (p && p.variants.length > 0) addToCart(productId, p.variants[0]);
-            } else if (target.classList.contains('detail-btn')) {
+            const card = e.target.closest('.product-card');
+            if (!card) return;
+            const productId = parseInt(card.dataset.id);
+            if (!isNaN(productId)) {
                 openDetail(productId);
             }
         });
 
-        // Detail modal
+        // Detail modal tutup
         document.getElementById('detailCloseBtn').addEventListener('click', function() {
             document.getElementById('detailOverlay').classList.remove('open');
         });
         document.getElementById('detailOverlay').addEventListener('click', function(e) {
             if (e.target === this) this.classList.remove('open');
-        });
-
-        document.getElementById('detailAddCart').addEventListener('click', function() {
-            const select = document.getElementById('variantSelect');
-            const variant = select.value;
-            if (currentProductId && variant) {
-                addToCart(currentProductId, variant);
-                document.getElementById('detailOverlay').classList.remove('open');
-            }
-        });
-
-        document.getElementById('detailOrderNow').addEventListener('click', function() {
-            const select = document.getElementById('variantSelect');
-            const variant = select.value;
-            const p = products.find(x => x.id === currentProductId);
-            if (!p || !variant) return;
-            const msg = `Halo, saya mau pesan produk: ${p.name} (${variant}) - Rp ${p.price.toLocaleString()}`;
-            window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
-            document.getElementById('detailOverlay').classList.remove('open');
-        });
-
-        document.getElementById('detailPaymentBtn').addEventListener('click', function() {
-            const p = products.find(x => x.id === currentProductId);
-            if (!p) return;
-            goToPayment(p.name, p.price);
-            document.getElementById('detailOverlay').classList.remove('open');
         });
 
         // Checkout & Payment dari keranjang
@@ -1300,4 +1317,4 @@
         updateCartUI();
     </script>
 </body>
-    </html>
+</html>

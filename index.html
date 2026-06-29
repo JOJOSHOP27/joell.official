@@ -247,7 +247,7 @@
             color: var(--text-secondary);
         }
 
-        /* ===== DETAIL MODAL ===== */
+        /* ===== DETAIL MODAL — SEPERTI CONTOH GAMBAR ===== */
         .detail-overlay {
             position: fixed;
             inset: 0;
@@ -334,13 +334,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 14px;
+            padding: 8px 12px;
             background: var(--bg-primary);
             border-radius: 6px;
             border: 1px solid var(--border-subtle);
             transition: var(--transition);
             gap: 8px;
-            flex-wrap: wrap;
         }
 
         .detail-modal .variant-item:hover {
@@ -352,13 +351,13 @@
             color: var(--text-primary);
             font-size: 0.85rem;
             flex: 1;
-            min-width: 100px;
         }
 
         .detail-modal .variant-item .vprice {
             font-weight: 700;
             color: var(--accent);
             font-size: 0.85rem;
+            margin-right: 8px;
             white-space: nowrap;
         }
 
@@ -366,15 +365,12 @@
             background: var(--accent);
             color: #fff;
             border: none;
-            padding: 5px 14px;
+            padding: 4px 14px;
             border-radius: 40px;
             font-weight: 600;
             font-size: 0.7rem;
             cursor: pointer;
             transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 4px;
             white-space: nowrap;
         }
 
@@ -722,6 +718,21 @@
             }
             .stats .stat-item .label {
                 font-size: 0.6rem;
+            }
+            .detail-modal .variant-item {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+            .detail-modal .variant-item .vname {
+                font-size: 0.8rem;
+                flex: 1 1 100%;
+            }
+            .detail-modal .variant-item .vprice {
+                font-size: 0.8rem;
+            }
+            .detail-modal .variant-item .vbtn {
+                font-size: 0.65rem;
+                padding: 3px 10px;
             }
         }
 
@@ -1168,7 +1179,7 @@
                     <span class="vname">${v.name}</span>
                     <span class="vprice">${priceText}</span>
                     <button class="vbtn" data-variant="${v.name}" data-price="${v.price}">
-                        <i class="fas fa-cart-plus"></i> Tambah
+                        Tambah
                     </button>
                 `;
                 list.appendChild(div);

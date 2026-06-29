@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>JoellShop · Domain & Hosting</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>JOELL SHOP · Bot & Hosting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         /* ============================================================
            RESET & DARK MODE VARIABEL
@@ -25,14 +25,13 @@
             --text-secondary: #a8b5cf;
             --text-muted: #6b7e9e;
             --border-subtle: #2a3340;
-            --accent: #6c5ce7;
-            --accent-glow: rgba(108, 92, 231, 0.25);
+            --accent: #4d7bfd;
+            --accent-glow: rgba(77, 123, 253, 0.25);
             --green: #00b894;
-            --gold: #fdcb6e;
             --radius: 20px;
             --radius-sm: 12px;
             --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 40px rgba(108, 92, 231, 0.08);
+            --shadow-glow: 0 0 40px rgba(77, 123, 253, 0.08);
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --bottom-nav-height: 76px;
         }
@@ -165,7 +164,7 @@
         }
 
         .search-box button:hover {
-            background: #7c6df0;
+            background: #3a6ae0;
             transform: scale(1.02);
         }
 
@@ -200,7 +199,7 @@
         .hero-logo img {
             height: 64px;
             width: auto;
-            filter: drop-shadow(0 4px 20px rgba(108, 92, 231, 0.15));
+            filter: drop-shadow(0 4px 20px rgba(77, 123, 253, 0.15));
         }
 
         /* ============================================================
@@ -246,22 +245,25 @@
            SECTION TITLE
            ============================================================ */
         .section-title {
-            font-size: 1.7rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin: 28px 0 16px;
             display: flex;
             align-items: center;
             gap: 12px;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
+            color: var(--text-secondary);
+            border-left: 4px solid var(--accent);
+            padding-left: 14px;
         }
 
         .section-title i {
             color: var(--accent);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         /* ============================================================
-           PRODUK GRID — TANPA TOMBOL KERANJANG/DETAIL
+           PRODUK GRID
            ============================================================ */
         .product-grid {
             display: grid;
@@ -301,7 +303,7 @@
             align-items: center;
             justify-content: center;
             font-size: 3rem;
-            color: var(--text-muted);
+            color: var(--accent);
             border: 1px solid var(--border-subtle);
             transition: var(--transition);
         }
@@ -309,6 +311,11 @@
         .product-card:hover .product-img {
             border-color: var(--accent);
             transform: scale(1.02);
+        }
+
+        .product-card .product-img i {
+            font-size: 3rem;
+            color: var(--accent);
         }
 
         .product-card .product-name {
@@ -333,7 +340,7 @@
         }
 
         /* ============================================================
-           BUTTONS — MODERN
+           BUTTONS
            ============================================================ */
         .btn {
             border: none;
@@ -363,7 +370,7 @@
         }
 
         .btn-primary:hover {
-            background: #7c6df0;
+            background: #3a6ae0;
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
@@ -387,11 +394,11 @@
         .btn-outline:hover {
             border-color: var(--accent);
             color: var(--text-primary);
-            background: rgba(108, 92, 231, 0.08);
+            background: rgba(77, 123, 253, 0.08);
         }
 
         .btn-payment {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            background: linear-gradient(135deg, #4d7bfd, #a29bfe);
             color: #fff;
             border: none;
         }
@@ -532,7 +539,7 @@
         }
 
         .cart-payment {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            background: linear-gradient(135deg, #4d7bfd, #a29bfe);
             margin-top: 10px;
         }
 
@@ -621,7 +628,7 @@
         }
 
         /* ============================================================
-           DETAIL MODAL — DENGAN DAFTAR VARIAN + HARGA
+           DETAIL MODAL
            ============================================================ */
         .detail-overlay {
             position: fixed;
@@ -716,7 +723,7 @@
         }
 
         .detail-modal .variant-item .vbtn:hover {
-            background: #7c6df0;
+            background: #3a6ae0;
             box-shadow: 0 0 16px var(--accent-glow);
         }
 
@@ -761,7 +768,7 @@
         }
 
         /* ============================================================
-           BOTTOM NAVIGATION — MODERN DARK
+           BOTTOM NAVIGATION
            ============================================================ */
         .bottom-nav {
             position: fixed;
@@ -876,6 +883,10 @@
             .detail-modal {
                 padding: 20px 16px;
             }
+            .section-title {
+                font-size: 1.1rem;
+                padding-left: 10px;
+            }
         }
 
         @media (max-width: 450px) {
@@ -911,7 +922,7 @@
         <header class="top-header">
             <div class="logo-area">
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
-                <span>JoellShop</span>
+                <span>JOELL SHOP</span>
             </div>
         </header>
 
@@ -932,12 +943,22 @@
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
             </div>
             <div class="stats">
-                <div class="stat-item"><span class="number">1.247+</span><div class="label">Produk Terjual</div></div>
-                <div class="stat-item"><span class="number">892+</span><div class="label">Pelanggan</div></div>
+                <div class="stat-item"><span class="number">12.5K</span><div class="label">Total Terjual</div></div>
+                <div class="stat-item"><span class="number">8.2K</span><div class="label">Pelanggan</div></div>
                 <div class="stat-item"><span class="number">98%</span><div class="label">Kepuasan</div></div>
             </div>
-            <div class="section-title"><i class="fas fa-boxes"></i> Produk Kami</div>
-            <div class="product-grid" id="productGrid"></div>
+
+            <!-- ====== KATEGORI 1 ====== -->
+            <div class="section-title">
+                <i class="fas fa-server"></i> Hosting Dan Kebutuhan Bot WhatsApp
+            </div>
+            <div class="product-grid" id="gridHosting"></div>
+
+            <!-- ====== KATEGORI 2 ====== -->
+            <div class="section-title">
+                <i class="fas fa-robot"></i> Jasa Script Bot WhatsApp
+            </div>
+            <div class="product-grid" id="gridScript"></div>
         </div>
 
         <!-- ====== HALAMAN PROFIL ====== -->
@@ -948,8 +969,8 @@
                     <div class="profile-logo">
                         <img src="https://files.catbox.moe/ijemcy.png" alt="logo profil" />
                     </div>
-                    <h2>JoellShop</h2>
-                    <p class="bio">Toko online terpercaya untuk kebutuhan domain, hosting, dan layanan digital. Berdiri sejak 2020, melayani ribuan pelanggan dengan kepuasan terbaik.</p>
+                    <h2>JOELL SHOP</h2>
+                    <p class="bio">Toko online terpercaya untuk kebutuhan bot WhatsApp, hosting, domain, dan layanan digital. Berdiri sejak 2021, melayani ribuan pelanggan dengan kepuasan terbaik.</p>
                     <div class="profile-contact">
                         <span><i class="fas fa-envelope"></i> joellshop@gmail.com</span>
                         <span><i class="fab fa-whatsapp"></i> 0877-5175-5160</span>
@@ -993,7 +1014,7 @@
 
     </div>
 
-    <!-- ====== BOTTOM NAVIGATION (5 TOMBOL) ====== -->
+    <!-- ====== BOTTOM NAVIGATION ====== -->
     <nav class="bottom-nav" id="bottomNav">
         <button class="nav-item active" data-page="home" id="navHome">
             <i class="fas fa-home"></i> Beranda
@@ -1015,39 +1036,17 @@
 
     <script>
         // ============================================================
-        //  DATA PRODUK — dengan varian + harga per varian
+        //  DATA PRODUK — JOELL SHOP dengan Font Awesome
         // ============================================================
         const products = [
-            // Produk lama dengan varian sederhana
-            { id: 1, name: 'Domain .com', price: 120000, desc: 'Domain internasional .com untuk bisnis & personal.', icon: '🌐', variants: [{ name: '1 Tahun', price: 120000 }, { name: '2 Tahun', price: 220000 }, { name: '5 Tahun', price: 500000 }] },
-            { id: 2, name: 'Domain .id', price: 85000, desc: 'Domain lokal .id, cocok untuk usaha di Indonesia.', icon: '🇮🇩', variants: [{ name: '1 Tahun', price: 85000 }, { name: '3 Tahun', price: 240000 }] },
-            { id: 3, name: 'Domain .xyz', price: 45000, desc: 'Domain modern .xyz dengan harga terjangkau.', icon: '🔮', variants: [{ name: '1 Tahun', price: 45000 }, { name: '2 Tahun', price: 85000 }] },
-            { id: 4, name: 'Hosting Basic', price: 150000, desc: 'Hosting 5GB, cocok untuk blog & website sederhana.', icon: '🖥️', variants: [{ name: '1 Bulan', price: 150000 }, { name: '6 Bulan', price: 800000 }, { name: '1 Tahun', price: 1500000 }] },
-            { id: 5, name: 'Hosting Pro', price: 350000, desc: 'Hosting 20GB, SSD, support 100+ pengunjung/hari.', icon: '⚡', variants: [{ name: '1 Bulan', price: 350000 }, { name: '1 Tahun', price: 3500000 }] },
-            { id: 6, name: 'Hosting Business', price: 650000, desc: 'Hosting 100GB, unlimited bandwidth, untuk bisnis besar.', icon: '🏢', variants: [{ name: '1 Bulan', price: 650000 }, { name: '1 Tahun', price: 6500000 }] },
-            { id: 7, name: 'SSL Certificate', price: 200000, desc: 'Sertifikat SSL untuk keamanan website.', icon: '🔒', variants: [{ name: '1 Tahun', price: 200000 }, { name: '2 Tahun', price: 380000 }] },
-            { id: 8, name: 'Email Hosting', price: 80000, desc: 'Email profesional dengan domain sendiri.', icon: '📧', variants: [{ name: '1 Akun', price: 80000 }, { name: '5 Akun', price: 350000 }, { name: '10 Akun', price: 650000 }] },
-            { id: 9, name: 'VPS 1 Core', price: 280000, desc: 'VPS 1 vCPU, 2GB RAM, 25GB SSD.', icon: '🧠', variants: [{ name: '1 Bulan', price: 280000 }, { name: '3 Bulan', price: 780000 }] },
-            { id: 10, name: 'VPS 2 Core', price: 480000, desc: 'VPS 2 vCPU, 4GB RAM, 50GB SSD.', icon: '🚀', variants: [{ name: '1 Bulan', price: 480000 }, { name: '3 Bulan', price: 1380000 }] },
-            { id: 11, name: 'Dedicated Server', price: 1250000, desc: 'Server dedicated penuh untuk kebutuhan enterprise.', icon: '🖥️', variants: [{ name: '1 Bulan', price: 1250000 }, { name: '1 Tahun', price: 12500000 }] },
-            { id: 12, name: 'CDN Service', price: 180000, desc: 'Content Delivery Network untuk percepatan akses global.', icon: '🌍', variants: [{ name: '100GB', price: 180000 }, { name: '500GB', price: 800000 }, { name: '1TB', price: 1500000 }] },
-            { id: 13, name: 'Backup Otomatis', price: 75000, desc: 'Backup website & database secara terjadwal.', icon: '💾', variants: [{ name: '1 Bulan', price: 75000 }, { name: '1 Tahun', price: 750000 }] },
-            { id: 14, name: 'Migration Service', price: 250000, desc: 'Jasa pindah hosting/domain tanpa downtime.', icon: '📦', variants: [{ name: '1 Website', price: 250000 }, { name: '3 Website', price: 650000 }] },
-            { id: 15, name: 'Security Audit', price: 450000, desc: 'Audit keamanan website & rekomendasi perbaikan.', icon: '🛡️', variants: [{ name: 'Basic', price: 450000 }, { name: 'Pro', price: 850000 }] },
-            { id: 16, name: 'WordPress Optimasi', price: 190000, desc: 'Optimasi kecepatan & SEO untuk WordPress.', icon: '⚙️', variants: [{ name: '1 Site', price: 190000 }, { name: '3 Site', price: 500000 }] },
-            { id: 17, name: 'Domain .org', price: 110000, desc: 'Domain .org untuk organisasi & komunitas.', icon: '🏛️', variants: [{ name: '1 Tahun', price: 110000 }, { name: '3 Tahun', price: 310000 }] },
-            { id: 18, name: 'Domain .net', price: 115000, desc: 'Domain .net untuk jaringan & teknologi.', icon: '🔗', variants: [{ name: '1 Tahun', price: 115000 }, { name: '2 Tahun', price: 210000 }] },
-            { id: 19, name: 'Hosting Unlimited', price: 450000, desc: 'Hosting unlimited storage & bandwidth.', icon: '♾️', variants: [{ name: '1 Bulan', price: 450000 }, { name: '1 Tahun', price: 4500000 }] },
-            { id: 20, name: 'Panel Reseller', price: 750000, desc: 'Panel untuk menjual domain/hosting sendiri.', icon: '📊', variants: [{ name: 'Bulanan', price: 750000 }, { name: 'Tahunan', price: 7500000 }] },
-            { id: 21, name: 'Website Builder', price: 99000, desc: 'Buat website sendiri tanpa coding dengan drag & drop.', icon: '🧩', variants: [{ name: '1 Bulan', price: 99000 }, { name: '1 Tahun', price: 990000 }] },
-            { id: 22, name: 'Domain .shop', price: 135000, desc: 'Domain .shop untuk toko online & e-commerce.', icon: '🛍️', variants: [{ name: '1 Tahun', price: 135000 }, { name: '2 Tahun', price: 250000 }] },
-            // ====== PRODUK BARU: PANEL PTERODACTYL (seperti contoh gambar) ======
+            // ====== KATEGORI 1: Hosting Dan Kebutuhan Bot WhatsApp ======
             {
-                id: 23,
+                id: 1,
                 name: 'Panel Pterodactyl',
                 price: 2000,
                 desc: 'Panel Pterodactyl hosting bot/game dengan performa stabil dan harga terjangkau.',
-                icon: '🐉',
+                icon: 'fa-server',
+                category: 'hosting',
                 variants: [
                     { name: '1GB RAM', price: 2000 },
                     { name: '2GB RAM', price: 3000 },
@@ -1063,258 +1062,30 @@
                     { name: 'Reseller Panel', price: 16000 },
                     { name: 'Admin Panel', price: 18000 }
                 ]
-            }
-        ];
-
-        let cart = [];
-        let currentProductId = null;
-
-        // ====== FUNGSI REDIRECT PAYMENT ======
-        function goToPayment(productName, totalPrice) {
-            const url =
-                `https://joell-payment.vercel.app/?product=${encodeURIComponent(productName)}&total=${totalPrice}`;
-            window.open(url, '_blank');
-        }
-
-        // ====== RENDER PRODUK (tanpa tombol aksi) ======
-        function renderProducts(filter = '') {
-            const grid = document.getElementById('productGrid');
-            const keyword = filter.toLowerCase().trim();
-            let html = '';
-            const filtered = products.filter(p =>
-                p.name.toLowerCase().includes(keyword) ||
-                p.desc.toLowerCase().includes(keyword)
-            );
-            if (filtered.length === 0) {
-                grid.innerHTML =
-                    `<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px;">Tidak ada produk ditemukan.</p>`;
-                return;
-            }
-            filtered.forEach(p => {
-                // Tampilkan harga termurah sebagai harga awal
-                const minPrice = Math.min(...p.variants.map(v => v.price));
-                html += `
-                        <div class="product-card" data-id="${p.id}">
-                            <div class="product-img">${p.icon}</div>
-                            <div class="product-name">${p.name}</div>
-                            <div class="product-price">Rp ${minPrice.toLocaleString()}</div>
-                            <div class="product-desc">${p.desc}</div>
-                        </div>
-                    `;
-            });
-            grid.innerHTML = html;
-        }
-
-        // ====== KERANJANG ======
-        function updateCartUI() {
-            const count = cart.reduce((sum, i) => sum + i.qty, 0);
-            document.getElementById('navCartBadge').textContent = count;
-
-            const container = document.getElementById('cartItems');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px;">Keranjang kosong.</p>';
-                document.getElementById('cartTotalPrice').textContent = 'Rp 0';
-                return;
-            }
-            let html = '';
-            let total = 0;
-            cart.forEach((item, idx) => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                html += `
-                        <div class="cart-item">
-                            <div>
-                                <div class="ci-name">${item.name}</div>
-                                <div style="font-size:0.8rem;color:var(--text-muted);">${item.variant} × ${item.qty}</div>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:12px;">
-                                <span class="ci-price">Rp ${subtotal.toLocaleString()}</span>
-                                <button class="ci-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
-                            </div>
-                        </div>
-                    `;
-            });
-            container.innerHTML = html;
-            document.getElementById('cartTotalPrice').textContent = `Rp ${total.toLocaleString()}`;
-            document.querySelectorAll('.ci-remove').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    cart.splice(idx, 1);
-                    updateCartUI();
-                });
-            });
-        }
-
-        function addToCart(productId, variantName, variantPrice) {
-            const p = products.find(x => x.id === productId);
-            if (!p) return;
-            const existing = cart.find(item => item.id === productId && item.variant === variantName);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                cart.push({
-                    id: p.id,
-                    name: p.name,
-                    price: variantPrice,
-                    variant: variantName,
-                    qty: 1
-                });
-            }
-            updateCartUI();
-            document.getElementById('cartOverlay').classList.add('open');
-        }
-
-        // ====== DETAIL PRODUK (modal dengan daftar varian) ======
-        function openDetail(productId) {
-            const p = products.find(x => x.id === productId);
-            if (!p) return;
-            currentProductId = p.id;
-            document.getElementById('detailName').textContent = p.name;
-            // Tampilkan harga termurah
-            const minPrice = Math.min(...p.variants.map(v => v.price));
-            document.getElementById('detailPrice').textContent = `Rp ${minPrice.toLocaleString()}`;
-            document.getElementById('detailDesc').textContent = p.desc;
-
-            const list = document.getElementById('variantList');
-            list.innerHTML = '';
-            p.variants.forEach(v => {
-                const div = document.createElement('div');
-                div.className = 'variant-item';
-                div.innerHTML = `
-                        <span class="vname">${v.name}</span>
-                        <span class="vprice">Rp ${v.price.toLocaleString()}</span>
-                        <button class="vbtn" data-variant="${v.name}" data-price="${v.price}">
-                            <i class="fas fa-cart-plus"></i>
-                        </button>
-                    `;
-                list.appendChild(div);
-            });
-
-            // Event listener untuk tombol "+" di setiap varian
-            list.querySelectorAll('.vbtn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const variant = this.dataset.variant;
-                    const price = parseInt(this.dataset.price);
-                    addToCart(currentProductId, variant, price);
-                    // Tidak menutup modal agar user bisa lanjut tambah varian lain
-                });
-            });
-
-            document.getElementById('detailOverlay').classList.add('open');
-        }
-
-        // ====== NAVIGASI BOTTOM ======
-        function navigateTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            const targetPage = document.getElementById(`page-${page}`);
-            if (targetPage) targetPage.classList.add('active');
-
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-                item.classList.remove('active');
-                if (item.dataset.page === page) {
-                    item.classList.add('active');
-                }
-            });
-            document.getElementById('cartOverlay').classList.remove('open');
-        }
-
-        // ====== EVENT LISTENER ======
-        // Bottom nav: Beranda, Keranjang, Profil
-        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.dataset.page;
-                if (page === 'cart') {
-                    document.getElementById('cartOverlay').classList.toggle('open');
-                    return;
-                }
-                navigateTo(page);
-            });
-        });
-
-        // Cari -> fokus ke input search
-        document.getElementById('navSearch').addEventListener('click', function() {
-            document.getElementById('searchInput').focus();
-            document.querySelector('.search-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-
-        // Payment -> langsung ke link
-        document.getElementById('navPayment').addEventListener('click', function() {
-            window.open('https://joell-payment.vercel.app/', '_blank');
-        });
-
-        // Keranjang tutup
-        document.getElementById('cartCloseBtn').addEventListener('click', function() {
-            document.getElementById('cartOverlay').classList.remove('open');
-        });
-        document.getElementById('cartOverlay').addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('open');
-        });
-
-        // Search
-        function doSearch() {
-            const val = document.getElementById('searchInput').value;
-            renderProducts(val);
-            navigateTo('home');
-        }
-        document.getElementById('searchBtn').addEventListener('click', doSearch);
-        document.getElementById('searchInput').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') doSearch();
-        });
-
-        // Klik kartu produk -> buka detail modal
-        document.getElementById('productGrid').addEventListener('click', function(e) {
-            const card = e.target.closest('.product-card');
-            if (!card) return;
-            const productId = parseInt(card.dataset.id);
-            if (!isNaN(productId)) {
-                openDetail(productId);
-            }
-        });
-
-        // Detail modal tutup
-        document.getElementById('detailCloseBtn').addEventListener('click', function() {
-            document.getElementById('detailOverlay').classList.remove('open');
-        });
-        document.getElementById('detailOverlay').addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('open');
-        });
-
-        // Checkout & Payment dari keranjang
-        document.getElementById('checkoutBtn').addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Keranjang kosong.');
-                return;
-            }
-            let msg = 'Halo, saya mau pesan:\n';
-            let total = 0;
-            cart.forEach(item => {
-                const sub = item.price * item.qty;
-                total += sub;
-                msg += `- ${item.name} (${item.variant}) × ${item.qty} = Rp ${sub.toLocaleString()}\n`;
-            });
-            msg += `\nTotal: Rp ${total.toLocaleString()}`;
-            window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
-        });
-
-        document.getElementById('paymentBtn').addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Keranjang kosong.');
-                return;
-            }
-            let total = 0;
-            let names = [];
-            cart.forEach(item => {
-                total += item.price * item.qty;
-                names.push(`${item.name} (${item.variant}) × ${item.qty}`);
-            });
-            goToPayment(names.join(' + '), total);
-        });
-
-        // ====== INIT ======
-        renderProducts();
-        updateCartUI();
-    </script>
-</body>
-</html>
+            },
+            {
+                id: 2,
+                name: 'Jasa Pembuatan Fitur',
+                price: 5000,
+                desc: 'Layanan pembuatan fitur khusus untuk bot WhatsApp sesuai kebutuhan Anda.',
+                icon: 'fa-microchip',
+                category: 'hosting',
+                variants: [
+                    { name: 'Add & Fix / Fitur WhatsApp Bot', price: 5000 },
+                    { name: 'Add Fitur Auto React Status', price: 15000 },
+                    { name: 'Add Fitur Security IP', price: 25000 },
+                    { name: 'Add Fitur Security Username + Password', price: 15000 },
+                    { name: 'Add Fitur Autojoin Saluran WhatsApp', price: 10000 },
+                    { name: 'Add Fitur Auto Show JKT48 (Showroom + IDN) Otomatis', price: 55000 }
+                ]
+            },
+            {
+                id: 3,
+                name: 'Sewa Bot & Jadibot',
+                price: 10000,
+                desc: 'Layanan Sewabot atau Jadibot WhatsApp, bot siap pakai 24 jam tanpa perlu server sendiri.',
+                icon: 'fa-robot',
+                category: 'hosting',
+                variants: [
+                    { name: '2 Minggu / 14 Day', price: 10000 },
+                    { name: '1 Bul

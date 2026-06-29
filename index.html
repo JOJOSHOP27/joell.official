@@ -1088,4 +1088,397 @@
                 category: 'hosting',
                 variants: [
                     { name: '2 Minggu / 14 Day', price: 10000 },
-                    { name: '1 Bul
+                    { name: '1 Bulan / 30 Day', price: 20000 },
+                    { name: 'Permanen / LifeTime', price: 30000 }
+                ]
+            },
+            {
+                id: 4,
+                name: 'Sell Script Lily Generation 2',
+                price: 30000,
+                desc: 'Script Lily Generation 2, bot WhatsApp dengan fitur modern, performa cepat, dan auto-update.',
+                icon: 'fa-database',
+                category: 'hosting',
+                variants: [
+                    { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (NO UPDATE)', price: 30000 },
+                    { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (FREE 1x UPDATE)', price: 35000 },
+                    { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (FREE 2x UPDATE)', price: 45000 }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Jasa Rename Script Bot WA',
+                price: 7000,
+                desc: 'Jasa rename script bot WhatsApp, dari 30% hingga 100% full rename.',
+                icon: 'fa-pen-fancy',
+                category: 'hosting',
+                variants: [
+                    { name: 'Rename 30% + Ganti Namabot + Ganti Footer/Watermark + Beberapa Foto Menu Utama', price: 7000 },
+                    { name: 'Rename 60% + Ganti NamaBot + NamaOwner + InfoBot + Watermark + Foto Menu + Beberapa Command & Variabel & String', price: 12000 },
+                    { name: 'Rename 80% + Ganti NamaBot + NamaOwner + InfoBot + Watermark + Foto Menu + Beberapa Command & Variabel & String + Struktur Menu + Command utama & alias', price: 15000 },
+                    { name: 'Rename 100% Full + Ganti NamaBot + NamaOwner + InfoBot + Watermark + Foto Menu + Beberapa Command & Variabel & String + Struktur Menu + Command utama & alias + Response + Rombak Total + Semua Jadi Milik Kamu + Dapat Licensi Full Hak Milik', price: 20000 }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Domain & Hosting 1 Tahun',
+                price: 8000,
+                desc: 'Hosting website dengan panel cPanel / DirectAdmin, cocok untuk pemula.',
+                icon: 'fa-globe',
+                category: 'hosting',
+                variants: [
+                    { name: 'Domain myid 1 Tahun', price: 8000 },
+                    { name: 'Domain bizid 1 Tahun', price: 8000 },
+                    { name: 'Domain xyz 1 Tahun', price: 75000 },
+                    { name: 'Domain xyz 1 Tahun + Hosting', price: 550000 }
+                ]
+            },
+            // ====== KATEGORI 2: Jasa Script Bot WhatsApp ======
+            {
+                id: 7,
+                name: 'Bot Multi Device',
+                price: 35000,
+                desc: 'Script bot WhatsApp Multi Device dengan fitur modern, stabil, untuk personal atau bisnis.',
+                icon: 'fa-whatsapp',
+                category: 'script',
+                variants: [
+                    { name: 'Bot MD Basic', price: 35000 },
+                    { name: 'Bot MD Premium', price: 75000 },
+                    { name: 'Custom Request', price: 0 }
+                ]
+            },
+            {
+                id: 8,
+                name: 'Bot RPG',
+                price: 45000,
+                desc: 'Script bot WhatsApp RPG dengan sistem game, inventory, leveling, dan fitur seru lainnya.',
+                icon: 'fa-gamepad',
+                category: 'script',
+                variants: [
+                    { name: 'Bot RPG Basic', price: 45000 },
+                    { name: 'Bot RPG Full Fitur', price: 85000 },
+                    { name: 'Custom Request', price: 0 }
+                ]
+            },
+            {
+                id: 9,
+                name: 'Bot Jaga Group & Pushkontak',
+                price: 30000,
+                desc: 'Script bot untuk keamanan grup, welcome, anti-link, auto respon, dan push kontak.',
+                icon: 'fa-users-cog',
+                category: 'script',
+                variants: [
+                    { name: 'Jaga Group Basic', price: 30000 },
+                    { name: 'Jaga Group + Pushkontak', price: 70000 },
+                    { name: 'Custom Request', price: 0 }
+                ]
+            },
+            {
+                id: 10,
+                name: 'Bot Convert Downloader Sticker',
+                price: 40000,
+                desc: 'Bot dengan fitur convert media, downloader sosial media, dan pembuat sticker otomatis.',
+                icon: 'fa-download',
+                category: 'script',
+                variants: [
+                    { name: 'Downloader Basic', price: 40000 },
+                    { name: 'Convert + Sticker Full', price: 80000 },
+                    { name: 'Custom Request', price: 0 }
+                ]
+            },
+            {
+                id: 11,
+                name: 'Bot Auto AI',
+                price: 50000,
+                desc: 'Bot WhatsApp AI otomatis untuk chat pintar, tanya jawab, dan asisten virtual.',
+                icon: 'fa-brain',
+                category: 'script',
+                variants: [
+                    { name: 'AI Basic', price: 50000 },
+                    { name: 'AI Premium Full', price: 95000 },
+                    { name: 'Custom Request', price: 0 }
+                ]
+            },
+            {
+                id: 12,
+                name: 'Bot Auto Order Payment Gateway',
+                price: 55000,
+                desc: 'Bot WhatsApp auto order dengan sistem pembayaran otomatis menggunakan payment gateway.',
+                icon: 'fa-credit-card',
+                category: 'script',
+                variants: [
+                    { name: 'Auto Order Basic', price: 55000 },
+                    { name: 'Auto Order Premium', price: 99000 },
+                    { name: 'Custom Request', price: 0 }
+                ]
+            }
+        ];
+
+        // ============================================================
+        //  STATE & FUNGSI
+        // ============================================================
+        let cart = [];
+        let currentProductId = null;
+
+        // ====== FUNGSI REDIRECT PAYMENT ======
+        function goToPayment(productName, totalPrice) {
+            const url =
+                `https://joell-payment.vercel.app/?product=${encodeURIComponent(productName)}&total=${totalPrice}`;
+            window.open(url, '_blank');
+        }
+
+        // ====== RENDER PRODUK PER KATEGORI ======
+        function renderProducts() {
+            const gridHosting = document.getElementById('gridHosting');
+            const gridScript = document.getElementById('gridScript');
+
+            const hostingProducts = products.filter(p => p.category === 'hosting');
+            const scriptProducts = products.filter(p => p.category === 'script');
+
+            gridHosting.innerHTML = renderProductCards(hostingProducts);
+            gridScript.innerHTML = renderProductCards(scriptProducts);
+        }
+
+        function renderProductCards(productList) {
+            let html = '';
+            productList.forEach(p => {
+                const minPrice = Math.min(...p.variants.map(v => v.price));
+                html += `
+                    <div class="product-card" data-id="${p.id}">
+                        <div class="product-img">
+                            <i class="fas ${p.icon}"></i>
+                        </div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">Rp ${minPrice.toLocaleString()}</div>
+                        <div class="product-desc">${p.desc}</div>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
+        // ====== KERANJANG ======
+        function updateCartUI() {
+            const count = cart.reduce((sum, i) => sum + i.qty, 0);
+            document.getElementById('navCartBadge').textContent = count;
+
+            const container = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:20px;">Keranjang kosong.</p>';
+                document.getElementById('cartTotalPrice').textContent = 'Rp 0';
+                return;
+            }
+            let html = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                html += `
+                    <div class="cart-item">
+                        <div>
+                            <div class="ci-name">${item.name}</div>
+                            <div style="font-size:0.8rem;color:var(--text-muted);">${item.variant} × ${item.qty}</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:12px;">
+                            <span class="ci-price">Rp ${subtotal.toLocaleString()}</span>
+                            <button class="ci-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            document.getElementById('cartTotalPrice').textContent = `Rp ${total.toLocaleString()}`;
+            document.querySelectorAll('.ci-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const idx = parseInt(this.dataset.index);
+                    cart.splice(idx, 1);
+                    updateCartUI();
+                });
+            });
+        }
+
+        function addToCart(productId, variantName, variantPrice) {
+            const p = products.find(x => x.id === productId);
+            if (!p) return;
+            const existing = cart.find(item => item.id === productId && item.variant === variantName);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: p.id,
+                    name: p.name,
+                    price: variantPrice,
+                    variant: variantName,
+                    qty: 1
+                });
+            }
+            updateCartUI();
+            document.getElementById('cartOverlay').classList.add('open');
+        }
+
+        // ====== DETAIL PRODUK ======
+        function openDetail(productId) {
+            const p = products.find(x => x.id === productId);
+            if (!p) return;
+            currentProductId = p.id;
+            document.getElementById('detailName').textContent = p.name;
+            const minPrice = Math.min(...p.variants.map(v => v.price));
+            document.getElementById('detailPrice').textContent = `Rp ${minPrice.toLocaleString()}`;
+            document.getElementById('detailDesc').textContent = p.desc;
+
+            const list = document.getElementById('variantList');
+            list.innerHTML = '';
+            p.variants.forEach(v => {
+                const div = document.createElement('div');
+                div.className = 'variant-item';
+                div.innerHTML = `
+                    <span class="vname">${v.name}</span>
+                    <span class="vprice">Rp ${v.price.toLocaleString()}</span>
+                    <button class="vbtn" data-variant="${v.name}" data-price="${v.price}">
+                        <i class="fas fa-cart-plus"></i>
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+
+            list.querySelectorAll('.vbtn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const variant = this.dataset.variant;
+                    const price = parseInt(this.dataset.price);
+                    addToCart(currentProductId, variant, price);
+                });
+            });
+
+            document.getElementById('detailOverlay').classList.add('open');
+        }
+
+        // ====== NAVIGASI ======
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const targetPage = document.getElementById(`page-${page}`);
+            if (targetPage) targetPage.classList.add('active');
+
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.page === page) {
+                    item.classList.add('active');
+                }
+            });
+            document.getElementById('cartOverlay').classList.remove('open');
+        }
+
+        // ====== SEARCH ======
+        function doSearch() {
+            const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+            const hostingProducts = products.filter(p =>
+                p.category === 'hosting' &&
+                (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword))
+            );
+            const scriptProducts = products.filter(p =>
+                p.category === 'script' &&
+                (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword))
+            );
+
+            document.getElementById('gridHosting').innerHTML = renderProductCards(hostingProducts);
+            document.getElementById('gridScript').innerHTML = renderProductCards(scriptProducts);
+
+            if (hostingProducts.length === 0 && scriptProducts.length === 0) {
+                document.getElementById('gridHosting').innerHTML =
+                    '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:20px;">Tidak ada produk ditemukan.</p>';
+                document.getElementById('gridScript').innerHTML = '';
+            }
+
+            navigateTo('home');
+        }
+
+        // ============================================================
+        //  EVENT LISTENERS
+        // ============================================================
+        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.dataset.page;
+                if (page === 'cart') {
+                    document.getElementById('cartOverlay').classList.toggle('open');
+                    return;
+                }
+                navigateTo(page);
+            });
+        });
+
+        document.getElementById('navSearch').addEventListener('click', function() {
+            document.getElementById('searchInput').focus();
+            document.querySelector('.search-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        document.getElementById('navPayment').addEventListener('click', function() {
+            window.open('https://joell-payment.vercel.app/', '_blank');
+        });
+
+        document.getElementById('cartCloseBtn').addEventListener('click', function() {
+            document.getElementById('cartOverlay').classList.remove('open');
+        });
+        document.getElementById('cartOverlay').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('open');
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', doSearch);
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') doSearch();
+        });
+
+        document.querySelectorAll('.product-grid').forEach(grid => {
+            grid.addEventListener('click', function(e) {
+                const card = e.target.closest('.product-card');
+                if (!card) return;
+                const productId = parseInt(card.dataset.id);
+                if (!isNaN(productId)) {
+                    openDetail(productId);
+                }
+            });
+        });
+
+        document.getElementById('detailCloseBtn').addEventListener('click', function() {
+            document.getElementById('detailOverlay').classList.remove('open');
+        });
+        document.getElementById('detailOverlay').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('open');
+        });
+
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Keranjang kosong.');
+                return;
+            }
+            let msg = 'Halo, saya mau pesan:\n';
+            let total = 0;
+            cart.forEach(item => {
+                const sub = item.price * item.qty;
+                total += sub;
+                msg += `- ${item.name} (${item.variant}) × ${item.qty} = Rp ${sub.toLocaleString()}\n`;
+            });
+            msg += `\nTotal: Rp ${total.toLocaleString()}`;
+            window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+
+        document.getElementById('paymentBtn').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Keranjang kosong.');
+                return;
+            }
+            let total = 0;
+            let names = [];
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                names.push(`${item.name} (${item.variant}) × ${item.qty}`);
+            });
+            goToPayment(names.join(' + '), total);
+        });
+
+        // ====== INIT ======
+        renderProducts();
+        updateCartUI();
+    </script>
+</body>
+</html>

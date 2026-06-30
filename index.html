@@ -28,6 +28,7 @@
             --accent-light: #a29bfe;
             --accent-glow: rgba(108, 92, 231, 0.30);
             --green: #00b894;
+            --gold: #fdcb6e;
             --radius: 16px;
             --radius-sm: 10px;
             --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -154,7 +155,7 @@
         }
 
         /* ============================================================
-           HERO & STATS
+           HERO
            ============================================================ */
         .hero {
             border-radius: var(--radius);
@@ -186,6 +187,53 @@
             filter: drop-shadow(0 4px 20px var(--accent-glow));
         }
 
+        /* ============================================================
+           STORE HEADER — SEPERTI GAMBAR
+           ============================================================ */
+        .store-header {
+            text-align: center;
+            margin: 8px 0 16px;
+        }
+
+        .store-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .store-name .rating {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-left: 8px;
+        }
+
+        .store-name .rating i {
+            color: var(--gold);
+        }
+
+        .store-name .rating .review-count {
+            color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.8rem;
+        }
+
+        .store-name .badge-free {
+            display: inline-block;
+            background: rgba(0, 184, 148, 0.15);
+            color: var(--green);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-left: 8px;
+            border: 1px solid rgba(0, 184, 148, 0.20);
+        }
+
+        /* ============================================================
+           STATS
+           ============================================================ */
         .stats {
             display: flex;
             flex-wrap: wrap;
@@ -314,7 +362,7 @@
         }
 
         /* ============================================================
-           DETAIL MODAL — MODERN
+           DETAIL MODAL
            ============================================================ */
         .detail-overlay {
             position: fixed;
@@ -732,7 +780,7 @@
         }
 
         /* ============================================================
-           BOTTOM NAV — MODERN
+           BOTTOM NAV
            ============================================================ */
         .bottom-nav {
             position: fixed;
@@ -871,6 +919,12 @@
             .stats .stat-item .label {
                 font-size: 0.65rem;
             }
+            .store-name {
+                font-size: 1.3rem;
+            }
+            .store-name .rating {
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 380px) {
@@ -924,6 +978,16 @@
                 font-size: 0.95rem;
                 padding: 14px;
             }
+            .store-name {
+                font-size: 1.1rem;
+            }
+            .store-name .rating {
+                font-size: 0.7rem;
+            }
+            .store-name .badge-free {
+                font-size: 0.6rem;
+                padding: 1px 8px;
+            }
         }
     </style>
 </head>
@@ -954,6 +1018,17 @@
             </div>
             <div class="hero-logo">
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
+            </div>
+
+            <!-- ===== STORE HEADER + STATS ===== -->
+            <div class="store-header">
+                <div class="store-name">
+                    JOELL SHOP
+                    <span class="rating">
+                        <i class="fas fa-star"></i> 4.9 <span class="review-count">(1,234 Reviews)</span>
+                    </span>
+                    <span class="badge-free">Free Fee Admin</span>
+                </div>
             </div>
             <div class="stats">
                 <div class="stat-item"><span class="number">12.5K</span><div class="label">Total Terjual</div></div>
@@ -1025,7 +1100,7 @@
 
     </div>
 
-    <!-- ===== BOTTOM NAV — URUTAN: Beranda | Cari | Keranjang | Payment | Profil ===== -->
+    <!-- ===== BOTTOM NAV ===== -->
     <nav class="bottom-nav" id="bottomNav">
         <button class="nav-item active" data-page="home" id="navHome">
             <i class="fas fa-home"></i> Beranda
@@ -1425,12 +1500,6 @@
             });
         });
 
-        // Tombol Payment di bottom nav (data-page="payment") sudah di-handle di navigateTo
-        // Tapi kita juga perlu handle klik langsung untuk kasus tertentu
-        document.getElementById('navPayment').addEventListener('click', function(e) {
-            // Sudah di-handle oleh navigateTo via data-page
-        });
-
         document.getElementById('navSearch').addEventListener('click', function() {
             document.getElementById('searchInput').focus();
             document.querySelector('.search-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1511,4 +1580,4 @@
         updateCartUI();
     </script>
 </body>
-    </html>
+</html>

@@ -187,7 +187,7 @@
         }
 
         /* ============================================================
-           STORE HEADER + STATS
+           STORE HEADER — SEPERTI GAMBAR (dalam satu baris)
            ============================================================ */
         .store-header {
             text-align: center;
@@ -199,14 +199,20 @@
             font-weight: 800;
             color: var(--text-primary);
             letter-spacing: -0.5px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 6px 12px;
         }
 
         .store-name .rating {
-            display: block;
             font-size: 0.9rem;
             font-weight: 500;
             color: var(--gold);
-            margin-top: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .store-name .rating i {
@@ -225,17 +231,20 @@
             color: var(--green);
             font-size: 0.7rem;
             font-weight: 600;
-            padding: 3px 14px;
+            padding: 2px 12px;
             border-radius: 30px;
-            margin-top: 6px;
             border: 1px solid rgba(0, 184, 148, 0.20);
+            white-space: nowrap;
         }
 
+        /* ============================================================
+           STATS — SEPERTI GAMBAR
+           ============================================================ */
         .stats {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 16px 36px;
+            gap: 16px 40px;
             background: var(--bg-card);
             padding: 16px 20px;
             border-radius: var(--radius);
@@ -249,7 +258,7 @@
         }
 
         .stats .stat-item .number {
-            font-size: 1.7rem;
+            font-size: 1.8rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             -webkit-background-clip: text;
@@ -259,7 +268,7 @@
         }
 
         .stats .stat-item .label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -741,7 +750,6 @@
             margin-bottom: 4px;
         }
 
-        /* Contact Box */
         .contact-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: var(--radius-sm);
@@ -772,7 +780,6 @@
             font-size: 0.9rem;
         }
 
-        /* Social Icons */
         .social-icons {
             display: flex;
             gap: 14px;
@@ -803,7 +810,6 @@
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Contact Form */
         .contact-form {
             margin-top: 4px;
         }
@@ -1155,7 +1161,7 @@
             </div>
         </div>
 
-        <!-- ===== BERANDA ===== -->
+        <!-- ===== DASHBOARD / BERANDA ===== -->
         <div class="page active" id="page-home">
             <div class="hero">
                 <img src="https://files.catbox.moe/iai8aa.png" alt="hero" />
@@ -1164,6 +1170,7 @@
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
             </div>
 
+            <!-- ===== STORE HEADER — SEPERTI GAMBAR ===== -->
             <div class="store-header">
                 <div class="store-name">
                     JOELL SHOP
@@ -1173,12 +1180,24 @@
                     <span class="badge-free">Free Fee Admin</span>
                 </div>
             </div>
+
+            <!-- ===== STATS — SEPERTI GAMBAR ===== -->
             <div class="stats">
-                <div class="stat-item"><span class="number">12.5K</span><div class="label">Total Terjual</div></div>
-                <div class="stat-item"><span class="number">8.2K</span><div class="label">Pelanggan</div></div>
-                <div class="stat-item"><span class="number">98%</span><div class="label">Kepuasan</div></div>
+                <div class="stat-item">
+                    <span class="number">12.5K</span>
+                    <div class="label">Total Terjual</div>
+                </div>
+                <div class="stat-item">
+                    <span class="number">8.2K</span>
+                    <div class="label">Pelanggan</div>
+                </div>
+                <div class="stat-item">
+                    <span class="number">98%</span>
+                    <div class="label">Kepuasan</div>
+                </div>
             </div>
 
+            <!-- ===== PRODUK ===== -->
             <div class="section-title">Hosting Dan Kebutuhan Bot WhatsApp</div>
             <div class="grid-menu" id="gridHosting"></div>
 
@@ -1186,7 +1205,7 @@
             <div class="grid-menu" id="gridScript"></div>
         </div>
 
-        <!-- ===== PROFIL — TATA LETAK BARU ===== -->
+        <!-- ===== PROFIL ===== -->
         <div class="page" id="page-profile">
             <div class="profile-page">
                 <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover" />
@@ -1774,4 +1793,4 @@
         updateCartUI();
     </script>
 </body>
-                                    </html>
+</html>

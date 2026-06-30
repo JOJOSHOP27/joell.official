@@ -93,7 +93,40 @@
         }
 
         /* ============================================================
-           SEARCH
+           HERO
+           ============================================================ */
+        .hero {
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(4px);
+        }
+
+        .hero img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            opacity: 0.80;
+        }
+
+        .hero-logo {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0 4px;
+        }
+
+        .hero-logo img {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 4px 20px var(--accent-glow));
+        }
+
+        /* ============================================================
+           SEARCH — HANYA DI BERANDA
            ============================================================ */
         .search-wrap {
             display: flex;
@@ -154,40 +187,7 @@
         }
 
         /* ============================================================
-           HERO
-           ============================================================ */
-        .hero {
-            border-radius: var(--radius);
-            overflow: hidden;
-            margin-bottom: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            backdrop-filter: blur(4px);
-        }
-
-        .hero img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-            display: block;
-            opacity: 0.80;
-        }
-
-        .hero-logo {
-            display: flex;
-            justify-content: center;
-            padding: 10px 0 4px;
-        }
-
-        .hero-logo img {
-            height: 70px;
-            width: auto;
-            filter: drop-shadow(0 4px 20px var(--accent-glow));
-        }
-
-        /* ============================================================
-           STORE HEADER — SEPERTI GAMBAR (dalam satu baris)
+           STORE HEADER — TANPA BINTANG (sesuai gambar)
            ============================================================ */
         .store-header {
             text-align: center;
@@ -215,10 +215,6 @@
             gap: 4px;
         }
 
-        .store-name .rating i {
-            color: var(--gold);
-        }
-
         .store-name .rating .review-count {
             color: var(--text-muted);
             font-weight: 400;
@@ -238,7 +234,7 @@
         }
 
         /* ============================================================
-           STATS — SEPERTI GAMBAR
+           STATS
            ============================================================ */
         .stats {
             display: flex;
@@ -676,7 +672,7 @@
         }
 
         /* ============================================================
-           PROFIL — TATA LETAK SEPERTI GAMBAR
+           PROFIL
            ============================================================ */
         .profile-page {
             background: var(--bg-card);
@@ -1153,15 +1149,7 @@
             </div>
         </header>
 
-        <!-- ===== SEARCH ===== -->
-        <div class="search-wrap">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Cari produk..." />
-                <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
-            </div>
-        </div>
-
-        <!-- ===== DASHBOARD / BERANDA ===== -->
+        <!-- ===== HALAMAN BERANDA ===== -->
         <div class="page active" id="page-home">
             <div class="hero">
                 <img src="https://files.catbox.moe/iai8aa.png" alt="hero" />
@@ -1170,18 +1158,26 @@
                 <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
             </div>
 
-            <!-- ===== STORE HEADER — SEPERTI GAMBAR ===== -->
+            <!-- ===== SEARCH — HANYA DI BERANDA ===== -->
+            <div class="search-wrap">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari produk..." />
+                    <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
+                </div>
+            </div>
+
+            <!-- ===== STORE HEADER ===== -->
             <div class="store-header">
                 <div class="store-name">
                     JOELL SHOP
                     <span class="rating">
-                        <i class="fas fa-star"></i> 4.9 <span class="review-count">(1,234 Reviews)</span>
+                        4.9 <span class="review-count">(1,234 Reviews)</span>
                     </span>
                     <span class="badge-free">Free Fee Admin</span>
                 </div>
             </div>
 
-            <!-- ===== STATS — SEPERTI GAMBAR ===== -->
+            <!-- ===== STATS ===== -->
             <div class="stats">
                 <div class="stat-item">
                     <span class="number">12.5K</span>
@@ -1205,7 +1201,7 @@
             <div class="grid-menu" id="gridScript"></div>
         </div>
 
-        <!-- ===== PROFIL ===== -->
+        <!-- ===== HALAMAN PROFIL ===== -->
         <div class="page" id="page-profile">
             <div class="profile-page">
                 <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover" />
@@ -1715,7 +1711,7 @@
 
         document.getElementById('navSearch').addEventListener('click', function() {
             document.getElementById('searchInput').focus();
-            document.querySelector('.search-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.querySelector('.search-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
         document.getElementById('cartCloseBtn').addEventListener('click', function() {

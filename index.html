@@ -93,7 +93,7 @@
         }
 
         /* ============================================================
-           HERO — VIDEO DENGAN SUARA
+           HERO — VIDEO TANPA KONTROL, BERSURARA
            ============================================================ */
         .hero {
             border-radius: var(--radius);
@@ -111,6 +111,7 @@
             object-fit: cover;
             display: block;
             background: var(--bg-card);
+            pointer-events: none; /* matikan semua interaksi */
         }
 
         /* ============================================================
@@ -2239,14 +2240,13 @@
 
         <!-- ===== HALAMAN BERANDA ===== -->
         <div class="page active" id="page-home">
-            <!-- ===== HERO VIDEO DENGAN SUARA ===== -->
+            <!-- ===== HERO VIDEO — TANPA KONTROL, BERSURARA ===== -->
             <div class="hero">
                 <video 
                     src="https://files.catbox.moe/trw5j2.mp4" 
                     autoplay 
                     loop 
-                    playsinline 
-                    controls
+                    playsinline
                     class="hero-video"
                     id="heroVideo"
                 ></video>
@@ -2482,22 +2482,61 @@
 
     <script>
         // ============================================================
-        //  FALLBACK AUTOPLAY UNTUK VIDEO DENGAN SUARA
+        //  FORCE AUTOPLAY WITH SOUND — TANPA KONTROL, TANPA FALLBACK
         // ============================================================
-        document.addEventListener('DOMContentLoaded', function() {
+        (function() {
             const video = document.getElementById('heroVideo');
-            if (video) {
-                // Coba putar dengan suara
-                video.play().catch(function(error) {
-                    console.log('Autoplay with sound blocked. User needs to interact.');
-                    // Jika autoplay dengan suara diblokir, tambahkan event listener sekali klik
-                    document.addEventListener('click', function playVideo() {
-                        video.play();
-                        document.removeEventListener('click', playVideo);
-                    }, { once: true });
+            if (!video) return;
+
+            // Matikan semua kontrol
+            video.controls = false;
+            video.removeAttribute('controls');
+
+            // Hapus atribut muted
+            video.muted = false;
+            video.removeAttribute('muted');
+
+            // Volume penuh
+            video.volume = 1.0;
+
+            // Pointer events none biar ga bisa diinteraksi
+            video.style.pointerEvents = 'none';
+
+            // Paksa play dengan suara
+            const forcePlay = function() {
+                video.play().then(() => {
+                    console.log('[HERO] Video berjalan dengan suara.');
+                }).catch(function(err) {
+                    console.warn('[HERO] Autoplay dengan suara diblokir browser, mencoba ulang...');
+                    setTimeout(forcePlay, 2000);
                 });
-            }
-        });
+            };
+
+            forcePlay();
+
+            // Bypass jika user interaksi di mana saja
+            const playOnInteraction = function() {
+                video.muted = false;
+                video.volume = 1.0;
+                video.play().catch(() => {});
+                document.removeEventListener('click', playOnInteraction);
+                document.removeEventListener('touchstart', playOnInteraction);
+            };
+
+            document.addEventListener('click', playOnInteraction);
+            document.addEventListener('touchstart', playOnInteraction);
+
+            // Lanjutkan saat tab aktif kembali
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    video.muted = false;
+                    video.volume = 1.0;
+                    video.play().catch(() => {});
+                }
+            });
+
+            console.log('[HERO] Video suara aktif — tanpa tombol, tanpa fallback.');
+        })();
 
         // ============================================================
         //  DATA TOPUP GAME

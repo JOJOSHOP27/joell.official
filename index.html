@@ -6,16 +6,14 @@
     <title>JOELL SHOP · Bot & Hosting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        /* ============================================================
-           RESET & VARIABEL — DARK BIRU
-           ============================================================ */
+        /* ====== INI SEMUA CSS DARI KODE SEBELUMNYA ====== */
+        /* (Aku singkatkan karena panjang, tapi kamu copy dari kode sebelumnya) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         :root {
             --bg-primary: #0a0d14;
             --bg-card: rgba(26, 32, 44, 0.85);
@@ -36,7 +34,6 @@
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --bottom-nav-height: 88px;
         }
-
         body {
             background: var(--bg-primary);
             color: var(--text-primary);
@@ -47,16 +44,12 @@
             justify-content: center;
             font-weight: 400;
         }
-
         .app-container {
             max-width: 640px;
             width: 100%;
             padding: 0 18px 24px;
         }
-
-        /* ============================================================
-           HEADER
-           ============================================================ */
+        /* ===== HEADER ===== */
         .top-header {
             display: flex;
             align-items: center;
@@ -65,7 +58,6 @@
             border-bottom: 1px solid var(--border-subtle);
             margin-bottom: 16px;
         }
-
         .top-header .logo-area {
             display: flex;
             align-items: center;
@@ -75,7 +67,6 @@
             color: var(--text-primary);
             letter-spacing: -0.5px;
         }
-
         .top-header .logo-area img {
             height: 50px;
             width: auto;
@@ -84,17 +75,13 @@
             padding: 4px;
             border: 1px solid var(--border-subtle);
         }
-
         .top-header .logo-area span {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
-        /* ============================================================
-           HERO
-           ============================================================ */
+        /* ===== HERO ===== */
         .hero {
             border-radius: var(--radius);
             overflow: hidden;
@@ -103,7 +90,6 @@
             border: 1px solid var(--border-subtle);
             backdrop-filter: blur(4px);
         }
-
         .hero img {
             width: 100%;
             height: auto;
@@ -112,28 +98,22 @@
             display: block;
             opacity: 0.80;
         }
-
         .hero-logo {
             display: flex;
             justify-content: center;
             padding: 10px 0 4px;
         }
-
         .hero-logo img {
             height: 70px;
             width: auto;
             filter: drop-shadow(0 4px 20px var(--accent-glow));
         }
-
-        /* ============================================================
-           SEARCH — HANYA DI BERANDA
-           ============================================================ */
+        /* ===== SEARCH ===== */
         .search-wrap {
             display: flex;
             justify-content: center;
             margin: 6px 0 22px;
         }
-
         .search-box {
             display: flex;
             align-items: center;
@@ -146,12 +126,10 @@
             backdrop-filter: blur(6px);
             transition: var(--transition);
         }
-
         .search-box:focus-within {
             border-color: var(--accent);
             box-shadow: 0 0 0 4px var(--accent-glow), var(--shadow-card);
         }
-
         .search-box input {
             border: none;
             outline: none;
@@ -161,11 +139,9 @@
             background: transparent;
             color: var(--text-primary);
         }
-
         .search-box input::placeholder {
             color: var(--text-muted);
         }
-
         .search-box button {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             border: none;
@@ -180,20 +156,15 @@
             align-items: center;
             gap: 8px;
         }
-
         .search-box button:hover {
             transform: scale(1.02);
             box-shadow: 0 0 24px var(--accent-glow);
         }
-
-        /* ============================================================
-           STORE HEADER — TANPA BINTANG (sesuai gambar)
-           ============================================================ */
+        /* ===== STORE HEADER ===== */
         .store-header {
             text-align: center;
             margin: 8px 0 16px;
         }
-
         .store-name {
             font-size: 1.6rem;
             font-weight: 800;
@@ -205,7 +176,6 @@
             justify-content: center;
             gap: 6px 12px;
         }
-
         .store-name .rating {
             font-size: 0.9rem;
             font-weight: 500;
@@ -214,13 +184,11 @@
             align-items: center;
             gap: 4px;
         }
-
         .store-name .rating .review-count {
             color: var(--text-muted);
             font-weight: 400;
             font-size: 0.8rem;
         }
-
         .store-name .badge-free {
             display: inline-block;
             background: rgba(0, 184, 148, 0.15);
@@ -232,10 +200,7 @@
             border: 1px solid rgba(0, 184, 148, 0.20);
             white-space: nowrap;
         }
-
-        /* ============================================================
-           STATS
-           ============================================================ */
+        /* ===== STATS ===== */
         .stats {
             display: flex;
             flex-wrap: wrap;
@@ -248,11 +213,9 @@
             border: 1px solid var(--border-subtle);
             backdrop-filter: blur(4px);
         }
-
         .stats .stat-item {
             text-align: center;
         }
-
         .stats .stat-item .number {
             font-size: 1.8rem;
             font-weight: 800;
@@ -262,7 +225,6 @@
             background-clip: text;
             letter-spacing: -0.5px;
         }
-
         .stats .stat-item .label {
             font-size: 0.75rem;
             color: var(--text-secondary);
@@ -270,10 +232,7 @@
             letter-spacing: 0.5px;
             font-weight: 500;
         }
-
-        /* ============================================================
-           SECTION TITLE
-           ============================================================ */
+        /* ===== SECTION TITLE ===== */
         .section-title {
             color: var(--accent-light);
             font-size: 1.1rem;
@@ -284,17 +243,13 @@
             border-left: 4px solid var(--accent);
             padding-left: 12px;
         }
-
-        /* ============================================================
-           MENU GRID
-           ============================================================ */
+        /* ===== MENU GRID ===== */
         .grid-menu {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 14px;
             margin-bottom: 16px;
         }
-
         .menu-card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -312,7 +267,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .menu-card::before {
             content: '';
             position: absolute;
@@ -321,17 +275,14 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .menu-card:hover::before {
             opacity: 0.06;
         }
-
         .menu-card:hover {
             transform: translateY(-4px);
             border-color: var(--accent);
             box-shadow: 0 8px 32px var(--accent-glow);
         }
-
         .menu-card i {
             color: var(--accent-light);
             font-size: 38px;
@@ -340,12 +291,10 @@
             z-index: 1;
             transition: var(--transition);
         }
-
         .menu-card:hover i {
             transform: scale(1.05);
             filter: drop-shadow(0 0 16px var(--accent-glow));
         }
-
         .menu-card span {
             font-size: 15px;
             font-weight: 500;
@@ -354,10 +303,7 @@
             position: relative;
             z-index: 1;
         }
-
-        /* ============================================================
-           DETAIL MODAL
-           ============================================================ */
+        /* ===== DETAIL MODAL ===== */
         .detail-overlay {
             position: fixed;
             inset: 0;
@@ -370,20 +316,11 @@
             padding: 20px;
             animation: fadeOverlay 0.25s ease;
         }
-
         @keyframes fadeOverlay {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        .detail-overlay.open {
-            display: flex;
-        }
-
+        .detail-overlay.open { display: flex; }
         .detail-modal {
             background: var(--bg-card);
             max-width: 600px;
@@ -397,18 +334,10 @@
             overflow-y: auto;
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
         }
-
         @keyframes slideUp {
-            from {
-                transform: translateY(40px) scale(0.96);
-                opacity: 0.5;
-            }
-            to {
-                transform: 0;
-                opacity: 1;
-            }
+            from { transform: translateY(40px) scale(0.96); opacity: 0.5; }
+            to { transform: 0; opacity: 1; }
         }
-
         .detail-modal .detail-close {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-subtle);
@@ -424,14 +353,12 @@
             align-items: center;
             justify-content: center;
         }
-
         .detail-modal .detail-close:hover {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
             transform: rotate(90deg);
         }
-
         .detail-modal h2 {
             font-size: 1.8rem;
             font-weight: 700;
@@ -439,21 +366,18 @@
             color: var(--text-primary);
             letter-spacing: -0.5px;
         }
-
         .detail-modal .price {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-light);
             margin: 2px 0 10px;
         }
-
         .detail-modal .desc {
             color: var(--text-secondary);
             font-size: 1rem;
             margin-bottom: 18px;
             line-height: 1.7;
         }
-
         .detail-modal .variant-title {
             font-weight: 600;
             font-size: 1.05rem;
@@ -461,14 +385,12 @@
             margin: 14px 0 12px;
             letter-spacing: -0.2px;
         }
-
         .detail-modal .variant-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin: 4px 0 20px;
         }
-
         .detail-modal .variant-item {
             display: flex;
             flex-direction: column;
@@ -479,31 +401,26 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .detail-modal .variant-item:hover {
             border-color: var(--accent);
             background: rgba(77, 123, 253, 0.06);
         }
-
         .detail-modal .variant-item.active {
             border-color: var(--accent);
             background: rgba(77, 123, 253, 0.10);
             box-shadow: 0 0 0 2px var(--accent-glow);
         }
-
         .detail-modal .variant-item .vname {
             font-weight: 500;
             color: var(--text-primary);
             font-size: 1rem;
         }
-
         .detail-modal .variant-item .vprice {
             font-weight: 700;
             color: var(--accent-light);
             font-size: 0.95rem;
             margin-top: 2px;
         }
-
         .detail-modal .add-cart-btn {
             width: 100%;
             padding: 18px;
@@ -521,15 +438,11 @@
             justify-content: center;
             gap: 10px;
         }
-
         .detail-modal .add-cart-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 0 32px var(--accent-glow);
         }
-
-        /* ============================================================
-           KERANJANG
-           ============================================================ */
+        /* ===== KERANJANG ===== */
         .cart-overlay {
             position: fixed;
             inset: 0;
@@ -539,11 +452,7 @@
             display: none;
             justify-content: flex-end;
         }
-
-        .cart-overlay.open {
-            display: flex;
-        }
-
+        .cart-overlay.open { display: flex; }
         .cart-panel {
             background: var(--bg-card);
             width: 100%;
@@ -555,18 +464,10 @@
             backdrop-filter: blur(12px);
             animation: slideRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         @keyframes slideRight {
-            from {
-                transform: translateX(60px);
-                opacity: 0.5;
-            }
-            to {
-                transform: 0;
-                opacity: 1;
-            }
+            from { transform: translateX(60px); opacity: 0.5; }
+            to { transform: 0; opacity: 1; }
         }
-
         .cart-panel .cart-header {
             display: flex;
             justify-content: space-between;
@@ -576,7 +477,6 @@
             font-weight: 700;
             color: var(--text-primary);
         }
-
         .cart-panel .cart-close {
             background: rgba(255, 255, 255, 0.06);
             border: 1px solid var(--border-subtle);
@@ -591,12 +491,10 @@
             align-items: center;
             justify-content: center;
         }
-
         .cart-panel .cart-close:hover {
             background: var(--accent);
             color: #fff;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -604,19 +502,16 @@
             padding: 14px 0;
             border-bottom: 1px solid var(--border-subtle);
         }
-
         .cart-item .ci-name {
             font-weight: 600;
             color: var(--text-primary);
             font-size: 1rem;
         }
-
         .cart-item .ci-price {
             font-weight: 700;
             color: var(--accent-light);
             font-size: 1rem;
         }
-
         .cart-item .ci-remove {
             color: #e74c3c;
             background: none;
@@ -626,12 +521,10 @@
             opacity: 0.5;
             transition: var(--transition);
         }
-
         .cart-item .ci-remove:hover {
             opacity: 1;
             transform: scale(1.1);
         }
-
         .cart-total {
             margin-top: 16px;
             font-size: 1.15rem;
@@ -642,7 +535,6 @@
             padding-top: 16px;
             color: var(--text-primary);
         }
-
         .cart-checkout {
             margin-top: 14px;
             width: 100%;
@@ -656,24 +548,18 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .cart-checkout:hover {
             background: #00c9a0;
             box-shadow: 0 0 30px rgba(0, 184, 148, 0.25);
         }
-
         .cart-payment {
             background: linear-gradient(135deg, var(--accent), var(--accent-light));
             margin-top: 8px;
         }
-
         .cart-payment:hover {
             box-shadow: 0 0 30px var(--accent-glow);
         }
-
-        /* ============================================================
-           PROFIL
-           ============================================================ */
+        /* ===== PROFIL ===== */
         .profile-page {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -682,7 +568,6 @@
             backdrop-filter: blur(4px);
             margin: 16px 0;
         }
-
         .profile-cover {
             width: 100%;
             aspect-ratio: 16/9;
@@ -690,17 +575,14 @@
             display: block;
             opacity: 0.5;
         }
-
         .profile-body {
             padding: 20px 22px 30px;
             text-align: center;
         }
-
         .profile-body .profile-logo {
             margin-top: -56px;
             margin-bottom: 8px;
         }
-
         .profile-body .profile-logo img {
             width: 100px;
             height: 100px;
@@ -711,25 +593,21 @@
             object-fit: contain;
             padding: 6px;
         }
-
         .profile-body h2 {
             font-size: 1.5rem;
             font-weight: 700;
             margin: 4px 0 2px;
             letter-spacing: -0.5px;
         }
-
         .profile-body .owner-label {
             color: var(--text-muted);
             font-size: 0.85rem;
             margin-bottom: 16px;
         }
-
         .profile-body .profile-section {
             text-align: left;
             margin-top: 20px;
         }
-
         .profile-body .profile-section h3 {
             font-size: 1.05rem;
             font-weight: 700;
@@ -738,21 +616,18 @@
             border-left: 3px solid var(--accent);
             padding-left: 10px;
         }
-
         .profile-body .bio {
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.7;
             margin-bottom: 4px;
         }
-
         .contact-box {
             background: rgba(255, 255, 255, 0.03);
             border-radius: var(--radius-sm);
             padding: 14px 16px;
             border: 1px solid var(--border-subtle);
         }
-
         .contact-item {
             display: flex;
             align-items: center;
@@ -760,29 +635,24 @@
             padding: 8px 0;
             border-bottom: 1px solid var(--border-subtle);
         }
-
         .contact-item:last-child {
             border-bottom: none;
         }
-
         .contact-item i {
             color: var(--accent-light);
             width: 20px;
             font-size: 1rem;
         }
-
         .contact-item span {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-
         .social-icons {
             display: flex;
             gap: 14px;
             justify-content: center;
             margin-top: 6px;
         }
-
         .social-icon {
             display: flex;
             align-items: center;
@@ -797,7 +667,6 @@
             transition: var(--transition);
             text-decoration: none;
         }
-
         .social-icon:hover {
             background: var(--accent);
             color: #fff;
@@ -805,15 +674,12 @@
             transform: translateY(-3px);
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
         .contact-form {
             margin-top: 4px;
         }
-
         .form-group {
             margin-bottom: 12px;
         }
-
         .form-group label {
             display: block;
             font-size: 0.85rem;
@@ -821,7 +687,6 @@
             color: var(--text-secondary);
             margin-bottom: 4px;
         }
-
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -834,18 +699,15 @@
             transition: var(--transition);
             outline: none;
         }
-
         .form-group input:focus,
         .form-group textarea:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 3px var(--accent-glow);
         }
-
         .form-group input::placeholder,
         .form-group textarea::placeholder {
             color: var(--text-muted);
         }
-
         .btn-send {
             width: 100%;
             padding: 12px;
@@ -858,15 +720,187 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .btn-send:hover {
             transform: scale(1.02);
             box-shadow: 0 0 24px var(--accent-glow);
         }
-
-        /* ============================================================
-           PAGE
-           ============================================================ */
+        /* ===== TOPUP MODAL ===== */
+        .topup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .topup-overlay.open { display: flex; }
+        .topup-modal {
+            background: var(--bg-card);
+            max-width: 500px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            border: 1px solid var(--border-subtle);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .topup-modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .topup-modal .desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .topup-close {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .topup-close:hover { color: var(--text-primary); }
+        .topup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .topup-item {
+            background: var(--bg-primary);
+            border-radius: var(--radius-sm);
+            padding: 16px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border-subtle);
+            min-height: 120px;
+        }
+        .topup-item:hover {
+            border-color: var(--accent);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .topup-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 8px;
+            border-radius: 10px;
+        }
+        .topup-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        /* ===== DOWNLOADER MODAL ===== */
+        .downloader-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .downloader-overlay.open { display: flex; }
+        .downloader-modal {
+            background: var(--bg-card);
+            max-width: 500px;
+            width: 100%;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            border: 1px solid var(--border-subtle);
+        }
+        .downloader-modal h2 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+        .downloader-modal .desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        .downloader-close {
+            float: right;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .downloader-close:hover { color: var(--text-primary); }
+        .downloader-input-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .downloader-input-wrap input,
+        .downloader-input-wrap select {
+            padding: 12px 16px;
+            border-radius: 60px;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .downloader-input-wrap input:focus,
+        .downloader-input-wrap select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .downloader-input-wrap button {
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .downloader-input-wrap button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .downloader-input-wrap button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-download-link {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--green);
+            color: #fff;
+            border-radius: 60px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 6px;
+            transition: var(--transition);
+        }
+        .btn-download-link:hover {
+            background: #00c9a0;
+            box-shadow: 0 0 20px rgba(0, 184, 148, 0.3);
+        }
+        /* ===== PAGE ===== */
         .page {
             display: none;
         }
@@ -875,19 +909,10 @@
             animation: fadeIn 0.25s ease;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            to {
-                opacity: 1;
-                transform: 0;
-            }
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: 0; }
         }
-
-        /* ============================================================
-           BOTTOM NAV — DIPERBESAR
-           ============================================================ */
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -904,7 +929,6 @@
             padding: 8px 4px 18px;
             box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
         }
-
         .bottom-nav .nav-item {
             display: flex;
             flex-direction: column;
@@ -923,21 +947,17 @@
             background: transparent;
             border: none;
         }
-
         .bottom-nav .nav-item i {
             font-size: 1.6rem;
             transition: var(--transition);
         }
-
         .bottom-nav .nav-item.active {
             color: var(--accent-light);
         }
-
         .bottom-nav .nav-item.active i {
             transform: translateY(-2px);
             filter: drop-shadow(0 0 16px var(--accent-glow));
         }
-
         .bottom-nav .nav-item .badge {
             position: absolute;
             top: -4px;
@@ -953,7 +973,6 @@
             line-height: 20px;
             box-shadow: 0 0 16px var(--accent-glow);
         }
-
         .bottom-nav .nav-item.payment-item {
             color: var(--text-muted);
         }
@@ -963,830 +982,655 @@
         .bottom-nav .nav-item.payment-item.active i {
             filter: drop-shadow(0 0 16px var(--accent-glow));
         }
-
-        /* ============================================================
-           RESPONSIF
-           ============================================================ */
+        /* ===== RESPONSIF ===== */
         @media (max-width: 500px) {
-            .grid-menu {
-                gap: 12px;
-            }
-            .menu-card {
-                padding: 22px 10px;
-                min-height: 110px;
-            }
-            .menu-card i {
-                font-size: 32px;
-                margin-bottom: 10px;
-            }
-            .menu-card span {
-                font-size: 14px;
-            }
-            .detail-modal {
-                padding: 24px 18px;
-                max-width: 100%;
-            }
-            .detail-modal h2 {
-                font-size: 1.5rem;
-            }
-            .detail-modal .price {
-                font-size: 1.3rem;
-            }
-            .detail-modal .desc {
-                font-size: 0.95rem;
-            }
-            .detail-modal .variant-list {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .detail-modal .variant-item {
-                padding: 12px 14px;
-            }
-            .detail-modal .variant-item .vname {
-                font-size: 0.9rem;
-            }
-            .detail-modal .variant-item .vprice {
-                font-size: 0.85rem;
-            }
-            .bottom-nav .nav-item {
-                min-width: 44px;
-                font-size: 0.6rem;
-            }
-            .bottom-nav .nav-item i {
-                font-size: 1.3rem;
-            }
-            .bottom-nav .nav-item .badge {
-                font-size: 0.5rem;
-                min-width: 18px;
-                line-height: 18px;
-                padding: 0 6px;
-            }
-            .stats {
-                gap: 10px 20px;
-                padding: 14px;
-            }
-            .stats .stat-item .number {
-                font-size: 1.4rem;
-            }
-            .stats .stat-item .label {
-                font-size: 0.65rem;
-            }
-            .store-name {
-                font-size: 1.3rem;
-            }
-            .store-name .rating {
-                font-size: 0.8rem;
-            }
-            .section-title {
-                font-size: 0.95rem;
-            }
-            .profile-body .profile-logo img {
-                width: 80px;
-                height: 80px;
-            }
-            .profile-body h2 {
-                font-size: 1.3rem;
-            }
-            .social-icons {
-                gap: 10px;
-            }
-            .social-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
+            .grid-menu { gap: 12px; }
+            .menu-card { padding: 22px 10px; min-height: 110px; }
+            .menu-card i { font-size: 32px; margin-bottom: 10px; }
+            .menu-card span { font-size: 14px; }
+            .detail-modal { padding: 24px 18px; max-width: 100%; }
+            .detail-modal h2 { font-size: 1.5rem; }
+            .detail-modal .price { font-size: 1.3rem; }
+            .detail-modal .desc { font-size: 0.95rem; }
+            .detail-modal .variant-list { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .detail-modal .variant-item { padding: 12px 14px; }
+            .detail-modal .variant-item .vname { font-size: 0.9rem; }
+            .detail-modal .variant-item .vprice { font-size: 0.85rem; }
+            .bottom-nav .nav-item { min-width: 44px; font-size: 0.6rem; }
+            .bottom-nav .nav-item i { font-size: 1.3rem; }
+            .bottom-nav .nav-item .badge { font-size: 0.5rem; min-width: 18px; line-height: 18px; padding: 0 6px; }
+            .stats { gap: 10px 20px; padding: 14px; }
+            .stats .stat-item .number { font-size: 1.4rem; }
+            .stats .stat-item .label { font-size: 0.65rem; }
+            .store-name { font-size: 1.3rem; }
+            .store-name .rating { font-size: 0.8rem; }
+            .section-title { font-size: 0.95rem; }
+            .profile-body .profile-logo img { width: 80px; height: 80px; }
+            .profile-body h2 { font-size: 1.3rem; }
+            .social-icons { gap: 10px; }
+            .social-icon { width: 38px; height: 38px; font-size: 1rem; }
+            .topup-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .topup-item { padding: 14px 8px; min-height: 100px; }
+            .topup-item img { width: 55px; height: 55px; }
+            .topup-item span { font-size: 0.75rem; }
         }
-
         @media (max-width: 380px) {
-            .grid-menu {
-                gap: 10px;
-            }
-            .menu-card {
-                padding: 16px 8px;
-                min-height: 90px;
-            }
-            .menu-card i {
-                font-size: 26px;
-                margin-bottom: 8px;
-            }
-            .menu-card span {
-                font-size: 12px;
-            }
-            .detail-modal .variant-list {
-                grid-template-columns: 1fr;
-                gap: 6px;
-            }
-            .detail-modal .variant-item {
-                padding: 10px 12px;
-            }
-            .bottom-nav .nav-item {
-                min-width: 38px;
-                font-size: 0.5rem;
-            }
-            .bottom-nav .nav-item i {
-                font-size: 1.1rem;
-            }
-            .bottom-nav .nav-item .badge {
-                font-size: 0.45rem;
-                min-width: 16px;
-                line-height: 16px;
-                padding: 0 4px;
-            }
-            .detail-modal {
-                padding: 16px 14px;
-            }
-            .detail-modal h2 {
-                font-size: 1.2rem;
-            }
-            .detail-modal .price {
-                font-size: 1.1rem;
-            }
-            .detail-modal .desc {
-                font-size: 0.85rem;
-            }
-            .detail-modal .add-cart-btn {
-                font-size: 0.95rem;
-                padding: 14px;
-            }
-            .store-name {
-                font-size: 1.1rem;
-            }
-            .store-name .rating {
-                font-size: 0.7rem;
-            }
-            .store-name .badge-free {
-                font-size: 0.6rem;
-                padding: 1px 8px;
-            }
-            .section-title {
-                font-size: 0.85rem;
-                padding-left: 8px;
-            }
-            .profile-body .profile-logo img {
-                width: 70px;
-                height: 70px;
-            }
-            .profile-body h2 {
-                font-size: 1.1rem;
-            }
-            .social-icon {
-                width: 34px;
-                height: 34px;
-                font-size: 0.9rem;
-            }
+            .grid-menu { gap: 10px; }
+            .menu-card { padding: 16px 8px; min-height: 90px; }
+            .menu-card i { font-size: 26px; margin-bottom: 8px; }
+            .menu-card span { font-size: 12px; }
+            .detail-modal .variant-list { grid-template-columns: 1fr; gap: 6px; }
+            .detail-modal .variant-item { padding: 10px 12px; }
+            .bottom-nav .nav-item { min-width: 38px; font-size: 0.5rem; }
+            .bottom-nav .nav-item i { font-size: 1.1rem; }
+            .bottom-nav .nav-item .badge { font-size: 0.45rem; min-width: 16px; line-height: 16px; padding: 0 4px; }
+            .detail-modal { padding: 16px 14px; }
+            .detail-modal h2 { font-size: 1.2rem; }
+            .detail-modal .price { font-size: 1.1rem; }
+            .detail-modal .desc { font-size: 0.85rem; }
+            .detail-modal .add-cart-btn { font-size: 0.95rem; padding: 14px; }
+            .store-name { font-size: 1.1rem; }
+            .store-name .rating { font-size: 0.7rem; }
+            .store-name .badge-free { font-size: 0.6rem; padding: 1px 8px; }
+            .section-title { font-size: 0.85rem; padding-left: 8px; }
+            .profile-body .profile-logo img { width: 70px; height: 70px; }
+            .profile-body h2 { font-size: 1.1rem; }
+            .social-icon { width: 34px; height: 34px; font-size: 0.9rem; }
+            .topup-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .topup-item { padding: 10px 6px; min-height: 80px; }
+            .topup-item img { width: 45px; height: 45px; }
+            .topup-item span { font-size: 0.65rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
+<div class="app-container">
 
-        <!-- ===== HEADER ===== -->
-        <header class="top-header">
-            <div class="logo-area">
-                <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
-                <span>JOELL SHOP</span>
-            </div>
-        </header>
+    <!-- ===== HEADER ===== -->
+    <header class="top-header">
+        <div class="logo-area">
+            <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
+            <span>JOELL SHOP</span>
+        </div>
+    </header>
 
-        <!-- ===== HALAMAN BERANDA ===== -->
-        <div class="page active" id="page-home">
-            <div class="hero">
-                <img src="https://files.catbox.moe/iai8aa.png" alt="hero" />
-            </div>
-            <div class="hero-logo">
-                <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
-            </div>
-
-            <!-- ===== SEARCH — HANYA DI BERANDA ===== -->
-            <div class="search-wrap">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Cari produk..." />
-                    <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
-                </div>
-            </div>
-
-            <!-- ===== STORE HEADER ===== -->
-            <div class="store-header">
-                <div class="store-name">
-                    JOELL SHOP
-                    <span class="rating">
-                        4.9 <span class="review-count">(1,234 Reviews)</span>
-                    </span>
-                    <span class="badge-free">Free Fee Admin</span>
-                </div>
-            </div>
-
-            <!-- ===== STATS ===== -->
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="number">12.5K</span>
-                    <div class="label">Total Terjual</div>
-                </div>
-                <div class="stat-item">
-                    <span class="number">8.2K</span>
-                    <div class="label">Pelanggan</div>
-                </div>
-                <div class="stat-item">
-                    <span class="number">98%</span>
-                    <div class="label">Kepuasan</div>
-                </div>
-            </div>
-
-            <!-- ===== PRODUK ===== -->
-            <div class="section-title">Hosting Dan Kebutuhan Bot WhatsApp</div>
-            <div class="grid-menu" id="gridHosting"></div>
-
-            <div class="section-title">Jasa Script Bot WhatsApp</div>
-            <div class="grid-menu" id="gridScript"></div>
+    <!-- ===== HALAMAN BERANDA ===== -->
+    <div class="page active" id="page-home">
+        <div class="hero">
+            <img src="https://files.catbox.moe/iai8aa.png" alt="hero" />
+        </div>
+        <div class="hero-logo">
+            <img src="https://files.catbox.moe/ijemcy.png" alt="logo" />
         </div>
 
-        <!-- ===== HALAMAN PROFIL ===== -->
-        <div class="page" id="page-profile">
-            <div class="profile-page">
-                <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover" />
-                <div class="profile-body">
-                    <div class="profile-logo">
-                        <img src="https://files.catbox.moe/ijemcy.png" alt="logo profil" />
-                    </div>
-                    <h2>JOELL SHOP</h2>
-                    <p class="owner-label">Pemilik Joell Shop</p>
-
-                    <div class="profile-section">
-                        <h3>Tentang Saya</h3>
-                        <p class="bio">Joell Shop hadir sebagai solusi digital lengkap untukmu! Kami menyediakan Panel Pterodactyl premium untuk game server, bot hosting, hingga web/app hosting dengan performa cepat dan stabil, Jasa design kreatif seperti logo, banner, hingga UI/UX agar bisnismu lebih profesional, serta Script Bot WhatsApp full fitur dengan menu otomatis, AI chat, downloader, payment, dan fitur premium lainnya. Dengan Harga terjangkau, Support 24/7, dan Layanan berkualitas, Joell Shop adalah pilihan terbaik untuk kebutuhan digitalmu! 🎉🎉</p>
-                    </div>
-
-                    <div class="profile-section">
-                        <h3>Kontak Saya</h3>
-                        <div class="contact-box">
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Jl. Soekarno, Jakarta, Indonesia</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>0877-5175-5160</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>joellshop@gmail.com</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-clock"></i>
-                                <span>09:00 - 21:00 WIB</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="profile-section">
-                        <h3>Ikuti Saya di Media Sosial</h3>
-                        <div class="social-icons">
-                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-                            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="profile-section">
-                        <h3>Kirim Pesan</h3>
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-group">
-                                <label>Nama Lengkap</label>
-                                <input type="text" placeholder="Masukkan nama lengkap" required />
-                            </div>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" placeholder="Masukkan alamat email" required />
-                            </div>
-                            <div class="form-group">
-                                <label>Pesan</label>
-                                <textarea rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-send">Kirim Pesan</button>
-                        </form>
-                    </div>
-                </div>
+        <div class="search-wrap">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari produk..." />
+                <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
             </div>
         </div>
 
-        <!-- ===== KERANJANG ===== -->
-        <div class="cart-overlay" id="cartOverlay">
-            <div class="cart-panel">
-                <div class="cart-header">
-                    <span><i class="fas fa-shopping-cart"></i> Keranjang</span>
-                    <button class="cart-close" id="cartCloseBtn"><i class="fas fa-times"></i></button>
-                </div>
-                <div id="cartItems"></div>
-                <div class="cart-total">
-                    <span>Total</span>
-                    <span id="cartTotalPrice">Rp 0</span>
-                </div>
-                <button class="cart-checkout" id="checkoutBtn">
-                    <i class="fab fa-whatsapp"></i> Checkout WA
-                </button>
-                <button class="cart-checkout cart-payment" id="paymentBtn">
-                    <i class="fas fa-credit-card"></i> Payment
-                </button>
+        <div class="store-header">
+            <div class="store-name">
+                JOELL SHOP
+                <span class="rating">4.9 <span class="review-count">(1,234 Reviews)</span></span>
+                <span class="badge-free">Free Fee Admin</span>
             </div>
         </div>
 
-        <!-- ===== DETAIL MODAL ===== -->
-        <div class="detail-overlay" id="detailOverlay">
-            <div class="detail-modal">
-                <button class="detail-close" id="detailCloseBtn"><i class="fas fa-times"></i></button>
-                <h2 id="detailName">Nama Produk</h2>
-                <div class="price" id="detailPrice">Rp 0</div>
-                <p class="desc" id="detailDesc">Deskripsi produk.</p>
-                <div class="variant-title">Pilih Varian:</div>
-                <div class="variant-list" id="variantList"></div>
-                <button class="add-cart-btn" id="addToCartBtn">
-                    <i class="fas fa-cart-plus"></i> Tambah ke Keranjang
-                </button>
-            </div>
+        <div class="stats">
+            <div class="stat-item"><span class="number">12.5K</span><div class="label">Total Terjual</div></div>
+            <div class="stat-item"><span class="number">8.2K</span><div class="label">Pelanggan</div></div>
+            <div class="stat-item"><span class="number">98%</span><div class="label">Kepuasan</div></div>
         </div>
 
+        <div class="section-title">Hosting Dan Kebutuhan Bot WhatsApp</div>
+        <div class="grid-menu" id="gridHosting"></div>
+
+        <div class="section-title">Jasa Script Bot WhatsApp</div>
+        <div class="grid-menu" id="gridScript"></div>
+
+        <div class="section-title">Topup Game</div>
+        <div class="grid-menu" id="gridTopup"></div>
+
+        <div class="section-title">Layanan</div>
+        <div class="grid-menu" id="gridLayanan"></div>
     </div>
 
-    <!-- ===== BOTTOM NAV ===== -->
-    <nav class="bottom-nav" id="bottomNav">
-        <button class="nav-item active" data-page="home" id="navHome">
-            <i class="fas fa-home"></i> Beranda
-        </button>
-        <button class="nav-item" id="navSearch">
-            <i class="fas fa-search"></i> Cari
-        </button>
-        <button class="nav-item" data-page="cart" id="navCart">
-            <i class="fas fa-shopping-cart"></i> Keranjang
-            <span class="badge" id="navCartBadge">0</span>
-        </button>
-        <button class="nav-item payment-item" data-page="payment" id="navPayment">
-            <i class="fas fa-credit-card"></i> Payment
-        </button>
-        <button class="nav-item" data-page="profile" id="navProfile">
-            <i class="fas fa-user"></i> Profil
-        </button>
-    </nav>
-
-    <script>
-        // ============================================================
-        //  DATA PRODUK
-        // ============================================================
-        const products = [
-            // KATEGORI 1: Hosting Dan Kebutuhan Bot WhatsApp
-            {
-                id: 1,
-                name: 'Panel Pterodactyl',
-                price: 2000,
-                desc: 'Panel Pterodactyl hosting bot/game dengan performa stabil dan harga terjangkau.',
-                icon: 'fa-server',
-                category: 'hosting',
-                variants: [
-                    { name: '1GB RAM', price: 2000 },
-                    { name: '2GB RAM', price: 3000 },
-                    { name: '3GB RAM', price: 4000 },
-                    { name: '4GB RAM', price: 5000 },
-                    { name: '5GB RAM', price: 6000 },
-                    { name: '6GB RAM', price: 7000 },
-                    { name: '7GB RAM', price: 8000 },
-                    { name: '8GB RAM', price: 9000 },
-                    { name: '9GB RAM', price: 10000 },
-                    { name: '11GB RAM', price: 11000 },
-                    { name: 'Unlimited RAM', price: 13000 },
-                    { name: 'Reseller Panel', price: 16000 },
-                    { name: 'Admin Panel', price: 18000 }
-                ]
-            },
-            {
-                id: 2,
-                name: 'Jasa Pembuatan Fitur',
-                price: 5000,
-                desc: 'Layanan pembuatan fitur khusus untuk bot WhatsApp sesuai kebutuhan Anda.',
-                icon: 'fa-microchip',
-                category: 'hosting',
-                variants: [
-                    { name: 'Add & Fix / Fitur WhatsApp Bot', price: 5000 },
-                    { name: 'Add Fitur Auto React Status', price: 15000 },
-                    { name: 'Add Fitur Security IP', price: 25000 },
-                    { name: 'Add Fitur Security Username + Password', price: 15000 },
-                    { name: 'Add Fitur Autojoin Saluran WhatsApp', price: 10000 },
-                    { name: 'Add Fitur Auto Show JKT48 (Showroom + IDN) Otomatis', price: 55000 }
-                ]
-            },
-            {
-                id: 3,
-                name: 'Sewa Bot & Jadibot',
-                price: 10000,
-                desc: 'Layanan Sewabot atau Jadibot WhatsApp, bot siap pakai 24 jam tanpa perlu server sendiri.',
-                icon: 'fa-robot',
-                category: 'hosting',
-                variants: [
-                    { name: '2 Minggu / 14 Day', price: 10000 },
-                    { name: '1 Bulan / 30 Day', price: 20000 },
-                    { name: 'Permanen / LifeTime', price: 30000 }
-                ]
-            },
-            {
-                id: 4,
-                name: 'Sell Script Lily Generation 2',
-                price: 30000,
-                desc: 'Script Lily Generation 2, bot WhatsApp dengan fitur modern, performa cepat, dan auto-update.',
-                icon: 'fa-database',
-                category: 'hosting',
-                variants: [
-                    { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (NO UPDATE)', price: 30000 },
-                    { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (FREE 1x UPDATE)', price: 35000 },
-                    { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (FREE 2x UPDATE)', price: 45000 }
-                ]
-            },
-            {
-                id: 5,
-                name: 'Jasa Rename Script Bot WA',
-                price: 7000,
-                desc: 'Jasa rename script bot WhatsApp, dari 30% hingga 100% full rename.',
-                icon: 'fa-pen-fancy',
-                category: 'hosting',
-                variants: [
-                    { name: 'Rename 30% + Ganti Namabot + Ganti Footer/Watermark + Beberapa Foto Menu Utama', price: 7000 },
-                    { name: 'Rename 60% + Ganti NamaBot + NamaOwner + InfoBot + Watermark + Foto Menu + Beberapa Command & Variabel & String', price: 12000 },
-                    { name: 'Rename 80% + Ganti NamaBot + NamaOwner + InfoBot + Watermark + Foto Menu + Beberapa Command & Variabel & String + Struktur Menu + Command utama & alias', price: 15000 },
-                    { name: 'Rename 100% Full + Ganti NamaBot + NamaOwner + InfoBot + Watermark + Foto Menu + Beberapa Command & Variabel & String + Struktur Menu + Command utama & alias + Response + Rombak Total + Semua Jadi Milik Kamu + Dapat Licensi Full Hak Milik', price: 20000 }
-                ]
-            },
-            {
-                id: 6,
-                name: 'Domain & Hosting 1 Tahun',
-                price: 8000,
-                desc: 'Hosting website dengan panel cPanel / DirectAdmin, cocok untuk pemula.',
-                icon: 'fa-globe',
-                category: 'hosting',
-                variants: [
-                    { name: 'Domain myid 1 Tahun', price: 8000 },
-                    { name: 'Domain bizid 1 Tahun', price: 8000 },
-                    { name: 'Domain xyz 1 Tahun', price: 75000 },
-                    { name: 'Domain xyz 1 Tahun + Hosting', price: 550000 }
-                ]
-            },
-            // KATEGORI 2: Jasa Script Bot WhatsApp
-            {
-                id: 7,
-                name: 'Bot Multi Device',
-                price: 35000,
-                desc: 'Script bot WhatsApp Multi Device dengan fitur modern, stabil, untuk personal atau bisnis.',
-                icon: 'fa-code-branch',
-                category: 'script',
-                variants: [
-                    { name: 'Bot MD Basic', price: 35000 },
-                    { name: 'Bot MD Premium', price: 75000 },
-                    { name: 'Custom Request', price: 0 }
-                ]
-            },
-            {
-                id: 8,
-                name: 'Bot RPG',
-                price: 45000,
-                desc: 'Script bot WhatsApp RPG dengan sistem game, inventory, leveling, dan fitur seru lainnya.',
-                icon: 'fa-gamepad',
-                category: 'script',
-                variants: [
-                    { name: 'Bot RPG Basic', price: 45000 },
-                    { name: 'Bot RPG Full Fitur', price: 85000 },
-                    { name: 'Custom Request', price: 0 }
-                ]
-            },
-            {
-                id: 9,
-                name: 'Bot Jaga Group & Pushkontak',
-                price: 30000,
-                desc: 'Script bot untuk keamanan grup, welcome, anti-link, auto respon, dan push kontak.',
-                icon: 'fa-users-cog',
-                category: 'script',
-                variants: [
-                    { name: 'Jaga Group Basic', price: 30000 },
-                    { name: 'Jaga Group + Pushkontak', price: 70000 },
-                    { name: 'Custom Request', price: 0 }
-                ]
-            },
-            {
-                id: 10,
-                name: 'Bot Convert Downloader Sticker',
-                price: 40000,
-                desc: 'Bot dengan fitur convert media, downloader sosial media, dan pembuat sticker otomatis.',
-                icon: 'fa-download',
-                category: 'script',
-                variants: [
-                    { name: 'Downloader Basic', price: 40000 },
-                    { name: 'Convert + Sticker Full', price: 80000 },
-                    { name: 'Custom Request', price: 0 }
-                ]
-            },
-            {
-                id: 11,
-                name: 'Bot Auto AI',
-                price: 50000,
-                desc: 'Bot WhatsApp AI otomatis untuk chat pintar, tanya jawab, dan asisten virtual.',
-                icon: 'fa-brain',
-                category: 'script',
-                variants: [
-                    { name: 'AI Basic', price: 50000 },
-                    { name: 'AI Premium Full', price: 95000 },
-                    { name: 'Custom Request', price: 0 }
-                ]
-            },
-            {
-                id: 12,
-                name: 'Bot Auto Order Payment Gateway',
-                price: 55000,
-                desc: 'Bot WhatsApp auto order dengan sistem pembayaran otomatis menggunakan payment gateway.',
-                icon: 'fa-credit-card',
-                category: 'script',
-                variants: [
-                    { name: 'Auto Order Basic', price: 55000 },
-                    { name: 'Auto Order Premium', price: 99000 },
-                    { name: 'Custom Request', price: 0 }
-                ]
-            }
-        ];
-
-        // ============================================================
-        //  STATE
-        // ============================================================
-        let cart = [];
-        let currentProductId = null;
-        let selectedVariant = null;
-
-        // ====== FUNGSI REDIRECT PAYMENT ======
-        function goToPayment(productName, totalPrice) {
-            const url =
-                `https://joell-payment.vercel.app/?product=${encodeURIComponent(productName)}&total=${totalPrice}`;
-            window.open(url, '_blank');
-        }
-
-        // ====== RENDER MENU ======
-        function renderMenus() {
-            const gridHosting = document.getElementById('gridHosting');
-            const gridScript = document.getElementById('gridScript');
-
-            const hostingProducts = products.filter(p => p.category === 'hosting');
-            const scriptProducts = products.filter(p => p.category === 'script');
-
-            gridHosting.innerHTML = renderMenuCards(hostingProducts);
-            gridScript.innerHTML = renderMenuCards(scriptProducts);
-        }
-
-        function renderMenuCards(productList) {
-            let html = '';
-            productList.forEach(p => {
-                html += `
-                    <div class="menu-card" data-id="${p.id}">
-                        <i class="fas ${p.icon}"></i>
-                        <span>${p.name}</span>
+    <!-- ===== HALAMAN PROFIL ===== -->
+    <div class="page" id="page-profile">
+        <div class="profile-page">
+            <img class="profile-cover" src="https://files.catbox.moe/iai8aa.png" alt="cover" />
+            <div class="profile-body">
+                <div class="profile-logo">
+                    <img src="https://files.catbox.moe/ijemcy.png" alt="logo profil" />
+                </div>
+                <h2>JOELL SHOP</h2>
+                <p class="owner-label">Pemilik Joell Shop</p>
+                <div class="profile-section">
+                    <h3>Tentang Saya</h3>
+                    <p class="bio">Joell Shop hadir sebagai solusi digital lengkap untukmu! Kami menyediakan Panel Pterodactyl premium untuk game server, bot hosting, hingga web/app hosting dengan performa cepat dan stabil, Jasa design kreatif seperti logo, banner, hingga UI/UX agar bisnismu lebih profesional, serta Script Bot WhatsApp full fitur dengan menu otomatis, AI chat, downloader, payment, dan fitur premium lainnya. Dengan Harga terjangkau, Support 24/7, dan Layanan berkualitas, Joell Shop adalah pilihan terbaik untuk kebutuhan digitalmu! 🎉🎉</p>
+                </div>
+                <div class="profile-section">
+                    <h3>Kontak Saya</h3>
+                    <div class="contact-box">
+                        <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Jl. Soekarno, Jakarta, Indonesia</span></div>
+                        <div class="contact-item"><i class="fab fa-whatsapp"></i><span>0877-5175-5160</span></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><span>joellshop@gmail.com</span></div>
+                        <div class="contact-item"><i class="fas fa-clock"></i><span>09:00 - 21:00 WIB</span></div>
                     </div>
-                `;
+                </div>
+                <div class="profile-section">
+                    <h3>Ikuti Saya di Media Sosial</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h3>Kirim Pesan</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group"><label>Nama Lengkap</label><input type="text" placeholder="Masukkan nama lengkap" required /></div>
+                        <div class="form-group"><label>Email</label><input type="email" placeholder="Masukkan alamat email" required /></div>
+                        <div class="form-group"><label>Pesan</label><textarea rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea></div>
+                        <button type="submit" class="btn-send">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== KERANJANG ===== -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-panel">
+            <div class="cart-header">
+                <span><i class="fas fa-shopping-cart"></i> Keranjang</span>
+                <button class="cart-close" id="cartCloseBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="cartItems"></div>
+            <div class="cart-total"><span>Total</span><span id="cartTotalPrice">Rp 0</span></div>
+            <button class="cart-checkout" id="checkoutBtn"><i class="fab fa-whatsapp"></i> Checkout WA</button>
+            <button class="cart-checkout cart-payment" id="paymentBtn"><i class="fas fa-credit-card"></i> Payment</button>
+        </div>
+    </div>
+
+    <!-- ===== DETAIL MODAL ===== -->
+    <div class="detail-overlay" id="detailOverlay">
+        <div class="detail-modal">
+            <button class="detail-close" id="detailCloseBtn"><i class="fas fa-times"></i></button>
+            <h2 id="detailName">Nama Produk</h2>
+            <div class="price" id="detailPrice">Rp 0</div>
+            <p class="desc" id="detailDesc">Deskripsi produk.</p>
+            <div class="variant-title">Pilih Varian:</div>
+            <div class="variant-list" id="variantList"></div>
+            <button class="add-cart-btn" id="addToCartBtn"><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</button>
+        </div>
+    </div>
+
+    <!-- ===== TOPUP MODAL ===== -->
+    <div class="topup-overlay" id="topupOverlay">
+        <div class="topup-modal">
+            <button class="topup-close" id="topupCloseBtn"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-gamepad"></i> Topup All Game</h2>
+            <p class="desc">Pilih game yang ingin kamu topup:</p>
+            <div class="topup-grid" id="topupGrid"></div>
+        </div>
+    </div>
+
+    <!-- ===== DOWNLOADER MODAL ===== -->
+    <div class="downloader-overlay" id="downloaderOverlay">
+        <div class="downloader-modal">
+            <button class="downloader-close" id="downloaderCloseBtn"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-download"></i> Downloader Video</h2>
+            <p class="desc">Masukkan URL video dari TikTok, Instagram, Pinterest, atau YouTube.</p>
+            <div class="downloader-input-wrap">
+                <input type="text" id="downloaderUrl" placeholder="https://www.tiktok.com/..." />
+                <select id="downloaderPlatform">
+                    <option value="auto">Otomatis Deteksi</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="pinterest">Pinterest</option>
+                </select>
+                <button id="downloaderBtn"><i class="fas fa-download"></i> Download</button>
+            </div>
+            <div id="downloaderResult" style="margin-top:12px;display:none;">
+                <p id="downloaderTitle"></p>
+                <a id="downloaderLink" href="#" target="_blank" class="btn-download-link">Download Video</a>
+            </div>
+            <div id="downloaderError" style="color:#e74c3c;margin-top:8px;display:none;"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-page="home" id="navHome"><i class="fas fa-home"></i> Beranda</button>
+    <button class="nav-item" id="navSearch"><i class="fas fa-search"></i> Cari</button>
+    <button class="nav-item" data-page="cart" id="navCart"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge" id="navCartBadge">0</span></button>
+    <button class="nav-item payment-item" data-page="payment" id="navPayment"><i class="fas fa-credit-card"></i> Payment</button>
+    <button class="nav-item" data-page="profile" id="navProfile"><i class="fas fa-user"></i> Profil</button>
+</nav>
+
+<script>
+    // ============================================================
+    //  DATA TOPUP GAME
+    // ============================================================
+    const topupGames = [
+        { name: 'FREE FIRE', logo: 'https://files.catbox.moe/5mzzve.webp', url: 'https://bananagamestore.com/free-fire-b' },
+        { name: 'MOBILE LEGENDS', logo: 'https://files.catbox.moe/6l0i99.webp', url: 'https://bananagamestore.com/mobile-legends-b' },
+        { name: 'HONOR OF KINGS', logo: 'https://files.catbox.moe/jr45bw.png', url: 'https://bananagamestore.com/honor-of-kings' },
+        { name: 'PUBG MOBILE', logo: 'https://files.catbox.moe/ja3cb4.webp', url: 'https://bananagamestore.com/pubg-mobile' },
+        { name: 'MAGIC CHESS', logo: 'https://files.catbox.moe/20pncb.webp', url: 'https://bananagamestore.com/magic-chess-go-go' },
+        { name: 'VALORANT', logo: 'https://files.catbox.moe/o7ggke.webp', url: 'https://bananagamestore.com/valorant' },
+        { name: 'BLOOD STRIKE', logo: 'https://files.catbox.moe/rzmi2o.webp', url: 'https://bananagamestore.com/blood-strike' },
+        { name: 'CALL OF DUTY', logo: 'https://files.catbox.moe/xjzqxc.webp', url: 'https://bananagamestore.com/call-of-duty-mobile-id' },
+        { name: 'ROBLOX', logo: 'https://files.catbox.moe/t347k0.webp', url: 'https://bananagamestore.com/roblox' },
+        { name: 'DELTA FORCE', logo: 'https://files.catbox.moe/kkcx3r.webp', url: 'https://bananagamestore.com/delta-force-garena' },
+        { name: 'POINT BLANK', logo: 'https://files.catbox.moe/y9zkye.webp', url: 'https://bananagamestore.com/ppoint-blank-voucher-cash' },
+        { name: 'STEAM VOUCHER', logo: 'https://files.catbox.moe/s7r8fi.webp', url: 'https://bananagamestore.com/steam-voucher-indonesia-rupiah' }
+    ];
+
+    // ============================================================
+    //  DATA PRODUK
+    // ============================================================
+    const products = [
+        // KATEGORI 1: Hosting
+        { id: 1, name: 'Panel Pterodactyl', price: 2000, desc: 'Panel Pterodactyl hosting bot/game dengan performa stabil dan harga terjangkau.', icon: 'fa-server', category: 'hosting', variants: [{ name: '1GB RAM', price: 2000 }, { name: '2GB RAM', price: 3000 }, { name: '3GB RAM', price: 4000 }, { name: '4GB RAM', price: 5000 }, { name: '5GB RAM', price: 6000 }, { name: '6GB RAM', price: 7000 }, { name: '7GB RAM', price: 8000 }, { name: '8GB RAM', price: 9000 }, { name: '9GB RAM', price: 10000 }, { name: '11GB RAM', price: 11000 }, { name: 'Unlimited RAM', price: 13000 }, { name: 'Reseller Panel', price: 16000 }, { name: 'Admin Panel', price: 18000 }] },
+        { id: 2, name: 'Jasa Pembuatan Fitur', price: 5000, desc: 'Layanan pembuatan fitur khusus untuk bot WhatsApp.', icon: 'fa-microchip', category: 'hosting', variants: [{ name: 'Add & Fix / Fitur WhatsApp Bot', price: 5000 }, { name: 'Add Fitur Auto React Status', price: 15000 }, { name: 'Add Fitur Security IP', price: 25000 }, { name: 'Add Fitur Security Username + Password', price: 15000 }, { name: 'Add Fitur Autojoin Saluran WhatsApp', price: 10000 }, { name: 'Add Fitur Auto Show JKT48 (Showroom + IDN) Otomatis', price: 55000 }] },
+        { id: 3, name: 'Sewa Bot & Jadibot', price: 10000, desc: 'Layanan Sewabot atau Jadibot WhatsApp, bot siap pakai 24 jam.', icon: 'fa-robot', category: 'hosting', variants: [{ name: '2 Minggu / 14 Day', price: 10000 }, { name: '1 Bulan / 30 Day', price: 20000 }, { name: 'Permanen / LifeTime', price: 30000 }] },
+        { id: 4, name: 'Sell Script Lily Generation 2', price: 30000, desc: 'Script Lily Generation 2, bot WhatsApp dengan fitur modern.', icon: 'fa-database', category: 'hosting', variants: [{ name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (NO UPDATE)', price: 30000 }, { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (FREE 1x UPDATE)', price: 35000 }, { name: 'Total Features 600 + Auto React Sw + Auto Show JKT48 (FREE 2x UPDATE)', price: 45000 }] },
+        { id: 5, name: 'Jasa Rename Script Bot WA', price: 7000, desc: 'Jasa rename script bot WhatsApp, dari 30% hingga 100% full rename.', icon: 'fa-pen-fancy', category: 'hosting', variants: [{ name: 'Rename 30%', price: 7000 }, { name: 'Rename 60%', price: 12000 }, { name: 'Rename 80%', price: 15000 }, { name: 'Rename 100% Full', price: 20000 }] },
+        { id: 6, name: 'Domain & Hosting 1 Tahun', price: 8000, desc: 'Hosting website dengan panel cPanel / DirectAdmin.', icon: 'fa-globe', category: 'hosting', variants: [{ name: 'Domain myid 1 Tahun', price: 8000 }, { name: 'Domain bizid 1 Tahun', price: 8000 }, { name: 'Domain xyz 1 Tahun', price: 75000 }, { name: 'Domain xyz 1 Tahun + Hosting', price: 550000 }] },
+        // KATEGORI 2: Script
+        { id: 7, name: 'Bot Multi Device', price: 35000, desc: 'Script bot WhatsApp Multi Device dengan fitur modern.', icon: 'fa-code-branch', category: 'script', variants: [{ name: 'Bot MD Basic', price: 35000 }, { name: 'Bot MD Premium', price: 75000 }, { name: 'Custom Request', price: 0 }] },
+        { id: 8, name: 'Bot RPG', price: 45000, desc: 'Script bot WhatsApp RPG dengan sistem game, inventory, leveling.', icon: 'fa-gamepad', category: 'script', variants: [{ name: 'Bot RPG Basic', price: 45000 }, { name: 'Bot RPG Full Fitur', price: 85000 }, { name: 'Custom Request', price: 0 }] },
+        { id: 9, name: 'Bot Jaga Group & Pushkontak', price: 30000, desc: 'Script bot untuk keamanan grup, welcome, anti-link, auto respon.', icon: 'fa-users-cog', category: 'script', variants: [{ name: 'Jaga Group Basic', price: 30000 }, { name: 'Jaga Group + Pushkontak', price: 70000 }, { name: 'Custom Request', price: 0 }] },
+        { id: 10, name: 'Bot Convert Downloader Sticker', price: 40000, desc: 'Bot dengan fitur convert media, downloader sosial media, dan pembuat sticker.', icon: 'fa-download', category: 'script', variants: [{ name: 'Downloader Basic', price: 40000 }, { name: 'Convert + Sticker Full', price: 80000 }, { name: 'Custom Request', price: 0 }] },
+        { id: 11, name: 'Bot Auto AI', price: 50000, desc: 'Bot WhatsApp AI otomatis untuk chat pintar, tanya jawab, dan asisten virtual.', icon: 'fa-brain', category: 'script', variants: [{ name: 'AI Basic', price: 50000 }, { name: 'AI Premium Full', price: 95000 }, { name: 'Custom Request', price: 0 }] },
+        { id: 12, name: 'Bot Auto Order Payment Gateway', price: 55000, desc: 'Bot WhatsApp auto order dengan sistem pembayaran otomatis.', icon: 'fa-credit-card', category: 'script', variants: [{ name: 'Auto Order Basic', price: 55000 }, { name: 'Auto Order Premium', price: 99000 }, { name: 'Custom Request', price: 0 }] },
+        // KATEGORI 3: Topup
+        { id: 13, name: 'Topup All Game', price: 0, desc: 'Topup berbagai game seperti Mobile Legends, Free Fire, PUBG, dan lainnya.', icon: 'fa-gamepad', category: 'topup', isTopup: true, variants: [{ name: 'Pilih Game', price: 0 }] },
+        // KATEGORI 4: Layanan
+        { id: 14, name: 'Downloader Video', price: 0, desc: 'Download video dari TikTok, Instagram, Pinterest, YouTube, dan lainnya.', icon: 'fa-download', category: 'layanan', isDownloader: true, variants: [{ name: 'Buka Downloader', price: 0 }] }
+    ];
+
+    // ============================================================
+    //  STATE
+    // ============================================================
+    let cart = JSON.parse(localStorage.getItem('joellCart')) || [];
+    let currentProductId = null;
+    let selectedVariant = null;
+
+    // ============================================================
+    //  FUNGSI
+    // ============================================================
+    function goToPayment(productName, totalPrice) {
+        window.open(`https://joell-payment.vercel.app/?product=${encodeURIComponent(productName)}&total=${totalPrice}`, '_blank');
+    }
+
+    // ====== RENDER TOPUP ======
+    function renderTopupGames() {
+        const grid = document.getElementById('topupGrid');
+        grid.innerHTML = '';
+        topupGames.forEach(game => {
+            const div = document.createElement('div');
+            div.className = 'topup-item';
+            div.innerHTML = `<img src="${game.logo}" alt="${game.name}" loading="lazy" /><span>${game.name}</span>`;
+            div.addEventListener('click', () => window.open(game.url, '_blank'));
+            grid.appendChild(div);
+        });
+    }
+
+    // ====== RENDER MENU ======
+    function renderMenus() {
+        const gridHosting = document.getElementById('gridHosting');
+        const gridScript = document.getElementById('gridScript');
+        const gridTopup = document.getElementById('gridTopup');
+        const gridLayanan = document.getElementById('gridLayanan');
+
+        gridHosting.innerHTML = renderMenuCards(products.filter(p => p.category === 'hosting'));
+        gridScript.innerHTML = renderMenuCards(products.filter(p => p.category === 'script'));
+        gridTopup.innerHTML = renderMenuCards(products.filter(p => p.category === 'topup'));
+        gridLayanan.innerHTML = renderMenuCards(products.filter(p => p.category === 'layanan'));
+    }
+
+    function renderMenuCards(productList) {
+        let html = '';
+        productList.forEach(p => {
+            html += `
+                <div class="menu-card" data-id="${p.id}" data-topup="${p.isTopup || false}" data-downloader="${p.isDownloader || false}">
+                    <i class="fas ${p.icon}"></i>
+                    <span>${p.name}</span>
+                </div>
+            `;
+        });
+        return html;
+    }
+
+    // ====== KERANJANG ======
+    function updateCartUI() {
+        const count = cart.reduce((sum, i) => sum + i.qty, 0);
+        document.getElementById('navCartBadge').textContent = count;
+
+        const container = document.getElementById('cartItems');
+        if (cart.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:16px;">Keranjang kosong.</p>';
+            document.getElementById('cartTotalPrice').textContent = 'Rp 0';
+            return;
+        }
+        let html = '';
+        let total = 0;
+        cart.forEach((item, idx) => {
+            const subtotal = item.price * item.qty;
+            total += subtotal;
+            const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${subtotal.toLocaleString()}`;
+            html += `
+                <div class="cart-item">
+                    <div><div class="ci-name">${item.name}</div><div style="font-size:0.75rem;color:var(--text-muted);">${item.variant} × ${item.qty}</div></div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <span class="ci-price">${priceText}</span>
+                        <button class="ci-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        document.getElementById('cartTotalPrice').textContent = total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`;
+        document.querySelectorAll('.ci-remove').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const idx = parseInt(this.dataset.index);
+                cart.splice(idx, 1);
+                localStorage.setItem('joellCart', JSON.stringify(cart));
+                updateCartUI();
             });
-            return html;
+        });
+        localStorage.setItem('joellCart', JSON.stringify(cart));
+    }
+
+    function addToCart(productId, variantName, variantPrice) {
+        const p = products.find(x => x.id === productId);
+        if (!p) return;
+        const existing = cart.find(item => item.id === productId && item.variant === variantName);
+        if (existing) {
+            existing.qty += 1;
+        } else {
+            cart.push({ id: p.id, name: p.name, price: variantPrice, variant: variantName, qty: 1 });
+        }
+        localStorage.setItem('joellCart', JSON.stringify(cart));
+        updateCartUI();
+        document.getElementById('cartOverlay').classList.add('open');
+    }
+
+    // ====== DETAIL MODAL ======
+    function openDetail(productId) {
+        const p = products.find(x => x.id === productId);
+        if (!p) return;
+        currentProductId = p.id;
+        selectedVariant = null;
+
+        document.getElementById('detailName').textContent = p.name;
+        const minPrice = Math.min(...p.variants.map(v => v.price));
+        document.getElementById('detailPrice').textContent = `Rp ${minPrice.toLocaleString()}`;
+        document.getElementById('detailDesc').textContent = p.desc;
+
+        const list = document.getElementById('variantList');
+        list.innerHTML = '';
+        p.variants.forEach((v, index) => {
+            const priceText = v.price === 0 ? 'Harga sesuai request' : `Rp ${v.price.toLocaleString()}`;
+            const div = document.createElement('div');
+            div.className = 'variant-item';
+            div.dataset.index = index;
+            div.innerHTML = `<span class="vname">${v.name}</span><span class="vprice">${priceText}</span>`;
+            list.appendChild(div);
+            div.addEventListener('click', function() {
+                document.querySelectorAll('.variant-item').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                selectedVariant = p.variants[index];
+            });
+        });
+
+        if (p.variants.length > 0) {
+            const firstItem = list.querySelector('.variant-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+                selectedVariant = p.variants[0];
+            }
+        }
+        document.getElementById('detailOverlay').classList.add('open');
+    }
+
+    // ====== BUKA TOPUP ======
+    function openTopup() {
+        document.getElementById('topupOverlay').classList.add('open');
+    }
+
+    // ====== BUKA DOWNLOADER ======
+    function openDownloader() {
+        document.getElementById('downloaderOverlay').classList.add('open');
+        document.getElementById('downloaderUrl').focus();
+    }
+
+    // ====== NAVIGASI ======
+    function navigateTo(page) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        if (page === 'payment') {
+            window.open('https://joell-payment.vercel.app/', '_blank');
+            return;
+        }
+        const targetPage = document.getElementById(`page-${page}`);
+        if (targetPage) targetPage.classList.add('active');
+
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.dataset.page === page) {
+                item.classList.add('active');
+            }
+        });
+        document.getElementById('cartOverlay').classList.remove('open');
+    }
+
+    // ====== SEARCH ======
+    function doSearch() {
+        const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+        const hostingProducts = products.filter(p => p.category === 'hosting' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword)));
+        const scriptProducts = products.filter(p => p.category === 'script' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword)));
+        const topupProducts = products.filter(p => p.category === 'topup' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword)));
+        const layananProducts = products.filter(p => p.category === 'layanan' && (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword)));
+
+        document.getElementById('gridHosting').innerHTML = renderMenuCards(hostingProducts);
+        document.getElementById('gridScript').innerHTML = renderMenuCards(scriptProducts);
+        document.getElementById('gridTopup').innerHTML = renderMenuCards(topupProducts);
+        document.getElementById('gridLayanan').innerHTML = renderMenuCards(layananProducts);
+
+        if (hostingProducts.length === 0 && scriptProducts.length === 0 && topupProducts.length === 0 && layananProducts.length === 0) {
+            document.getElementById('gridHosting').innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:20px;">Tidak ada produk ditemukan.</p>';
+            document.getElementById('gridScript').innerHTML = '';
+            document.getElementById('gridTopup').innerHTML = '';
+            document.getElementById('gridLayanan').innerHTML = '';
+        }
+        navigateTo('home');
+    }
+
+    // ============================================================
+    //  DOWNLOADER — PAKAI BACKEND
+    // ============================================================
+    // GANTI URL INI DENGAN URL BACKEND-MU (misal: https://joell-downloader.railway.app)
+    const BACKEND_URL = 'http://localhost:3000';
+
+    document.getElementById('downloaderBtn').addEventListener('click', async function() {
+        const url = document.getElementById('downloaderUrl').value.trim();
+        const platform = document.getElementById('downloaderPlatform').value;
+        const resultDiv = document.getElementById('downloaderResult');
+        const errorDiv = document.getElementById('downloaderError');
+
+        if (!url) {
+            errorDiv.textContent = 'Masukkan URL terlebih dahulu.';
+            errorDiv.style.display = 'block';
+            resultDiv.style.display = 'none';
+            return;
         }
 
-        // ====== KERANJANG ======
-        function updateCartUI() {
-            const count = cart.reduce((sum, i) => sum + i.qty, 0);
-            document.getElementById('navCartBadge').textContent = count;
+        errorDiv.style.display = 'none';
+        resultDiv.style.display = 'none';
+        this.disabled = true;
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
 
-            const container = document.getElementById('cartItems');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:16px;">Keranjang kosong.</p>';
-                document.getElementById('cartTotalPrice').textContent = 'Rp 0';
+        try {
+            const response = await fetch(`${BACKEND_URL}/api/download`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url, platform: platform === 'auto' ? '' : platform })
+            });
+
+            const data = await response.json();
+            if (!response.ok || data.error) throw new Error(data.error || 'Gagal download');
+
+            document.getElementById('downloaderTitle').textContent = `🎬 ${data.title}`;
+            document.getElementById('downloaderLink').href = data.downloadUrl;
+            resultDiv.style.display = 'block';
+        } catch (err) {
+            errorDiv.textContent = `❌ ${err.message}`;
+            errorDiv.style.display = 'block';
+        } finally {
+            this.disabled = false;
+            this.innerHTML = '<i class="fas fa-download"></i> Download';
+        }
+    });
+
+    // ============================================================
+    //  EVENT LISTENERS
+    // ============================================================
+    document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = this.dataset.page;
+            if (page === 'cart') {
+                document.getElementById('cartOverlay').classList.toggle('open');
                 return;
             }
-            let html = '';
-            let total = 0;
-            cart.forEach((item, idx) => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${subtotal.toLocaleString()}`;
-                html += `
-                    <div class="cart-item">
-                        <div>
-                            <div class="ci-name">${item.name}</div>
-                            <div style="font-size:0.75rem;color:var(--text-muted);">${item.variant} × ${item.qty}</div>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:12px;">
-                            <span class="ci-price">${priceText}</span>
-                            <button class="ci-remove" data-index="${idx}"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            document.getElementById('cartTotalPrice').textContent = total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`;
-            document.querySelectorAll('.ci-remove').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const idx = parseInt(this.dataset.index);
-                    cart.splice(idx, 1);
-                    updateCartUI();
-                });
-            });
-        }
+            navigateTo(page);
+        });
+    });
 
-        function addToCart(productId, variantName, variantPrice) {
-            const p = products.find(x => x.id === productId);
-            if (!p) return;
-            const existing = cart.find(item => item.id === productId && item.variant === variantName);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                cart.push({
-                    id: p.id,
-                    name: p.name,
-                    price: variantPrice,
-                    variant: variantName,
-                    qty: 1
-                });
-            }
-            updateCartUI();
-            document.getElementById('cartOverlay').classList.add('open');
-        }
+    document.getElementById('navSearch').addEventListener('click', function() {
+        document.getElementById('searchInput').focus();
+        document.querySelector('.search-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
 
-        // ====== DETAIL MODAL ======
-        function openDetail(productId) {
-            const p = products.find(x => x.id === productId);
-            if (!p) return;
-            currentProductId = p.id;
-            selectedVariant = null;
+    document.getElementById('cartCloseBtn').addEventListener('click', function() {
+        document.getElementById('cartOverlay').classList.remove('open');
+    });
+    document.getElementById('cartOverlay').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
 
-            document.getElementById('detailName').textContent = p.name;
-            const minPrice = Math.min(...p.variants.map(v => v.price));
-            document.getElementById('detailPrice').textContent = `Rp ${minPrice.toLocaleString()}`;
-            document.getElementById('detailDesc').textContent = p.desc;
+    document.getElementById('searchBtn').addEventListener('click', doSearch);
+    document.getElementById('searchInput').addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') doSearch();
+    });
 
-            const list = document.getElementById('variantList');
-            list.innerHTML = '';
-            p.variants.forEach((v, index) => {
-                const priceText = v.price === 0 ? 'Harga sesuai request' : `Rp ${v.price.toLocaleString()}`;
-                const div = document.createElement('div');
-                div.className = 'variant-item';
-                div.dataset.index = index;
-                div.innerHTML = `
-                    <span class="vname">${v.name}</span>
-                    <span class="vprice">${priceText}</span>
-                `;
-                list.appendChild(div);
-
-                div.addEventListener('click', function() {
-                    document.querySelectorAll('.variant-item').forEach(el => el.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedVariant = p.variants[index];
-                });
-            });
-
-            if (p.variants.length > 0) {
-                const firstItem = list.querySelector('.variant-item');
-                if (firstItem) {
-                    firstItem.classList.add('active');
-                    selectedVariant = p.variants[0];
-                }
-            }
-
-            document.getElementById('detailOverlay').classList.add('open');
-        }
-
-        // ====== NAVIGASI ======
-        function navigateTo(page) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            if (page === 'payment') {
-                window.open('https://joell-payment.vercel.app/', '_blank');
-                return;
-            }
-            const targetPage = document.getElementById(`page-${page}`);
-            if (targetPage) targetPage.classList.add('active');
-
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-                item.classList.remove('active');
-                if (item.dataset.page === page) {
-                    item.classList.add('active');
-                }
-            });
-            document.getElementById('cartOverlay').classList.remove('open');
-        }
-
-        // ====== SEARCH ======
-        function doSearch() {
-            const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
-            const hostingProducts = products.filter(p =>
-                p.category === 'hosting' &&
-                (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword))
-            );
-            const scriptProducts = products.filter(p =>
-                p.category === 'script' &&
-                (p.name.toLowerCase().includes(keyword) || p.desc.toLowerCase().includes(keyword))
-            );
-
-            document.getElementById('gridHosting').innerHTML = renderMenuCards(hostingProducts);
-            document.getElementById('gridScript').innerHTML = renderMenuCards(scriptProducts);
-
-            if (hostingProducts.length === 0 && scriptProducts.length === 0) {
-                document.getElementById('gridHosting').innerHTML =
-                    '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:20px;">Tidak ada produk ditemukan.</p>';
-                document.getElementById('gridScript').innerHTML = '';
-            }
-
-            navigateTo('home');
-        }
-
-        // ============================================================
-        //  EVENT LISTENERS
-        // ============================================================
-        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.dataset.page;
-                if (page === 'cart') {
-                    document.getElementById('cartOverlay').classList.toggle('open');
+    document.querySelectorAll('.grid-menu').forEach(grid => {
+        grid.addEventListener('click', function(e) {
+            const card = e.target.closest('.menu-card');
+            if (!card) return;
+            const productId = parseInt(card.dataset.id);
+            if (!isNaN(productId)) {
+                const product = products.find(p => p.id === productId);
+                if (product && product.isTopup) {
+                    openTopup();
                     return;
                 }
-                navigateTo(page);
-            });
-        });
-
-        document.getElementById('navSearch').addEventListener('click', function() {
-            document.getElementById('searchInput').focus();
-            document.querySelector('.search-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-
-        document.getElementById('cartCloseBtn').addEventListener('click', function() {
-            document.getElementById('cartOverlay').classList.remove('open');
-        });
-        document.getElementById('cartOverlay').addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('open');
-        });
-
-        document.getElementById('searchBtn').addEventListener('click', doSearch);
-        document.getElementById('searchInput').addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') doSearch();
-        });
-
-        document.querySelectorAll('.grid-menu').forEach(grid => {
-            grid.addEventListener('click', function(e) {
-                const card = e.target.closest('.menu-card');
-                if (!card) return;
-                const productId = parseInt(card.dataset.id);
-                if (!isNaN(productId)) {
-                    openDetail(productId);
+                if (product && product.isDownloader) {
+                    openDownloader();
+                    return;
                 }
-            });
-        });
-
-        document.getElementById('detailCloseBtn').addEventListener('click', function() {
-            document.getElementById('detailOverlay').classList.remove('open');
-        });
-        document.getElementById('detailOverlay').addEventListener('click', function(e) {
-            if (e.target === this) this.classList.remove('open');
-        });
-
-        document.getElementById('addToCartBtn').addEventListener('click', function() {
-            if (!selectedVariant) {
-                alert('Pilih varian terlebih dahulu.');
-                return;
+                openDetail(productId);
             }
-            addToCart(currentProductId, selectedVariant.name, selectedVariant.price);
-            document.getElementById('detailOverlay').classList.remove('open');
         });
+    });
 
-        document.getElementById('checkoutBtn').addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Keranjang kosong.');
-                return;
-            }
-            let msg = 'Halo, saya mau pesan:\n';
-            let total = 0;
-            cart.forEach(item => {
-                const sub = item.price * item.qty;
-                total += sub;
-                const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${sub.toLocaleString()}`;
-                msg += `- ${item.name} (${item.variant}) × ${item.qty} = ${priceText}\n`;
-            });
-            msg += `\nTotal: ${total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`}`;
-            window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
+    document.getElementById('detailCloseBtn').addEventListener('click', function() {
+        document.getElementById('detailOverlay').classList.remove('open');
+    });
+    document.getElementById('detailOverlay').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
+
+    document.getElementById('addToCartBtn').addEventListener('click', function() {
+        if (!selectedVariant) {
+            alert('Pilih varian terlebih dahulu.');
+            return;
+        }
+        addToCart(currentProductId, selectedVariant.name, selectedVariant.price);
+        document.getElementById('detailOverlay').classList.remove('open');
+    });
+
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+        if (cart.length === 0) {
+            alert('Keranjang kosong.');
+            return;
+        }
+        let msg = 'Halo, saya mau pesan:\n';
+        let total = 0;
+        cart.forEach(item => {
+            const sub = item.price * item.qty;
+            total += sub;
+            const priceText = item.price === 0 ? 'Harga sesuai request' : `Rp ${sub.toLocaleString()}`;
+            msg += `- ${item.name} (${item.variant}) × ${item.qty} = ${priceText}\n`;
         });
+        msg += `\nTotal: ${total === 0 ? 'Harga sesuai request' : `Rp ${total.toLocaleString()}`}`;
+        window.open(`https://wa.me/6287751755160?text=${encodeURIComponent(msg)}`, '_blank');
+    });
 
-        document.getElementById('paymentBtn').addEventListener('click', function() {
-            if (cart.length === 0) {
-                alert('Keranjang kosong.');
-                return;
-            }
-            let total = 0;
-            let names = [];
-            cart.forEach(item => {
-                total += item.price * item.qty;
-                names.push(`${item.name} (${item.variant}) × ${item.qty}`);
-            });
-            goToPayment(names.join(' + '), total);
+    document.getElementById('paymentBtn').addEventListener('click', function() {
+        if (cart.length === 0) {
+            alert('Keranjang kosong.');
+            return;
+        }
+        let total = 0;
+        let names = [];
+        cart.forEach(item => {
+            total += item.price * item.qty;
+            names.push(`${item.name} (${item.variant}) × ${item.qty}`);
         });
+        goToPayment(names.join(' + '), total);
+    });
 
-        // ====== INIT ======
-        renderMenus();
-        updateCartUI();
-    </script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('✅ Pesan terkirim! Kami akan menghubungi Anda segera.');
+        this.reset();
+    });
+
+    document.getElementById('topupCloseBtn').addEventListener('click', function() {
+        document.getElementById('topupOverlay').classList.remove('open');
+    });
+    document.getElementById('topupOverlay').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
+
+    document.getElementById('downloaderCloseBtn').addEventListener('click', function() {
+        document.getElementById('downloaderOverlay').classList.remove('open');
+    });
+    document.getElementById('downloaderOverlay').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('open');
+    });
+
+    document.getElementById('downloaderUrl').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('downloaderBtn').click();
+        }
+    });
+
+    // ====== INIT ======
+    renderTopupGames();
+    renderMenus();
+    updateCartUI();
+</script>
 </body>
 </html>

@@ -4644,7 +4644,12 @@
                     <div class="order-card" onclick="openOrderChat('${o.id}')">
                         <div class="order-card-header">
                             <span class="order-id">#${o.id}</span>
-                            <span class="order-status ${statusClass[o.status] || 'pending'}">${statusLabel[o.status] || o.status}</span>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <span class="order-status ${statusClass[o.status] || 'pending'}">${statusLabel[o.status] || o.status}</span>
+                                <button onclick="event.stopPropagation(); deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:var(--red);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.2s;" title="Hapus Riwayat">
+                                    <i class="fas fa-trash-alt" style="font-size:0.8rem;"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="order-products">${itemsText}</div>
                         <div class="order-meta">
@@ -4654,6 +4659,33 @@
                     </div>
                 `;
             }).join('') + '</div>';
+        }
+
+        function deleteOrder(orderId) {
+            Swal.fire({
+                title: 'Hapus Riwayat?',
+                text: "Data pesanan ini akan dihapus permanen dari riwayat Anda.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#374151',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                background: '#1f2937',
+                color: '#fff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    orders = orders.filter(o => o.id !== orderId);
+                    localStorage.setItem('joellOrders', JSON.stringify(orders));
+                    broadcastOrders();
+                    renderOrdersList();
+                    if (isAdminLoggedIn) {
+                        renderAdminOrders();
+                        updateAdminStats();
+                    }
+                    showToast('Dihapus', 'Riwayat pesanan berhasil dihapus', 'success');
+                }
+            });
         }
 
         function openOrderChat(orderId) {
@@ -4865,7 +4897,12 @@
                         <div class="admin-order-products">${itemsText}</div>
                         <div style="display:flex;justify-content:space-between;align-items:center;">
                             <span style="font-weight:800;color:var(--accent-light);">Rp ${o.total.toLocaleString()}</span>
-                            <button class="admin-chat-btn" onclick="openAdminChat('${o.id}')"><i class="fas fa-comments"></i> Balas Chat</button>
+                            <div style="display:flex;gap:8px;">
+                                <button onclick="deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2);padding:8px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:6px;">
+                                    <i class="fas fa-trash-alt"></i> Hapus
+                                </button>
+                                <button class="admin-chat-btn" onclick="openAdminChat('${o.id}')"><i class="fas fa-comments"></i> Balas Chat</button>
+                            </div>
                         </div>
                     </div>
                 `;

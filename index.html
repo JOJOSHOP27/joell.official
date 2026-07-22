@@ -2516,170 +2516,179 @@
         }
 
         
-        /* ===== ORDER CHAT MODAL (MODERN & WIDER) ===== */
+        /* ===== WHATSAPP STYLE CHAT MODAL ===== */
         .order-chat-modal {
-            max-width: 600px; /* Diperluas */
+            max-width: 800px; /* Diperluas secara signifikan */
             width: 95%;
-            background: var(--bg-card-solid);
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            height: 90vh; /* Hampir satu layar penuh */
+            background: #0b141a; /* Warna background WA Dark */
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
         }
         .order-chat-header {
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-bottom: 20px;
-            padding: 10px 0 20px;
-            border-bottom: 1px solid var(--border-subtle);
+            padding: 15px 20px;
+            background: #202c33; /* Header WA Dark */
+            border-bottom: none;
+            margin-bottom: 0;
+            z-index: 10;
         }
         .order-chat-header img {
-            width: 50px; height: 50px;
-            border-radius: 16px;
+            width: 45px; height: 45px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent);
-            padding: 2px;
+            border: none;
+            padding: 0;
+        }
+        .order-chat-header .info {
+            flex: 1;
         }
         .order-chat-header .info h3 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--text-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #e9edef;
+            background: none;
+            -webkit-text-fill-color: initial;
         }
         .order-chat-header .info p {
             font-size: 0.8rem;
-            color: var(--accent-light);
-            font-weight: 600;
+            color: #8696a0;
+            font-weight: 400;
         }
         .order-chat-messages {
-            height: 450px; /* Lebih tinggi */
+            flex: 1;
+            height: auto;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding: 10px;
-            margin-bottom: 20px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 16px;
+            gap: 8px;
+            padding: 20px 5%;
+            margin-bottom: 0;
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); /* Background WA Pattern */
+            background-color: #0b141a;
+            background-blend-mode: overlay;
+            background-size: contain;
             scrollbar-width: thin;
         }
         .order-chat-messages .msg {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            font-size: 0.9rem;
-            line-height: 1.6;
+            max-width: 75%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
             position: relative;
-            animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            color: #e9edef;
         }
         .order-chat-messages .msg.admin {
             align-self: flex-start;
-            background: var(--bg-hover);
-            color: var(--text-primary);
-            border-bottom-left-radius: 4px;
-            border: 1px solid var(--border-subtle);
+            background: #202c33;
+            border-top-left-radius: 0;
         }
         .order-chat-messages .msg.user {
             align-self: flex-end;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
-            border-bottom-right-radius: 4px;
-            box-shadow: 0 8px 20px var(--accent-glow);
+            background: #005c4b; /* Hijau WA Dark */
+            border-top-right-radius: 0;
         }
         .order-chat-messages .msg .time {
-            font-size: 0.65rem;
-            opacity: 0.6;
-            margin-top: 6px;
+            font-size: 0.7rem;
+            color: #8696a0;
+            margin-top: 4px;
             display: block;
             text-align: right;
         }
-        .order-chat-messages .msg.admin .time { text-align: left; }
+        .order-chat-messages .msg.user .time {
+            color: rgba(255,255,255,0.6);
+        }
         
-        /* Payment Button in Chat */
+        /* Payment Button in Chat (WhatsApp Style) */
         .chat-payment-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            gap: 10px;
+            background: #25d366; /* Hijau Terang WA */
             color: #000;
-            padding: 12px 20px;
-            border-radius: 12px;
-            margin: 10px 0;
+            padding: 14px 20px;
+            border-radius: 10px;
+            margin: 12px 0 5px;
             text-decoration: none;
-            font-weight: 800;
-            font-size: 0.95rem;
-            transition: var(--transition);
+            font-weight: 700;
+            font-size: 1rem;
+            transition: 0.3s;
             border: none;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
-            animation: pulse-gold 2s infinite;
-        }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
         .chat-payment-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            filter: brightness(1.1);
-            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.4);
+            background: #1ebe57;
+            transform: scale(1.02);
         }
-        .chat-payment-btn i { font-size: 1.1rem; }
+        .chat-payment-btn i { font-size: 1.2rem; }
 
-        .chat-attach-btn {
-            width: 46px; height: 46px;
-            border-radius: 14px;
-            background: var(--bg-hover);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-        .chat-attach-btn:hover {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-            transform: rotate(15deg);
-        }
         .order-chat-input-wrap {
             display: flex;
-            gap: 12px;
-            background: var(--bg-hover);
-            padding: 8px;
-            border-radius: 20px;
-            border: 1px solid var(--border-subtle);
+            align-items: center;
+            gap: 10px;
+            background: #202c33;
+            padding: 10px 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-radius: 0;
         }
+        .chat-attach-btn {
+            width: 40px; height: 40px;
+            background: transparent;
+            border: none;
+            color: #8696a0;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-attach-btn:hover { color: #e9edef; background: transparent; transform: none; }
+
         .order-chat-input-wrap input {
             flex: 1;
-            padding: 12px 20px;
-            border-radius: 14px;
+            padding: 10px 15px;
+            border-radius: 8px;
             border: none;
-            background: transparent;
-            color: var(--text-primary);
+            background: #2a3942;
+            color: #e9edef;
             font-size: 0.95rem;
             outline: none;
         }
-        .order-chat-input-wrap button#orderChatSend {
-            width: 46px; height: 46px;
-            background: var(--accent);
+        .order-chat-input-wrap button#orderChatSend,
+        .order-chat-input-wrap button#adminChatSend {
+            width: 45px; height: 45px;
+            background: #00a884; /* Tombol kirim WA */
             color: #fff;
             border: none;
-            border-radius: 14px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.2s;
+            flex-shrink: 0;
         }
-        .order-chat-input-wrap button#orderChatSend:hover {
-            background: var(--accent-light);
-            transform: scale(1.05) translateX(3px);
+        .order-chat-input-wrap button#orderChatSend:hover,
+        .order-chat-input-wrap button#adminChatSend:hover {
+            background: #008f72;
+            transform: scale(1.1);
+        }
+
+        .order-chat-messages .msg img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 6px;
+            display: block;
+            cursor: pointer;
         }
 
         /* ===== ORDERS PAGE ===== */
@@ -3867,10 +3876,10 @@
         </div>
     </div>
 
-    <!-- ORDER CHAT MODAL -->
+    <!-- ORDER CHAT MODAL (WHATSAPP STYLE) -->
     <div class="modal-overlay" id="orderChatOverlay">
         <div class="modal-box order-chat-modal">
-            <button class="modal-close" id="orderChatCloseBtn"><i class="fas fa-times"></i></button>
+            <button class="modal-close" id="orderChatCloseBtn" style="color:#e9edef;top:15px;right:20px;"><i class="fas fa-times"></i></button>
             <div class="order-chat-header">
                 <img src="https://files.catbox.moe/ijemcy.png" alt="admin">
                 <div class="info">
@@ -3880,7 +3889,7 @@
             </div>
             <div class="order-chat-messages" id="orderChatMessages"></div>
             <div class="order-chat-input-wrap">
-                <button class="chat-attach-btn" onclick="document.getElementById('orderChatFile').click()"><i class="fas fa-image"></i></button>
+                <button class="chat-attach-btn" onclick="document.getElementById('orderChatFile').click()"><i class="fas fa-plus"></i></button>
                 <input type="file" id="orderChatFile" accept="image/*" style="display:none;" onchange="handleChatFileUpload(this, 'user')">
                 <input type="text" id="orderChatInput" placeholder="Ketik pesan...">
                 <button id="orderChatSend"><i class="fas fa-paper-plane"></i></button>
@@ -3888,20 +3897,20 @@
         </div>
     </div>
 
-    <!-- ADMIN CHAT MODAL (for admin to reply) -->
+    <!-- ADMIN CHAT MODAL (WHATSAPP STYLE) -->
     <div class="modal-overlay" id="adminChatOverlay">
         <div class="modal-box order-chat-modal">
-            <button class="modal-close" id="adminChatCloseBtn"><i class="fas fa-times"></i></button>
+            <button class="modal-close" id="adminChatCloseBtn" style="color:#e9edef;top:15px;right:20px;"><i class="fas fa-times"></i></button>
             <div class="order-chat-header">
-                <div class="testimonial-avatar" style="width:44px;height:44px;font-size:1.2rem;background:linear-gradient(135deg,var(--green),var(--accent));"><i class="fas fa-user"></i></div>
+                <div class="testimonial-avatar" id="adminChatUserImg" style="width:44px;height:44px;font-size:1.2rem;background:linear-gradient(135deg,var(--green),var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user"></i></div>
                 <div class="info">
-                    <h3>Chat Pelanggan</h3>
+                    <h3 id="adminChatUserName">Chat Pelanggan</h3>
                     <p id="adminChatOrderId">Order: #JOELL-0000-0000</p>
                 </div>
             </div>
             <div class="order-chat-messages" id="adminChatMessages"></div>
             <div class="order-chat-input-wrap">
-                <button class="chat-attach-btn" onclick="document.getElementById('adminChatFile').click()"><i class="fas fa-image"></i></button>
+                <button class="chat-attach-btn" onclick="document.getElementById('adminChatFile').click()"><i class="fas fa-plus"></i></button>
                 <input type="file" id="adminChatFile" accept="image/*" style="display:none;" onchange="handleChatFileUpload(this, 'admin')">
                 <input type="text" id="adminChatInput" placeholder="Balas sebagai admin...">
                 <button id="adminChatSend"><i class="fas fa-paper-plane"></i></button>
@@ -3927,6 +3936,37 @@
     </nav>
 
     <script>
+        // ============================================================
+        //  NOTIFICATION SYSTEM
+        // ============================================================
+        function requestNotificationPermission() {
+            if ("Notification" in window) {
+                Notification.requestPermission();
+            }
+        }
+
+        function sendBrowserNotification(title, message, orderId = null) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                const notification = new Notification(title, {
+                    body: message,
+                    icon: 'https://files.catbox.moe/o3t86k.jpg'
+                });
+                notification.onclick = function() {
+                    window.focus();
+                    if (orderId) {
+                        if (typeof isAdminLoggedIn !== 'undefined' && isAdminLoggedIn) {
+                            openAdminChat(orderId);
+                        } else {
+                            navigateTo('orders');
+                            setTimeout(() => openOrderChat(orderId), 500);
+                        }
+                    }
+                };
+            }
+        }
+
+        requestNotificationPermission();
+
         // ============================================================
         //  CONFIG & DATA
         // ============================================================
@@ -4835,7 +4875,15 @@
             const order = orders.find(o => o.id === orderId);
             if (!order) return;
             currentAdminChatId = orderId;
-            document.getElementById('adminChatOrderId').textContent = 'Order: #' + orderId + ' | ' + order.userName;
+            document.getElementById('adminChatUserName').textContent = order.userName;
+            document.getElementById('adminChatOrderId').textContent = 'Order: #' + orderId;
+            
+            // Set User Avatar in Admin Chat
+            const userImg = document.getElementById('adminChatUserImg');
+            if (userImg) {
+                userImg.innerHTML = `<img src="https://ui-avatars.com/api/?name=${encodeURIComponent(order.userName)}&background=random" style="width:100%;height:100%;border-radius:50%;">`;
+            }
+
             renderAdminChatMessages();
             document.getElementById('adminChatOverlay').classList.add('open');
         }
@@ -4845,12 +4893,14 @@
             if (!order) return;
             const container = document.getElementById('adminChatMessages');
             container.innerHTML = order.chat.map(c => {
+                const payBtnHtml = c.paymentBtn ? `<a href="https://joell-payment.vercel.app" target="_blank" class="chat-payment-btn"><i class="fas fa-credit-card"></i> PAYMENT</a>` : '';
                 const imgHtml = c.image ? `<img src="${c.image}" alt="chat-img" onclick="window.open('${c.image}', '_blank')">` : '';
                 return `
                     <div class="msg ${c.from === 'admin' ? 'user' : 'admin'}">
                         ${c.text || ''}
+                        ${payBtnHtml}
                         ${imgHtml}
-                        <span class="time">${c.time} · ${c.from === 'admin' ? 'Admin' : 'Customer'}</span>
+                        <span class="time">${c.time}</span>
                     </div>
                 `;
             }).join('');

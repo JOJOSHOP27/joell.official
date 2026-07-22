@@ -3645,16 +3645,7 @@
                     <label><i class="fas fa-map-marker-alt"></i> Alamat / Catatan</label>
                     <textarea id="coAddress" rows="3" placeholder="Catatan tambahan untuk pesanan..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label><i class="fas fa-wallet"></i> Metode Pembayaran</label>
-                    <select id="coPayment">
-                        <option value="qris">QRIS (Scan)</option>
-                        <option value="transfer">Transfer Bank</option>
-                        <option value="ewallet">E-Wallet (Dana/OVO/Gopay)</option>
-                        <option value="cod">Bayar di Tempat</option>
-                    </select>
-                    <small>Pilih metode pembayaran yang paling nyaman</small>
-                </div>
+
                 <button type="submit" class="btn-place-order"><i class="fas fa-check-circle"></i> Buat Pesanan</button>
             </form>
         </div>
@@ -4046,11 +4037,22 @@
                     if (isAdminLoggedIn) renderAdminOrders();
                 }
                 if (event.data.type === 'chat_updated' && event.data.orderId) {
+                    orders = JSON.parse(localStorage.getItem('joellOrders')) || [];
                     if (currentOrderChatId === event.data.orderId) {
                         renderOrderChatMessages();
                     }
                     if (currentAdminChatId === event.data.orderId) {
                         renderAdminChatMessages();
+                    }
+                    
+                    // Browser Notification
+                    if (document.hidden) {
+                        const order = orders.find(o => o.id === event.data.orderId);
+                        if (order && order.chat.length > 0) {
+                            const lastMsg = order.chat[order.chat.length - 1];
+                            // Hanya kirim notifikasi jika pesan terakhir bukan dari diri sendiri (simulasi sederhana)
+                            sendBrowserNotification(`Pesan Baru: #${event.data.orderId}`, lastMsg.text || 'Mengirim gambar...', event.data.orderId);
+                        }
                     }
                 }
             };
@@ -4514,7 +4516,7 @@
                 userEmail: document.getElementById('coEmail').value,
                 userPhone: document.getElementById('coPhone').value,
                 address: document.getElementById('coAddress').value,
-                payment: document.getElementById('coPayment').value,
+                payment: 'online',
                 items: [...cart],
                 total: total,
                 status: 'pending',
@@ -4547,28 +4549,12 @@
             
             document.getElementById('checkoutOverlay').classList.remove('open');
             
-            // Tampilkan Instruksi Pembayaran
-            const payInfo = {
-                'qris': '<p>Silakan lakukan pembayaran melalui QRIS:</p><img src="https://files.catbox.moe/o3t86k.jpg" style="width:200px;border-radius:10px;margin:10px 0;"><p style="font-size:0.8rem;color:var(--text-muted);">Simpan/Screenshot QRIS di atas dan scan di aplikasi bank/e-wallet Anda.</p>',
-                'transfer': '<p>Silakan transfer ke rekening admin:</p><p style="font-weight:700;margin:10px 0;">BCA: 1234567890<br>a.n. JOELL SHOP</p><p style="font-size:0.8rem;color:var(--text-muted);">Upload bukti transfer via chat di menu Pesanan.</p>',
-                'ewallet': '<p>Silakan kirim ke E-Wallet admin:</p><p style="font-weight:700;margin:10px 0;">Dana: 08123456789<br>OVO: 08123456789<br>GoPay: 08123456789</p><p style="font-size:0.8rem;color:var(--text-muted);">Upload bukti transfer via chat di menu Pesanan.</p>',
-                'cod': '<p>Pesanan akan dibayar saat barang diterima.</p><p style="font-size:0.8rem;color:var(--text-muted);">Admin akan menghubungi Anda untuk konfirmasi pengiriman.</p>'
-            };
-            Swal.fire({
-                title: 'Pesanan Dibuat!',
-                html: `
-                    <div style="text-align:center;">
-                        ${payInfo[order.payment] || ''}
-                        <p style="font-weight:800;color:var(--accent-light);margin-top:10px;">Total: Rp ${total.toLocaleString()}</p>
-                    </div>
-                `,
-                icon: 'success',
-                confirmButtonText: 'OK, Saya Sudah Bayar',
-                confirmButtonColor: '#6366f1'
-            }).then(() => {
-                showToast('Pesanan Dibuat', `ID: ${orderId}. Cek di menu Pesanan.`, 'success', 5000);
-                navigateTo('orders');
-            });
+            // Langsung arahkan ke menu pesanan dan buka chat
+            showToast('Pesanan Dibuat', `ID: ${orderId}. Selesaikan pembayaran di menu Chat.`, 'success', 5000);
+            navigateTo('orders');
+            setTimeout(() => {
+                openOrderChat(orderId);
+            }, 500);
             renderOrdersList();
         });
 

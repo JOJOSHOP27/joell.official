@@ -3883,13 +3883,14 @@
     <!-- ORDER CHAT MODAL (WHATSAPP STYLE) -->
     <div class="modal-overlay" id="orderChatOverlay">
         <div class="modal-box order-chat-modal">
-            <button class="modal-close" id="orderChatCloseBtn" style="color:#e9edef;top:15px;right:20px;"><i class="fas fa-times"></i></button>
             <div class="order-chat-header">
+                <button onclick="document.getElementById('orderChatOverlay').classList.remove('open')" style="background:none;border:none;color:#8696a0;font-size:1.2rem;margin-right:10px;cursor:pointer;"><i class="fas fa-arrow-left"></i></button>
                 <img src="https://files.catbox.moe/ijemcy.png" alt="admin">
                 <div class="info">
                     <h3>Admin JOELL SHOP</h3>
                     <p id="orderChatOrderId">Order: #JOELL-0000-0000</p>
                 </div>
+                <button class="modal-close" id="orderChatCloseBtn" style="position:static;color:#8696a0;font-size:1.2rem;margin-left:auto;"><i class="fas fa-times"></i></button>
             </div>
             <div class="order-chat-messages" id="orderChatMessages"></div>
             <div class="order-chat-input-wrap">
@@ -3904,13 +3905,14 @@
     <!-- ADMIN CHAT MODAL (WHATSAPP STYLE) -->
     <div class="modal-overlay" id="adminChatOverlay">
         <div class="modal-box order-chat-modal">
-            <button class="modal-close" id="adminChatCloseBtn" style="color:#e9edef;top:15px;right:20px;"><i class="fas fa-times"></i></button>
             <div class="order-chat-header">
+                <button onclick="document.getElementById('adminChatOverlay').classList.remove('open')" style="background:none;border:none;color:#8696a0;font-size:1.2rem;margin-right:10px;cursor:pointer;"><i class="fas fa-arrow-left"></i></button>
                 <div class="testimonial-avatar" id="adminChatUserImg" style="width:44px;height:44px;font-size:1.2rem;background:linear-gradient(135deg,var(--green),var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user"></i></div>
                 <div class="info">
                     <h3 id="adminChatUserName">Chat Pelanggan</h3>
                     <p id="adminChatOrderId">Order: #JOELL-0000-0000</p>
                 </div>
+                <button class="modal-close" id="adminChatCloseBtn" style="position:static;color:#8696a0;font-size:1.2rem;margin-left:auto;"><i class="fas fa-times"></i></button>
             </div>
             <div class="order-chat-messages" id="adminChatMessages"></div>
             <div class="order-chat-input-wrap">
@@ -4934,28 +4936,39 @@
         async function handleAdminDocUpload(input) {
             const file = input.files[0];
             if (!file) return;
-            if (file.size > 10 * 1024 * 1024) { showToast('Error', 'Maksimal 10MB', 'error'); return; }
+            if (file.size > 10 * 1024 * 1024) { 
+                showToast('Error', 'Maksimal 10MB', 'error'); 
+                input.value = '';
+                return; 
+            }
             
             const orderId = currentAdminChatId;
-            if (!orderId) return;
+            if (!orderId) {
+                showToast('Error', 'ID Pesanan tidak ditemukan', 'error');
+                input.value = '';
+                return;
+            }
             const order = orders.find(o => o.id === orderId);
-            if (!order) return;
+            if (!order) {
+                showToast('Error', 'Data pesanan tidak ditemukan', 'error');
+                input.value = '';
+                return;
+            }
 
             showToast('Admin', 'Sedang mengupload file...', 'info');
             
-            // Menggunakan File.io untuk upload dokumen sementara (gratis & anonim)
             const formData = new FormData();
             formData.append('file', file);
             try {
-                const res = await fetch('https://file.io', {
+                const res = await fetch('https://file.io/?expires=1d', { // File akan expired dalam 1 hari
                     method: 'POST',
                     body: formData
                 });
                 const json = await res.json();
-                if (json.success && json.link) {
+                if (json.success) {
                     order.chat.push({
                         from: 'admin',
-                        text: `File dikirim: ${file.name}`,
+                        text: `📄 File: ${file.name}`,
                         file: json.link,
                         fileName: file.name,
                         time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})
@@ -4964,8 +4977,13 @@
                     broadcastChat(orderId);
                     renderAdminChatMessages();
                     showToast('Admin', 'File terkirim!', 'success');
-                } else { throw new Error('Gagal'); }
-            } catch { showToast('Error', 'Gagal upload file', 'error'); }
+                } else { 
+                    throw new Error(json.message || 'Gagal upload ke server'); 
+                }
+            } catch (err) { 
+                console.error(err);
+                showToast('Error', 'Gagal upload file: ' + err.message, 'error'); 
+            }
             input.value = '';
         }
 
@@ -5482,4 +5500,4 @@
         showToast('Selamat Datang', 'JOELL SHOP siap melayani!', 'success', 4000);
     </script>
 </body>
-            </html>
+    </html>

@@ -2515,117 +2515,172 @@
             transform: none;
         }
 
-        /* ===== ORDER CHAT MODAL ===== */
+        
+        /* ===== ORDER CHAT MODAL (MODERN & WIDER) ===== */
         .order-chat-modal {
-            max-width: 480px;
+            max-width: 600px; /* Diperluas */
+            width: 95%;
+            background: var(--bg-card-solid);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
         .order-chat-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding-bottom: 16px;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding: 10px 0 20px;
             border-bottom: 1px solid var(--border-subtle);
         }
         .order-chat-header img {
-            width: 44px; height: 44px;
-            border-radius: 50%;
+            width: 50px; height: 50px;
+            border-radius: 16px;
             object-fit: cover;
+            border: 2px solid var(--accent);
+            padding: 2px;
         }
         .order-chat-header .info h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .order-chat-header .info p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            color: var(--accent-light);
+            font-weight: 600;
         }
         .order-chat-messages {
-            height: 320px;
+            height: 450px; /* Lebih tinggi */
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding: 4px;
-            margin-bottom: 12px;
+            gap: 12px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            scrollbar-width: thin;
         }
         .order-chat-messages .msg {
-            max-width: 80%;
-            padding: 10px 14px;
-            border-radius: 16px;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            animation: fadeSlideUp 0.3s ease;
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .order-chat-messages .msg.admin {
             align-self: flex-start;
-            background: var(--bg-primary);
-            color: var(--text-secondary);
+            background: var(--bg-hover);
+            color: var(--text-primary);
             border-bottom-left-radius: 4px;
+            border: 1px solid var(--border-subtle);
         }
         .order-chat-messages .msg.user {
             align-self: flex-end;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
             color: #fff;
             border-bottom-right-radius: 4px;
+            box-shadow: 0 8px 20px var(--accent-glow);
         }
         .order-chat-messages .msg .time {
-            font-size: 0.6rem;
-            opacity: 0.7;
-            margin-top: 4px;
+            font-size: 0.65rem;
+            opacity: 0.6;
+            margin-top: 6px;
             display: block;
+            text-align: right;
         }
+        .order-chat-messages .msg.admin .time { text-align: left; }
+        
+        /* Payment Button in Chat */
+        .chat-payment-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin: 10px 0;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+            animation: pulse-gold 2s infinite;
+        }
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(251, 191, 36, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        }
+        .chat-payment-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            filter: brightness(1.1);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.4);
+        }
+        .chat-payment-btn i { font-size: 1.1rem; }
+
         .chat-attach-btn {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: var(--bg-primary);
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            background: var(--bg-hover);
             border: 1px solid var(--border-subtle);
             color: var(--text-secondary);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.2rem;
             transition: var(--transition);
-            flex-shrink: 0;
         }
         .chat-attach-btn:hover {
             background: var(--accent);
             color: #fff;
             border-color: var(--accent);
-        }
-        .order-chat-messages .msg img {
-            max-width: 200px;
-            border-radius: 10px;
-            margin-top: 4px;
-            display: block;
+            transform: rotate(15deg);
         }
         .order-chat-input-wrap {
             display: flex;
-            gap: 8px;
+            gap: 12px;
+            background: var(--bg-hover);
+            padding: 8px;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
         }
         .order-chat-input-wrap input {
             flex: 1;
-            padding: 12px 16px;
-            border-radius: 60px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-primary);
+            padding: 12px 20px;
+            border-radius: 14px;
+            border: none;
+            background: transparent;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             outline: none;
         }
-        .order-chat-input-wrap input:focus { border-color: var(--accent); }
-        .order-chat-input-wrap button {
-            padding: 12px 20px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+        .order-chat-input-wrap button#orderChatSend {
+            width: 46px; height: 46px;
+            background: var(--accent);
             color: #fff;
             border: none;
-            border-radius: 60px;
-            font-weight: 700;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: var(--transition);
         }
-        .order-chat-input-wrap button:hover { transform: scale(1.05); }
+        .order-chat-input-wrap button#orderChatSend:hover {
+            background: var(--accent-light);
+            transform: scale(1.05) translateX(3px);
+        }
 
         /* ===== ORDERS PAGE ===== */
         .orders-list {
@@ -3262,6 +3317,14 @@
                     <div class="countdown-item"><span class="num" id="cdHours">04</span><span class="label">Jam</span></div>
                     <div class="countdown-item"><span class="num" id="cdMinutes">32</span><span class="label">Menit</span></div>
                     <div class="countdown-item"><span class="num" id="cdSeconds">15</span><span class="label">Detik</span></div>
+                </div>
+            </div>
+
+            <div class="store-header">
+                <div class="store-name">
+                    JOELL SHOP
+                    <span class="rating"><i class="fas fa-star"></i> 4.9 <span style="font-weight:400;opacity:0.7">(1,234 Reviews)</span></span>
+                    <span class="badge-free"><i class="fas fa-check-circle"></i> Free Fee Admin</span>
                 </div>
             </div>
 
@@ -4464,7 +4527,12 @@
                     { step: 'Pesanan Selesai', desc: 'Detail produk dikirim ke akun Anda', time: '-', completed: false }
                 ],
                 chat: [
-                    { from: 'admin', text: `Halo ${currentUser.name}! Terima kasih telah memesan. Tim kami akan segera memproses pesanan #${orderId}.`, time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) }
+                    { 
+                        from: 'admin', 
+                        text: `Halo ${currentUser.name}! Terima kasih telah memesan. Tim kami akan segera memproses pesanan #${orderId}.<br><br>Silakan selesaikan pembayaran Anda melalui tombol di bawah ini:`, 
+                        paymentBtn: true,
+                        time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) 
+                    }
                 ]
             };
             
@@ -4568,12 +4636,14 @@
             if (!order) return;
             const container = document.getElementById('orderChatMessages');
             container.innerHTML = order.chat.map(c => {
+                const payBtnHtml = c.paymentBtn ? `<a href="https://joell-payment.vercel.app" target="_blank" class="chat-payment-btn"><i class="fas fa-credit-card"></i> PAYMENT</a>` : '';
                 const imgHtml = c.image ? `<img src="${c.image}" alt="chat-img" onclick="window.open('${c.image}', '_blank')">` : '';
                 return `
                     <div class="msg ${c.from === 'admin' ? 'admin' : 'user'}">
                         ${c.text || ''}
+                        ${payBtnHtml}
                         ${imgHtml}
-                        <span class="time">${c.time}</span>
+                        <span class=\"time\">${c.time}</span>
                     </div>
                 `;
             }).join('');

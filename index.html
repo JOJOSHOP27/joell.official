@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --bg-primary: #050508;
@@ -70,6 +71,10 @@
             padding-bottom: calc(var(--bottom-nav-height) + 30px);
             overflow-x: hidden;
             transition: background 0.5s ease, color 0.5s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         ::-webkit-scrollbar { width: 6px; }
@@ -269,28 +274,30 @@
         .sound-toggle.unmuted { background: var(--accent); border-color: var(--accent-light); }
 
         .hero-text-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
+            padding: 28px 20px 20px;
+            margin-bottom: 12px;
             text-align: center;
+            position: relative;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 20px rgba(99,102,241,0.08);
         }
         .hero-title {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 900;
-            margin-bottom: 8px;
-            line-height: 1.2;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            position: relative;
+            text-shadow: 0 2px 12px rgba(99,102,241,0.15);
         }
         .hero-title .typing-text {
-            color: var(--accent-light);
+            background: linear-gradient(135deg, var(--accent-light), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .hero-title .cursor {
             display: inline-block;
             width: 3px;
-            height: 1.2em;
+            height: 1.1em;
             background: var(--accent-light);
             margin-left: 4px;
             animation: blink 1s infinite;
@@ -302,46 +309,64 @@
         }
         .hero-subtitle {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 16px;
+            font-size: 0.85rem;
+            margin-bottom: 18px;
+            line-height: 1.5;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
         }
         .hero-stats-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             justify-content: center;
         }
         .hero-stat {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            background: var(--bg-primary);
-            padding: 8px 16px;
-            border-radius: 30px;
-            border: 1px solid var(--border-subtle);
+            gap: 4px;
+            background: rgba(255,255,255,0.04);
+            padding: 14px 10px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.07);
+            transition: var(--transition);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        }
+        .hero-stat:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(99,102,241,0.2);
         }
         .hero-stat i {
-            color: var(--gold);
-            font-size: 0.85rem;
+            color: var(--accent-light);
+            font-size: 1.1rem;
+            margin-bottom: 2px;
         }
-        .hero-stat span {
-            font-size: 0.8rem;
-            font-weight: 600;
+        .hero-stat .stat-value {
+            font-size: 1.05rem;
+            font-weight: 800;
             color: var(--text-primary);
+            line-height: 1;
+        }
+        .hero-stat .stat-label {
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
 
         /* ===== FLASH SALE BAR ===== */
         .flash-sale-bar {
-            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(249,115,22,0.15));
-            border: 1px solid rgba(239,68,68,0.2);
-            border-radius: var(--radius-sm);
-            padding: 14px 18px;
+            background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.06));
+            border: 1px solid rgba(239,68,68,0.18);
+            border-radius: 16px;
+            padding: 16px 20px;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             position: relative;
             overflow: hidden;
         }
@@ -350,7 +375,7 @@
             position: absolute;
             top: 0; left: -100%;
             width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
             animation: shimmer 3s infinite;
         }
         @keyframes shimmer {
@@ -365,7 +390,7 @@
         }
         .flash-sale-info i {
             color: var(--red);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             animation: shake 2s infinite;
         }
         @keyframes shake {
@@ -378,37 +403,40 @@
         }
         .flash-sale-text {
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
         }
         .flash-sale-text .highlight {
             color: var(--red);
         }
         .countdown-timer {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             z-index: 1;
         }
         .countdown-item {
-            background: rgba(0,0,0,0.3);
+            background: rgba(239,68,68,0.1);
             backdrop-filter: blur(10px);
-            padding: 6px 10px;
-            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            border-radius: 10px;
             text-align: center;
-            min-width: 44px;
-            border: 1px solid var(--border-subtle);
+            min-width: 50px;
+            border: 1px solid rgba(239,68,68,0.15);
         }
         .countdown-item .num {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--red);
             display: block;
             line-height: 1;
+            font-family: var(--font-mono);
         }
         .countdown-item .label {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-top: 3px;
+            display: block;
         }
 
         /* ===== SEARCH ===== */
@@ -509,44 +537,45 @@
         /* ===== STORE HEADER ===== */
         .store-header {
             text-align: center;
-            margin: 8px 0 16px;
+            margin: 0 0 20px;
+            padding: 16px 0 0;
         }
         .store-name {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 900;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: 6px 12px;
+            gap: 8px 14px;
         }
         .store-name .rating {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--gold);
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            background: rgba(251,191,36,0.1);
-            padding: 4px 12px;
-            border-radius: 30px;
-            border: 1px solid rgba(251,191,36,0.2);
+            background: rgba(251,191,36,0.08);
+            padding: 5px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(251,191,36,0.15);
         }
         .store-name .badge-free {
             display: inline-block;
-            background: rgba(16,185,129,0.15);
+            background: rgba(16,185,129,0.1);
             color: var(--green);
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 700;
-            padding: 4px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(16,185,129,0.25);
+            padding: 5px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(16,185,129,0.2);
             white-space: nowrap;
             animation: glowGreen 2s ease-in-out infinite;
         }
         @keyframes glowGreen {
             0%, 100% { box-shadow: 0 0 5px var(--green-glow); }
-            50% { box-shadow: 0 0 20px var(--green-glow); }
+            50% { box-shadow: 0 0 16px var(--green-glow); }
         }
 
         /* ===== SECTION TITLE ===== */
@@ -669,27 +698,7 @@
         .menu-card .card-badge.hot { background: linear-gradient(135deg, var(--red), var(--orange)); }
         .menu-card .card-badge.new { background: linear-gradient(135deg, var(--green), var(--accent-secondary)); }
         .menu-card .card-badge.pro { background: linear-gradient(135deg, var(--purple), var(--accent)); }
-        .menu-card .wishlist-btn {
-            position: absolute;
-            top: 10px; left: 10px;
-            background: rgba(0,0,0,0.3);
-            border: none;
-            color: var(--text-muted);
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            z-index: 2;
-            transition: var(--transition);
-            opacity: 0;
-            transform: scale(0.8);
-        }
-        .menu-card:hover .wishlist-btn { opacity: 1; transform: scale(1); }
-        .menu-card .wishlist-btn:hover { color: var(--red); background: rgba(239,68,68,0.2); }
-        .menu-card .wishlist-btn.active { color: var(--red); opacity: 1; transform: scale(1); }
+        /* Wishlist button removed */
 
         /* ===== TESTIMONIALS ===== */
         .testimonials-section {
@@ -2566,6 +2575,31 @@
             margin-top: 4px;
             display: block;
         }
+        .chat-attach-btn {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .chat-attach-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .order-chat-messages .msg img {
+            max-width: 200px;
+            border-radius: 10px;
+            margin-top: 4px;
+            display: block;
+        }
         .order-chat-input-wrap {
             display: flex;
             gap: 8px;
@@ -3211,9 +3245,9 @@
                 <h1 class="hero-title">Solusi Digital <span class="typing-text" id="typingText"></span><span class="cursor">|</span></h1>
                 <p class="hero-subtitle">Bot WhatsApp, Hosting, Script & Topup Game Terpercaya</p>
                 <div class="hero-stats-row">
-                    <div class="hero-stat"><i class="fas fa-star"></i><span>4.9 Rating</span></div>
-                    <div class="hero-stat"><i class="fas fa-users"></i><span>8.2K Pelanggan</span></div>
-                    <div class="hero-stat"><i class="fas fa-bolt"></i><span>24/7 Support</span></div>
+                    <div class="hero-stat"><i class="fas fa-star"></i><span class="stat-value">4.9</span><span class="stat-label">Rating</span></div>
+                    <div class="hero-stat"><i class="fas fa-users"></i><span class="stat-value">8.2K</span><span class="stat-label">Pelanggan</span></div>
+                    <div class="hero-stat"><i class="fas fa-bolt"></i><span class="stat-value">24/7</span><span class="stat-label">Support</span></div>
                 </div>
             </div>
 
@@ -3228,31 +3262,6 @@
                     <div class="countdown-item"><span class="num" id="cdHours">04</span><span class="label">Jam</span></div>
                     <div class="countdown-item"><span class="num" id="cdMinutes">32</span><span class="label">Menit</span></div>
                     <div class="countdown-item"><span class="num" id="cdSeconds">15</span><span class="label">Detik</span></div>
-                </div>
-            </div>
-
-            <div class="search-wrap">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Cari produk, script, hosting...">
-                    <button class="voice-btn" id="voiceSearchBtn" title="Pencarian Suara">
-                        <i class="fas fa-microphone"></i>
-                    </button>
-                    <button id="searchBtn"><i class="fas fa-search"></i> Cari</button>
-                </div>
-            </div>
-            <div class="search-filters" id="searchFilters">
-                <button class="search-filter-chip active" data-filter="all">Semua</button>
-                <button class="search-filter-chip" data-filter="hosting">Hosting</button>
-                <button class="search-filter-chip" data-filter="script">Script</button>
-                <button class="search-filter-chip" data-filter="topup">Topup</button>
-                <button class="search-filter-chip" data-filter="layanan">Layanan</button>
-            </div>
-
-            <div class="store-header">
-                <div class="store-name">
-                    JOELL SHOP
-                    <span class="rating"><i class="fas fa-star"></i> 4.9 <span style="font-weight:400;opacity:0.7">(1,234 Reviews)</span></span>
-                    <span class="badge-free"><i class="fas fa-check-circle"></i> Free Fee Admin</span>
                 </div>
             </div>
 
@@ -3281,17 +3290,16 @@
                 <div class="promo-message" id="promoMessage"></div>
             </div>
 
-            <div class="section-title">Hosting & Kebutuhan Bot <span class="view-all" data-cat="hosting">Lihat Semua <i class="fas fa-arrow-right"></i></span></div>
+            <div class="section-title">Hosting & Kebutuhan Bot</div>
             <div class="grid-menu" id="gridHosting"></div>
 
-            <div class="section-title">Jasa Script Bot WhatsApp <span class="view-all" data-cat="script">Lihat Semua <i class="fas fa-arrow-right"></i></span></div>
+            <div class="section-title">Jasa Script Bot WhatsApp</div>
             <div class="grid-menu" id="gridScript"></div>
 
-            <div class="section-title">Topup Game <span class="view-all" data-cat="topup">Lihat Semua <i class="fas fa-arrow-right"></i></span></div>
+            <div class="section-title">Topup Game</div>
             <div class="grid-menu" id="gridTopup"></div>
 
-            <div class="section-title">Layanan Premium <span class="view-all" data-cat="layanan">Lihat Semua <i class="fas fa-arrow-right"></i></span></div>
-            <div class="grid-menu" id="gridLayanan"></div>
+
 
             <div class="section-title">Testimoni Pelanggan</div>
             <div class="testimonials-carousel" id="testimonialsCarousel">
@@ -3341,24 +3349,7 @@
                 </div>
             </div>
 
-            <div class="section-title">Downloader Video</div>
-            <div class="grid-menu" style="grid-template-columns:1fr 1fr 1fr;">
-                <a href="https://snaptik.net/id" target="_blank" class="menu-card" style="text-decoration:none;">
-                    <i class="fab fa-tiktok" style="color:#000;"></i>
-                    <span>TikTok</span>
-                    <span class="sub-label">snaptik.net</span>
-                </a>
-                <a href="https://snapsave.app/id/download-video-instagram" target="_blank" class="menu-card" style="text-decoration:none;">
-                    <i class="fab fa-instagram" style="color:#E4405F;"></i>
-                    <span>Instagram</span>
-                    <span class="sub-label">snapsave.app</span>
-                </a>
-                <a href="https://pindown.io/id1" target="_blank" class="menu-card" style="text-decoration:none;">
-                    <i class="fab fa-pinterest" style="color:#E60023;"></i>
-                    <span>Pinterest</span>
-                    <span class="sub-label">pindown.io</span>
-                </a>
-            </div>
+
         </div>
 
         <!-- ORDERS PAGE -->
@@ -3835,6 +3826,8 @@
             </div>
             <div class="order-chat-messages" id="orderChatMessages"></div>
             <div class="order-chat-input-wrap">
+                <button class="chat-attach-btn" onclick="document.getElementById('orderChatFile').click()"><i class="fas fa-image"></i></button>
+                <input type="file" id="orderChatFile" accept="image/*" style="display:none;" onchange="handleChatFileUpload(this, 'user')">
                 <input type="text" id="orderChatInput" placeholder="Ketik pesan...">
                 <button id="orderChatSend"><i class="fas fa-paper-plane"></i></button>
             </div>
@@ -3854,6 +3847,8 @@
             </div>
             <div class="order-chat-messages" id="adminChatMessages"></div>
             <div class="order-chat-input-wrap">
+                <button class="chat-attach-btn" onclick="document.getElementById('adminChatFile').click()"><i class="fas fa-image"></i></button>
+                <input type="file" id="adminChatFile" accept="image/*" style="display:none;" onchange="handleChatFileUpload(this, 'admin')">
                 <input type="text" id="adminChatInput" placeholder="Balas sebagai admin...">
                 <button id="adminChatSend"><i class="fas fa-paper-plane"></i></button>
             </div>
@@ -3872,7 +3867,7 @@
     <nav class="bottom-nav" id="bottomNav">
         <button class="nav-item active" data-page="home" id="navHome"><i class="fas fa-home"></i> Beranda</button>
         <button class="nav-item" data-page="orders" id="navOrders"><i class="fas fa-shopping-bag"></i> Pesanan</button>
-        <button class="nav-item" id="navCart"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge" id="navCartBadge">0</span></button>
+        <button class="nav-item" id="navCart" data-page="cart"><i class="fas fa-shopping-cart"></i> Keranjang <span class="badge" id="navCartBadge">0</span></button>
         <button class="nav-item" data-page="tracking" id="navTracking"><i class="fas fa-shipping-fast"></i> Lacak</button>
         <button class="nav-item" data-page="profile" id="navProfile"><i class="fas fa-user"></i> Profil</button>
     </nav>
@@ -3956,12 +3951,7 @@
                 { name: 'Auto Order Basic', price: 55000, stock: 'Tersedia' }, { name: 'Auto Order Premium', price: 99000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
             ]},
             { id: 13, name: 'Topup All Game', price: 0, desc: 'Topup diamond, UC, dan voucher game favoritmu.', icon: 'fa-gamepad', category: 'topup', isTopup: true, variants: [{ name: 'Pilih Game', price: 0, stock: 'Tersedia' }] },
-            { id: 14, name: 'Downloader Video', price: 0, desc: 'Download video TikTok, IG, Pinterest tanpa watermark.', icon: 'fa-download', category: 'layanan', isDownloader: true, variants: [{ name: 'Buka Downloader', price: 0, stock: 'Tersedia' }] },
-            { id: 15, name: 'Info Anime', price: 0, desc: 'Cari info anime, jadwal tayang, dan rating.', icon: 'fa-film', category: 'layanan', isAnime: true, variants: [{ name: 'Cari Anime', price: 0, stock: 'Tersedia' }] },
-            { id: 16, name: 'Bot Controller', price: 0, desc: 'Kelola bot Telegram: auth, kirim pesan, history.', icon: 'fa-robot', category: 'layanan', isBotController: true, variants: [{ name: 'Buka Controller', price: 0, stock: 'Tersedia' }] },
-            { id: 17, name: 'WhatsApp OSINT', price: 0, desc: 'Intel dari nomor WA: profil, status, perangkat, privasi.', icon: 'fa-search', category: 'layanan', isOsint: true, variants: [{ name: 'Buka Tools', price: 0, stock: 'Tersedia' }] },
-            { id: 18, name: 'Screenshot Web', price: 0, desc: 'Ambil screenshot website secara instan.', icon: 'fa-camera', category: 'layanan', isSsweb: true, variants: [{ name: 'Buka SSWEB', price: 0, stock: 'Tersedia' }] },
-            { id: 19, name: 'Upload Gambar', price: 0, desc: 'Upload gambar dapatkan link permanen via Imgur.', icon: 'fa-cloud-upload-alt', category: 'layanan', isUpload: true, variants: [{ name: 'Buka Uploader', price: 0, stock: 'Tersedia' }] }
+
         ];
 
         // ============================================================
@@ -4197,34 +4187,7 @@
             }, duration);
         }
 
-        // ============================================================
-        //  VOICE SEARCH
-        // ============================================================
-        const voiceBtn = document.getElementById('voiceSearchBtn');
-        let recognition = null;
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            recognition = new SpeechRecognition();
-            recognition.lang = 'id-ID';
-            recognition.continuous = false;
-            recognition.onstart = () => voiceBtn.classList.add('recording');
-            recognition.onend = () => voiceBtn.classList.remove('recording');
-            recognition.onresult = (e) => {
-                const text = e.results[0][0].transcript;
-                document.getElementById('searchInput').value = text;
-                doSearch();
-                showToast('Voice Search', `Mencari: "${text}"`, 'info');
-            };
-            voiceBtn.addEventListener('click', () => {
-                if (voiceBtn.classList.contains('recording')) {
-                    recognition.stop();
-                } else {
-                    recognition.start();
-                }
-            });
-        } else {
-            voiceBtn.style.display = 'none';
-        }
+        // Voice search removed
 
         // ============================================================
         //  PROMO CODE
@@ -4280,19 +4243,15 @@
             document.getElementById('gridHosting').innerHTML = renderMenuCards(products.filter(p => p.category === 'hosting'));
             document.getElementById('gridScript').innerHTML = renderMenuCards(products.filter(p => p.category === 'script'));
             document.getElementById('gridTopup').innerHTML = renderMenuCards(products.filter(p => p.category === 'topup'));
-            document.getElementById('gridLayanan').innerHTML = renderMenuCards(products.filter(p => p.category === 'layanan'));
+
         }
 
         function renderMenuCards(productList) {
             return productList.map(p => {
-                const isWished = wishlist.includes(p.id);
                 const badgeHtml = p.badge ? `<span class="card-badge ${p.badge}">${p.badge.toUpperCase()}</span>` : '';
                 return `
                     <div class="menu-card" data-id="${p.id}" data-topup="${p.isTopup||false}" data-anime="${p.isAnime||false}" data-bot="${p.isBotController||false}" data-osint="${p.isOsint||false}" data-ssweb="${p.isSsweb||false}" data-upload="${p.isUpload||false}" data-downloader="${p.isDownloader||false}">
                         ${badgeHtml}
-                        <button class="wishlist-btn ${isWished?'active':''}" data-id="${p.id}" onclick="event.stopPropagation();toggleWishlist(${p.id})">
-                            <i class="fas fa-heart"></i>
-                        </button>
                         <i class="fas ${p.icon}"></i>
                         <span>${p.name}</span>
                     </div>
@@ -4300,18 +4259,7 @@
             }).join('');
         }
 
-        function toggleWishlist(id) {
-            const idx = wishlist.indexOf(id);
-            if (idx > -1) {
-                wishlist.splice(idx, 1);
-                showToast('Wishlist', 'Dihapus dari favorit', 'info');
-            } else {
-                wishlist.push(id);
-                showToast('Wishlist', 'Ditambahkan ke favorit', 'success');
-            }
-            localStorage.setItem('joellWishlist', JSON.stringify(wishlist));
-            renderMenus();
-        }
+        // toggleWishlist removed
 
         // ============================================================
         //  CART FUNCTIONS
@@ -4378,7 +4326,7 @@
 
         function updateQty(idx, delta) {
             if (cart[idx].qty + delta < 1) {
-                if (confirm('Hapus item ini?')) removeItem(idx);
+                removeItem(idx);
                 return;
             }
             cart[idx].qty += delta;
@@ -4530,7 +4478,29 @@
             updateCartUI();
             
             document.getElementById('checkoutOverlay').classList.remove('open');
-            showToast('Pesanan Dibuat', `ID: ${orderId}. Cek di menu Pesanan.`, 'success', 5000);
+            
+            // Tampilkan Instruksi Pembayaran
+            const payInfo = {
+                'qris': '<p>Silakan lakukan pembayaran melalui QRIS:</p><img src="https://files.catbox.moe/o3t86k.jpg" style="width:200px;border-radius:10px;margin:10px 0;"><p style="font-size:0.8rem;color:var(--text-muted);">Simpan/Screenshot QRIS di atas dan scan di aplikasi bank/e-wallet Anda.</p>',
+                'transfer': '<p>Silakan transfer ke rekening admin:</p><p style="font-weight:700;margin:10px 0;">BCA: 1234567890<br>a.n. JOELL SHOP</p><p style="font-size:0.8rem;color:var(--text-muted);">Upload bukti transfer via chat di menu Pesanan.</p>',
+                'ewallet': '<p>Silakan kirim ke E-Wallet admin:</p><p style="font-weight:700;margin:10px 0;">Dana: 08123456789<br>OVO: 08123456789<br>GoPay: 08123456789</p><p style="font-size:0.8rem;color:var(--text-muted);">Upload bukti transfer via chat di menu Pesanan.</p>',
+                'cod': '<p>Pesanan akan dibayar saat barang diterima.</p><p style="font-size:0.8rem;color:var(--text-muted);">Admin akan menghubungi Anda untuk konfirmasi pengiriman.</p>'
+            };
+            Swal.fire({
+                title: 'Pesanan Dibuat!',
+                html: `
+                    <div style="text-align:center;">
+                        ${payInfo[order.payment] || ''}
+                        <p style="font-weight:800;color:var(--accent-light);margin-top:10px;">Total: Rp ${total.toLocaleString()}</p>
+                    </div>
+                `,
+                icon: 'success',
+                confirmButtonText: 'OK, Saya Sudah Bayar',
+                confirmButtonColor: '#6366f1'
+            }).then(() => {
+                showToast('Pesanan Dibuat', `ID: ${orderId}. Cek di menu Pesanan.`, 'success', 5000);
+                navigateTo('orders');
+            });
             renderOrdersList();
         });
 
@@ -4597,12 +4567,16 @@
             const order = orders.find(o => o.id === currentOrderChatId);
             if (!order) return;
             const container = document.getElementById('orderChatMessages');
-            container.innerHTML = order.chat.map(c => `
-                <div class="msg ${c.from === 'admin' ? 'admin' : 'user'}">
-                    ${c.text}
-                    <span class="time">${c.time}</span>
-                </div>
-            `).join('');
+            container.innerHTML = order.chat.map(c => {
+                const imgHtml = c.image ? `<img src="${c.image}" alt="chat-img" onclick="window.open('${c.image}', '_blank')">` : '';
+                return `
+                    <div class="msg ${c.from === 'admin' ? 'admin' : 'user'}">
+                        ${c.text || ''}
+                        ${imgHtml}
+                        <span class="time">${c.time}</span>
+                    </div>
+                `;
+            }).join('');
             container.scrollTop = container.scrollHeight;
         }
 
@@ -4814,13 +4788,55 @@
             const order = orders.find(o => o.id === currentAdminChatId);
             if (!order) return;
             const container = document.getElementById('adminChatMessages');
-            container.innerHTML = order.chat.map(c => `
-                <div class="msg ${c.from === 'admin' ? 'user' : 'admin'}">
-                    ${c.text}
-                    <span class="time">${c.time} · ${c.from === 'admin' ? 'Admin' : 'Customer'}</span>
-                </div>
-            `).join('');
+            container.innerHTML = order.chat.map(c => {
+                const imgHtml = c.image ? `<img src="${c.image}" alt="chat-img" onclick="window.open('${c.image}', '_blank')">` : '';
+                return `
+                    <div class="msg ${c.from === 'admin' ? 'user' : 'admin'}">
+                        ${c.text || ''}
+                        ${imgHtml}
+                        <span class="time">${c.time} · ${c.from === 'admin' ? 'Admin' : 'Customer'}</span>
+                    </div>
+                `;
+            }).join('');
             container.scrollTop = container.scrollHeight;
+        }
+
+        async function handleChatFileUpload(input, senderType) {
+            const file = input.files[0];
+            if (!file) return;
+            if (file.size > 5 * 1024 * 1024) { showToast('Error', 'Maksimal 5MB', 'error'); return; }
+            
+            const orderId = senderType === 'user' ? currentOrderChatId : currentAdminChatId;
+            if (!orderId) return;
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+
+            showToast('Chat', 'Sedang mengirim gambar...', 'info');
+            
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch('https://api.imgur.com/3/image', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Client-ID ' + CONFIG.imgurClientId },
+                    body: formData
+                });
+                const json = await res.json();
+                if (json.success && json.data?.link) {
+                    order.chat.push({
+                        from: senderType,
+                        text: '',
+                        image: json.data.link,
+                        time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})
+                    });
+                    localStorage.setItem('joellOrders', JSON.stringify(orders));
+                    broadcastChat(orderId);
+                    if (senderType === 'user') renderOrderChatMessages();
+                    else renderAdminChatMessages();
+                    showToast('Chat', 'Gambar terkirim!', 'success');
+                } else { throw new Error('Gagal'); }
+            } catch { showToast('Error', 'Gagal kirim gambar', 'error'); }
+            input.value = '';
         }
 
         document.getElementById('adminChatSend').addEventListener('click', () => {
@@ -5157,7 +5173,7 @@
 
         function doSearch() {
             const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
-            const cats = ['hosting', 'script', 'topup', 'layanan'];
+            const cats = ['hosting', 'script', 'topup'];
             cats.forEach(cat => {
                 const filtered = products.filter(p => {
                     const matchCat = currentFilter === 'all' || p.category === currentFilter;
@@ -5169,40 +5185,23 @@
             navigateTo('home');
         }
 
-        document.querySelectorAll('.search-filter-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                document.querySelectorAll('.search-filter-chip').forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
-                currentFilter = chip.dataset.filter;
-                doSearch();
-            });
-        });
+        // Search filter chips removed
 
-        document.querySelectorAll('.view-all').forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentFilter = btn.dataset.cat;
-                document.querySelectorAll('.search-filter-chip').forEach(c => c.classList.remove('active'));
-                const chip = document.querySelector(`[data-filter="${currentFilter}"]`);
-                if (chip) chip.classList.add('active');
-                doSearch();
-                document.querySelector('.search-wrap').scrollIntoView({ behavior: 'smooth' });
-            });
-        });
+        // View-all buttons removed along with search
 
-        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(btn => {
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const page = btn.dataset.page;
                 if (page === 'cart') { document.getElementById('cartOverlay').classList.toggle('open'); return; }
-                navigateTo(page);
+                if (page) navigateTo(page);
             });
         });
 
         document.getElementById('cartCloseBtn').addEventListener('click', () => document.getElementById('cartOverlay').classList.remove('open'));
         document.getElementById('cartOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); });
 
-        document.getElementById('searchBtn').addEventListener('click', doSearch);
-        document.getElementById('searchInput').addEventListener('keyup', (e) => { if (e.key === 'Enter') doSearch(); });
+        // Search buttons removed
 
         document.querySelectorAll('.grid-menu').forEach(grid => {
             grid.addEventListener('click', (e) => {

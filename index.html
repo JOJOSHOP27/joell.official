@@ -3571,9 +3571,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="trackChatBtn" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),var(--purple));color:#fff;border:none;border-radius:60px;font-weight:700;cursor:pointer;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;">
-                        <i class="fas fa-comments"></i> Chat Admin Terkait Pesanan
-                    </button>
+
                 </div>
             </div>
         </div>
@@ -4702,9 +4700,7 @@
                     { step: 'Sedang Diproses', desc: 'Tim menyiapkan pesanan Anda', time: '-', completed: false },
                     { step: 'Pesanan Selesai', desc: 'Detail produk dikirim ke akun Anda', time: '-', completed: false }
                 ],
-                chat: [
-                    { from: 'admin', text: `Halo ${currentUser.name}! Terima kasih telah memesan. Pesanan Anda #${orderId} telah kami terima dan akan segera kami proses.`, paymentBtn: false, time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) }
-                ]
+                chat: []
             };
             
             orders.unshift(order);
@@ -4722,12 +4718,9 @@
                 title: 'Pesanan Berhasil!',
                 text: 'ID Pesanan: ' + orderId,
                 icon: 'success',
-                confirmButtonText: 'Buka Chat Admin'
+                confirmButtonText: 'Lihat Pesanan Saya'
             }).then(() => {
                 navigateTo('orders');
-                setTimeout(() => {
-                    openOrderChat(orderId);
-                }, 500);
             });
         });
 
@@ -4767,7 +4760,7 @@
                 const itemsText = o.items.map(i => `${i.name} (${i.variant})`).join(', ');
                 return `
                     <div class="order-card">
-                        <div onclick="openOrderChat('${o.id}')" style="cursor:pointer;">
+                        <div>
                             <div class="order-card-header">
                                 <span class="order-id">#${o.id}</span>
                                 <span class="order-status ${statusClass[o.status] || 'pending'}">${statusLabel[o.status] || o.status}</span>
@@ -5025,8 +5018,7 @@
                         <div style="display:flex;justify-content:space-between;align-items:center;">
                             <span style="font-weight:800;color:var(--accent-light);">Rp ${o.total.toLocaleString()}</span>
                             <div style="display:flex;gap:8px;">
-                                <button class="admin-chat-btn" onclick="openAdminChat('${o.id}')"><i class="fas fa-comments"></i> Balas Chat</button>
-                                <button class="admin-chat-btn" onclick="deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2);"><i class="fas fa-trash-alt"></i></button>
+                                <button class="admin-chat-btn" onclick="deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2);"><i class="fas fa-trash-alt"></i> Hapus Pesanan</button>
                             </div>
                         </div>
                     </div>
@@ -5662,4 +5654,4 @@
         showToast('Selamat Datang', 'JOELL SHOP siap melayani!', 'success', 4000);
     </script>
 </body>
-    </html>
+                                                                                                        </html>

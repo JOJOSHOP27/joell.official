@@ -3701,16 +3701,7 @@
                     <label><i class="fas fa-map-marker-alt"></i> Alamat / Catatan</label>
                     <textarea id="coAddress" rows="3" placeholder="Catatan tambahan untuk pesanan..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label><i class="fas fa-wallet"></i> Metode Pembayaran</label>
-                    <select id="coPayment">
-                        <option value="qris">QRIS (Scan)</option>
-                        <option value="transfer">Transfer Bank</option>
-                        <option value="ewallet">E-Wallet (Dana/OVO/Gopay)</option>
-                        <option value="cod">Bayar di Tempat</option>
-                    </select>
-                    <small>Pilih metode pembayaran yang paling nyaman</small>
-                </div>
+
                 <button type="submit" class="btn-place-order"><i class="fas fa-check-circle"></i> Buat Pesanan</button>
             </form>
         </div>
@@ -4699,7 +4690,7 @@
                 userEmail: document.getElementById('coEmail').value,
                 userPhone: document.getElementById('coPhone').value,
                 address: document.getElementById('coAddress').value,
-                payment: document.getElementById('coPayment').value,
+                payment: 'manual',
                 items: [...cart],
                 total: total,
                 status: 'pending',
@@ -4712,7 +4703,7 @@
                     { step: 'Pesanan Selesai', desc: 'Detail produk dikirim ke akun Anda', time: '-', completed: false }
                 ],
                 chat: [
-                    { from: 'admin', text: `Halo ${currentUser.name}! Terima kasih telah memesan. Silakan selesaikan pembayaran melalui tombol di bawah ini agar segera kami proses pesanan #${orderId}.`, paymentBtn: true, time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) }
+                    { from: 'admin', text: `Halo ${currentUser.name}! Terima kasih telah memesan. Pesanan Anda #${orderId} telah kami terima dan akan segera kami proses.`, paymentBtn: false, time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) }
                 ]
             };
             
@@ -5671,4 +5662,4 @@
         showToast('Selamat Datang', 'JOELL SHOP siap melayani!', 'success', 4000);
     </script>
 </body>
-                    </html>
+    </html>

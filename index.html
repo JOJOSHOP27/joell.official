@@ -4144,9 +4144,17 @@
         // Sync Orders with Firebase
         function syncOrdersToCloud() {
             if (db) {
-                db.ref('orders').set(orders).catch(e => {
+                db.ref('orders').set(orders).then(() => {
+                    console.log("Cloud Sync Success");
+                }).catch(e => {
                     console.error("Sync Error:", e);
-                    showToast('Sync Error', 'Gagal kirim data ke Cloud.', 'error');
+                    let errorMsg = 'Gagal kirim ke data cloud';
+                    if (e.code === 'PERMISSION_DENIED') {
+                        errorMsg = 'Izin Ditolak: Pastikan Firebase Rules sudah diatur ke true.';
+                    } else if (e.message.includes('disconnected')) {
+                        errorMsg = 'Koneksi Terputus: Cek internet Anda.';
+                    }
+                    showToast('Cloud Error', errorMsg, 'error', 5000);
                 });
             }
         }

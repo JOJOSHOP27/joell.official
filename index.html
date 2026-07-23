@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- FIREBASE SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <style>
         :root {
             --bg-primary: #050508;
@@ -3855,7 +3858,7 @@
                 </ul>
 
                 <div id="g_id_onload"
-                     data-client_id="598453625335-mic0auldfqe057vsi9h0jg01v7qc0u1r.apps.googleusercontent.com"
+                     data-client_id="598453625335-ll12jkopgvbo0m767rfe17gh9lfhj9l1.apps.googleusercontent.com"
                      data-context="signin"
                      data-ux_mode="popup"
                      data-callback="handleGoogleLogin"
@@ -4073,43 +4076,83 @@
         let logoClickCount = 0;
 
         // ============================================================
-        //  BROADCAST CHANNEL (for real-time sync same-browser)
+        //  FIREBASE REAL-TIME DATABASE INTEGRATION
         // ============================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyDoG6GPBDURvBCzbOOSCQLJknruFys4XEw",
+            authDomain: "joell-shop-db3a6.firebaseapp.com",
+            projectId: "joell-shop-db3a6",
+            storageBucket: "joell-shop-db3a6.firebasestorage.app",
+            messagingSenderId: "1016239066240",
+            appId: "1:1016239066240:web:1898ec80e89e458724aa65",
+            databaseURL: "https://joell-shop-db3a6-default-rtdb.firebaseio.com" // Pastikan URL ini benar sesuai dashboard Firebase Anda
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Sync Orders with Firebase
+        function syncOrdersToCloud() {
+            db.ref('orders').set(orders);
+        }
+
+        // Listen for Real-time Updates from Firebase
+        db.ref('orders').on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                // Periksa apakah ada pesan baru untuk notifikasi
+                const oldOrders = JSON.parse(JSON.stringify(orders));
+                orders = data;
+                localStorage.setItem('joellOrders', JSON.stringify(orders));
+                
+                renderOrdersList();
+                if (isAdminLoggedIn) renderAdminOrders();
+                if (currentOrderChatId) renderOrderChatMessages();
+                if (currentAdminChatId) renderAdminChatMessages();
+                
+                // Cek notifikasi untuk pesan baru
+                if (document.hidden) {
+                    orders.forEach(newOrder => {
+                        const oldOrder = oldOrders.find(o => o.id === newOrder.id);
+                        if (oldOrder && newOrder.chat.length > oldOrder.chat.length) {
+                            const lastMsg = newOrder.chat[newOrder.chat.length - 1];
+                            // Hindari notifikasi jika pesan dari diri sendiri (berdasarkan role)
+                            sendBrowserNotification(`Pesan Baru: #${newOrder.id}`, lastMsg.text || 'Mengirim file...', newOrder.id);
+                        }
+                    });
+                }
+            }
+        });
+
         let bc;
         try {
             bc = new BroadcastChannel('joell_shop_channel');
             bc.onmessage = (event) => {
-                if (event.data.type === 'orders_updated') {
+                if (event.data.type === 'orders_updated' || event.data.type === 'chat_updated') {
                     orders = JSON.parse(localStorage.getItem('joellOrders')) || [];
                     renderOrdersList();
                     if (isAdminLoggedIn) renderAdminOrders();
-                }
-                if (event.data.type === 'chat_updated' && event.data.orderId) {
-                    orders = JSON.parse(localStorage.getItem('joellOrders')) || [];
-                    if (currentOrderChatId === event.data.orderId) {
-                        renderOrderChatMessages();
-                    }
-                    if (currentAdminChatId === event.data.orderId) {
-                        renderAdminChatMessages();
-                    }
+                    if (currentOrderChatId === event.data.orderId) renderOrderChatMessages();
+                    if (currentAdminChatId === event.data.orderId) renderAdminChatMessages();
                     
-                    // Browser Notification
-                    if (document.hidden) {
+                    if (document.hidden && event.data.type === 'chat_updated') {
                         const order = orders.find(o => o.id === event.data.orderId);
                         if (order && order.chat.length > 0) {
                             const lastMsg = order.chat[order.chat.length - 1];
-                            // Hanya kirim notifikasi jika pesan terakhir bukan dari diri sendiri (simulasi sederhana)
-                            sendBrowserNotification(`Pesan Baru: #${event.data.orderId}`, lastMsg.text || 'Mengirim gambar...', event.data.orderId);
+                            sendBrowserNotification(`Pesan Baru: #${event.data.orderId}`, lastMsg.text || 'Mengirim file...', event.data.orderId);
                         }
                     }
                 }
             };
-        } catch(e) { console.log('BroadcastChannel not supported'); }
+        } catch(e) {}
 
         function broadcastOrders() {
+            syncOrdersToCloud();
             if (bc) bc.postMessage({ type: 'orders_updated' });
         }
         function broadcastChat(orderId) {
+            syncOrdersToCloud();
             if (bc) bc.postMessage({ type: 'chat_updated', orderId });
         }
 
@@ -5537,4 +5580,4 @@
         showToast('Selamat Datang', 'JOELL SHOP siap melayani!', 'success', 4000);
     </script>
 </body>
-    </html>
+                                                                                                                                                               </html>

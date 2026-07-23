@@ -3586,19 +3586,13 @@
                         <div class="label">Selesai</div>
                     </div>
                 </div>
-                <div class="admin-section">
-                    <h3><i class="fas fa-database"></i> Backup & Restore Data</h3>
-                    <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:12px;">Karena ini static site, gunakan export/import untuk transfer data antar device/browser.</p>
-                    <div class="admin-export-btns">
-                        <button id="adminExportBtn"><i class="fas fa-download"></i> Export Orders JSON</button>
-                        <button id="adminExportChatBtn"><i class="fas fa-download"></i> Export Chat JSON</button>
+                <div class="admin-section" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.2);">
+                    <h3><i class="fas fa-cloud"></i> Cloud Sync Status</h3>
+                    <div id="cloudStatusIndicator" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;background:rgba(0,0,0,0.2);margin-top:10px;">
+                        <div id="cloudStatusDot" style="width:12px;height:12px;border-radius:50%;background:var(--text-muted);"></div>
+                        <span id="cloudStatusText" style="font-size:0.9rem;color:var(--text-secondary);">Mengecek koneksi database...</span>
                     </div>
-                    <div class="admin-import-wrap">
-                        <label class="admin-import-label" for="adminImportFile">
-                            <i class="fas fa-upload"></i> Import Orders JSON
-                        </label>
-                        <input type="file" id="adminImportFile" accept=".json">
-                    </div>
+                    <p style="color:var(--text-muted);font-size:0.75rem;margin-top:8px;">Database cloud memungkinkan chat real-time antar perangkat berbeda secara otomatis.</p>
                 </div>
                 <div class="admin-section">
                     <h3><i class="fas fa-shopping-bag"></i> Semua Pesanan</h3>
@@ -3858,7 +3852,7 @@
                 </ul>
 
                 <div id="g_id_onload"
-                     data-client_id="598453625335-ll12jkopgvbo0m767rfe17gh9lfhj9l1.apps.googleusercontent.com"
+                     data-client_id="https://598453625335-ll12jkopgvbo0m767rfe17gh9lfhj9l1.apps.googleusercontent.com"
                      data-context="signin"
                      data-ux_mode="popup"
                      data-callback="handleGoogleLogin"
@@ -4089,41 +4083,75 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+        let db;
+        function initCloudSync() {
+            const statusDot = document.getElementById('cloudStatusDot');
+            const statusText = document.getElementById('cloudStatusText');
+            
+            try {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.database();
+                
+                // Cek koneksi
+                const connectedRef = db.ref(".info/connected");
+                connectedRef.on("value", (snap) => {
+                    if (snap.val() === true) {
+                        if (statusDot) statusDot.style.background = 'var(--green)';
+                        if (statusText) statusText.textContent = 'Terhubung ke Cloud Database';
+                        console.log("Cloud Connected");
+                    } else {
+                        if (statusDot) statusDot.style.background = 'var(--red)';
+                        if (statusText) statusText.textContent = 'Terputus dari Cloud Database';
+                        console.log("Cloud Disconnected");
+                    }
+                });
+
+                // Listen for Real-time Updates from Firebase
+                db.ref('orders').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        const oldOrders = JSON.parse(JSON.stringify(orders));
+                        orders = data;
+                        localStorage.setItem('joellOrders', JSON.stringify(orders));
+                        
+                        renderOrdersList();
+                        if (isAdminLoggedIn) {
+                            renderAdminOrders();
+                            updateAdminStats();
+                        }
+                        if (currentOrderChatId) renderOrderChatMessages();
+                        if (currentAdminChatId) renderAdminChatMessages();
+                        
+                        // Notifikasi pesan baru
+                        if (document.hidden) {
+                            orders.forEach(newOrder => {
+                                const oldOrder = oldOrders.find(o => o.id === newOrder.id);
+                                if (oldOrder && newOrder.chat.length > oldOrder.chat.length) {
+                                    const lastMsg = newOrder.chat[newOrder.chat.length - 1];
+                                    sendBrowserNotification(`Pesan Baru: #${newOrder.id}`, lastMsg.text || 'Mengirim file...', newOrder.id);
+                                }
+                            });
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error("Firebase Init Error:", e);
+                if (statusDot) statusDot.style.background = 'var(--red)';
+                if (statusText) statusText.textContent = 'Error: Konfigurasi Cloud Salah';
+            }
+        }
 
         // Sync Orders with Firebase
         function syncOrdersToCloud() {
-            db.ref('orders').set(orders);
+            if (db) {
+                db.ref('orders').set(orders).catch(e => {
+                    console.error("Sync Error:", e);
+                    showToast('Sync Error', 'Gagal kirim data ke Cloud.', 'error');
+                });
+            }
         }
 
-        // Listen for Real-time Updates from Firebase
-        db.ref('orders').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                // Periksa apakah ada pesan baru untuk notifikasi
-                const oldOrders = JSON.parse(JSON.stringify(orders));
-                orders = data;
-                localStorage.setItem('joellOrders', JSON.stringify(orders));
-                
-                renderOrdersList();
-                if (isAdminLoggedIn) renderAdminOrders();
-                if (currentOrderChatId) renderOrderChatMessages();
-                if (currentAdminChatId) renderAdminChatMessages();
-                
-                // Cek notifikasi untuk pesan baru
-                if (document.hidden) {
-                    orders.forEach(newOrder => {
-                        const oldOrder = oldOrders.find(o => o.id === newOrder.id);
-                        if (oldOrder && newOrder.chat.length > oldOrder.chat.length) {
-                            const lastMsg = newOrder.chat[newOrder.chat.length - 1];
-                            // Hindari notifikasi jika pesan dari diri sendiri (berdasarkan role)
-                            sendBrowserNotification(`Pesan Baru: #${newOrder.id}`, lastMsg.text || 'Mengirim file...', newOrder.id);
-                        }
-                    });
-                }
-            }
-        });
+        initCloudSync();
 
         let bc;
         try {
@@ -5580,4 +5608,4 @@
         showToast('Selamat Datang', 'JOELL SHOP siap melayani!', 'success', 4000);
     </script>
 </body>
-                                                                                                                                                               </html>
+    </html>

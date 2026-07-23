@@ -13,6 +13,17 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <!-- Security Scripts -->
     <script>
+        // Domain Locking - Only allow joell-payment.vercel.app
+        (function() {
+            var allowedDomain = "joell-payment.vercel.app";
+            if (window.location.hostname !== allowedDomain && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+                document.documentElement.innerHTML = ""; // Wipe out content
+                alert("Unauthorized Domain: This website is protected. Cloning is strictly prohibited.");
+                window.location.href = "https://" + allowedDomain;
+                return;
+            }
+        })();
+
         // Disable Right Click
         document.addEventListener('contextmenu', event => event.preventDefault());
 
@@ -3641,8 +3652,15 @@
             </div>
             <div id="adminDashboardView" style="display:none;">
                 <div class="tracking-detail-box" style="margin-bottom:16px;">
-                    <h2><i class="fas fa-shield-alt" style="color:var(--accent-light);"></i> Admin Dashboard</h2>
-                    <p class="subtitle">Kelola pesanan dan chat pelanggan</p>
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                        <div>
+                            <h2><i class="fas fa-shield-alt" style="color:var(--accent-light);"></i> Admin Dashboard</h2>
+                            <p class="subtitle">Kelola pesanan dan chat pelanggan</p>
+                        </div>
+                        <button onclick="refreshAdminOrders()" class="header-btn" title="Refresh Data" id="btnRefreshAdmin">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="admin-stats-grid">
                     <div class="admin-stat-card">
@@ -4148,14 +4166,16 @@
         // ============================================================
         //  FIREBASE REAL-TIME DATABASE INTEGRATION
         // ============================================================
+        // Obfuscated Firebase Config
+        const _0x4f2a = ["QUl6YVN5RG9HNkdQQkRVUnZCQ3piT09TQ1FMSmtucnVGeXM0WEV3", "am9lbGwtc2hvcC1kYjNhNi5maXJlYmFzZWFwcC5jb20=", "am9lbGwtc2hvcC1kYjNhNg==", "am9lbGwtc2hvcC1kYjNhNi5maXJlYmFzZXN0b3JhZ2UuYXBw", "MTAxNjIzOTA2NjI0MA==", "MToxMDE2MjM5MDY2MjQwOndlYjoxODk4ZWM4MGU4OWU0NTg3MjRhYTY1", "aHR0cHM6Ly9qb2VsbC1zaG9wLWRiM2E2LWRlZmF1bHQtcnRkYi5hc2lhLXNvdXRoZWFzdDEuZmlyZWJhc2VkYXRhYmFzZS5hcHAv"];
         const firebaseConfig = {
-            apiKey: "AIzaSyDoG6GPBDURvBCzbOOSCQLJknruFys4XEw",
-            authDomain: "joell-shop-db3a6.firebaseapp.com",
-            projectId: "joell-shop-db3a6",
-            storageBucket: "joell-shop-db3a6.firebasestorage.app",
-            messagingSenderId: "1016239066240",
-            appId: "1:1016239066240:web:1898ec80e89e458724aa65",
-            databaseURL: "https://joell-shop-db3a6-default-rtdb.asia-southeast1.firebasedatabase.app/"
+            apiKey: atob(_0x4f2a[0]),
+            authDomain: atob(_0x4f2a[1]),
+            projectId: atob(_0x4f2a[2]),
+            storageBucket: atob(_0x4f2a[3]),
+            messagingSenderId: atob(_0x4f2a[4]),
+            appId: atob(_0x4f2a[5]),
+            databaseURL: atob(_0x4f2a[6])
         };
 
         // Initialize Firebase
@@ -4764,6 +4784,15 @@
         // ============================================================
         //  ORDERS & TRACKING
         // ============================================================
+        // Helper function for copy to clipboard
+        function copyToClipboard(text, label) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Berhasil', `${label} berhasil disalin!`, 'success', 2000);
+            }).catch(() => {
+                showToast('Gagal', 'Gagal menyalin teks', 'error');
+            });
+        }
+
         function renderOrdersList() {
             const container = document.getElementById('ordersListContainer');
             const myOrders = currentUser ? orders.filter(o => o.userId === currentUser.id) : [];
@@ -4798,7 +4827,12 @@
                 return `
                     <div class="order-card" onclick="openOrderChat('${o.id}')">
                         <div class="order-card-header">
-                            <span class="order-id">#${o.id}</span>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <span class="order-id">#${o.id}</span>
+                                <button onclick="event.stopPropagation(); copyToClipboard('${o.id}', 'ID Pesanan')" style="background:rgba(99,102,241,0.1);color:var(--accent-light);border:none;width:24px;height:24px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.2s;" title="Salin ID">
+                                    <i class="far fa-copy" style="font-size:0.75rem;"></i>
+                                </button>
+                            </div>
                             <div style="display:flex;align-items:center;gap:8px;">
                                 <span class="order-status ${statusClass[o.status] || 'pending'}">${statusLabel[o.status] || o.status}</span>
                                 <button onclick="event.stopPropagation(); deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:var(--red);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.2s;" title="Hapus Riwayat">
@@ -5021,6 +5055,29 @@
             document.getElementById('adminStatPending').textContent = orders.filter(o => o.status === 'pending').length;
             document.getElementById('adminStatProcessing').textContent = orders.filter(o => o.status === 'processing').length;
             document.getElementById('adminStatCompleted').textContent = orders.filter(o => o.status === 'completed').length;
+        }
+
+        function refreshAdminOrders() {
+            const btn = document.getElementById('btnRefreshAdmin');
+            if (btn) btn.querySelector('i').classList.add('fa-spin');
+            
+            if (db) {
+                db.ref('orders').once('value').then((snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        orders = data;
+                        localStorage.setItem('joellOrders', JSON.stringify(orders));
+                        renderAdminOrders();
+                        updateAdminStats();
+                        showToast('Berhasil', 'Data pesanan diperbarui!', 'success', 2000);
+                    }
+                }).finally(() => {
+                    if (btn) btn.querySelector('i').classList.remove('fa-spin');
+                });
+            } else {
+                showToast('Error', 'Database tidak terhubung', 'error');
+                if (btn) btn.querySelector('i').classList.remove('fa-spin');
+            }
         }
 
         function renderAdminOrders() {

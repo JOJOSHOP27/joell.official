@@ -3946,7 +3946,7 @@
                 </ul>
 
                 <div id="g_id_onload"
-                     data-client_id="598453625335-75q95ljkskfe9em9kkr2a340tbgg3p3m.apps.googleusercontent.com
+                     data-client_id="598453625335-75q95ljkskfe9em9kkr2a340tbgg3p3m.apps.googleusercontent.com"
                      data-context="signin"
                      data-ux_mode="popup"
                      data-callback="handleGoogleLogin"
@@ -5209,20 +5209,31 @@
             const formData = new FormData();
             formData.append('file', file);
             try {
-                const res = await fetch('https://file.io/?expires=1d', { // File akan expired dalam 1 hari
+                // Using file.io - note that it expects field name 'file'
+                const res = await fetch('https://file.io', {
                     method: 'POST',
                     body: formData
                 });
                 const json = await res.json();
+                
+                // file.io returns { success: true, link: "..." }
                 if (json.success) {
-                    order.chat.push({
+                    const newMessage = {
                         from: 'admin',
                         text: `📄 File: ${file.name}`,
                         file: json.link,
                         fileName: file.name,
                         time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})
-                    });
+                    };
+                    
+                    order.chat.push(newMessage);
                     localStorage.setItem('joellOrders', JSON.stringify(orders));
+                    
+                    // Sync to Firebase if database is available
+                    if (db) {
+                        db.ref('orders').set(orders);
+                    }
+                    
                     broadcastChat(orderId);
                     renderAdminChatMessages();
                     showToast('Admin', 'File terkirim!', 'success');
@@ -5231,7 +5242,7 @@
                 }
             } catch (err) { 
                 console.error(err);
-                showToast('Error', 'Gagal upload file: ' + err.message, 'error'); 
+                showToast('Error', 'Gagal upload file. Coba lagi nanti.', 'error'); 
             }
             input.value = '';
         }
@@ -5258,13 +5269,21 @@
                 });
                 const json = await res.json();
                 if (json.success && json.data?.link) {
-                    order.chat.push({
+                    const newMessage = {
                         from: senderType,
                         text: '',
                         image: json.data.link,
                         time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})
-                    });
+                    };
+                    
+                    order.chat.push(newMessage);
                     localStorage.setItem('joellOrders', JSON.stringify(orders));
+                    
+                    // Sync to Firebase
+                    if (db) {
+                        db.ref('orders').set(orders);
+                    }
+                    
                     broadcastChat(orderId);
                     if (senderType === 'user') renderOrderChatMessages();
                     else renderAdminChatMessages();

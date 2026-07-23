@@ -748,10 +748,8 @@
         }
         .testimonial-info .stars {
             color: var(--gold);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
         }
-
-
         .testimonial-text {
             color: var(--text-secondary);
             font-size: 0.85rem;
@@ -2520,6 +2518,7 @@
             transform: none;
         }
 
+        
         /* ===== WHATSAPP STYLE CHAT MODAL ===== */
         .order-chat-modal {
             max-width: 800px;
@@ -2698,32 +2697,6 @@
             display: block;
             cursor: pointer;
         }
-        .order-chat-input-wrap {
-            display: flex;
-            gap: 8px;
-        }
-        .order-chat-input-wrap input {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 60px;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            outline: none;
-        }
-        .order-chat-input-wrap input:focus { border-color: var(--accent); }
-        .order-chat-input-wrap button {
-            padding: 12px 20px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            color: #fff;
-            border: none;
-            border-radius: 60px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .order-chat-input-wrap button:hover { transform: scale(1.05); }
 
         /* ===== ORDERS PAGE ===== */
         .orders-list {
@@ -3622,26 +3595,7 @@
                     <p style="color:var(--text-muted);font-size:0.75rem;margin-top:8px;">Database cloud memungkinkan chat real-time antar perangkat berbeda secara otomatis.</p>
                 </div>
                 <div class="admin-section">
-                    <h3><i class="fas fa-database"></i> Backup & Restore Data</h3>
-                    <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:12px;">Gunakan export/import untuk cadangan manual atau transfer data.</p>
-                    <div class="admin-export-btns">
-                        <button id="adminExportBtn"><i class="fas fa-download"></i> Export Orders</button>
-                        <button id="adminExportChatBtn"><i class="fas fa-download"></i> Export Chat</button>
-                    </div>
-                    <div class="admin-import-wrap">
-                        <label class="admin-import-label" for="adminImportFile">
-                            <i class="fas fa-upload"></i> Import Data JSON
-                        </label>
-                        <input type="file" id="adminImportFile" accept=".json">
-                    </div>
-                </div>
-                <div class="admin-section">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
-                        <h3 style="margin:0;"><i class="fas fa-shopping-bag"></i> Semua Pesanan</h3>
-                        <button onclick="manualRefreshAdmin()" id="adminRefreshBtn" class="header-btn" title="Refresh Pesanan" style="width:38px;height:38px;background:var(--accent-glow);color:var(--accent-light);border:1px solid var(--accent);">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
+                    <h3><i class="fas fa-shopping-bag"></i> Semua Pesanan</h3>
                     <div id="adminOrdersList"></div>
                 </div>
             </div>
@@ -3988,6 +3942,37 @@
 
     <script>
         // ============================================================
+        //  NOTIFICATION SYSTEM
+        // ============================================================
+        function requestNotificationPermission() {
+            if ("Notification" in window) {
+                Notification.requestPermission();
+            }
+        }
+
+        function sendBrowserNotification(title, message, orderId = null) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                const notification = new Notification(title, {
+                    body: message,
+                    icon: 'https://files.catbox.moe/o3t86k.jpg'
+                });
+                notification.onclick = function() {
+                    window.focus();
+                    if (orderId) {
+                        if (typeof isAdminLoggedIn !== 'undefined' && isAdminLoggedIn) {
+                            openAdminChat(orderId);
+                        } else {
+                            navigateTo('orders');
+                            setTimeout(() => openOrderChat(orderId), 500);
+                        }
+                    }
+                };
+            }
+        }
+
+        requestNotificationPermission();
+
+        // ============================================================
         //  CONFIG & DATA
         // ============================================================
         const CONFIG = {
@@ -4002,7 +3987,91 @@
             adminPassword: 'joelladmin2026'  // GANTI PASSWORD INI UNTUK PRODUCTION
         };
 
-        // FIREBASE CONFIG
+        const topupGames = [
+            { name: 'FREE FIRE', logo: 'https://files.catbox.moe/5mzzve.webp', url: 'https://bananagamestore.com/free-fire-b' },
+            { name: 'MOBILE LEGENDS', logo: 'https://files.catbox.moe/6l0i99.webp', url: 'https://bananagamestore.com/mobile-legends-b' },
+            { name: 'HONOR OF KINGS', logo: 'https://files.catbox.moe/jr45bw.png', url: 'https://bananagamestore.com/honor-of-kings' },
+            { name: 'PUBG MOBILE', logo: 'https://files.catbox.moe/ja3cb4.webp', url: 'https://bananagamestore.com/pubg-mobile' },
+            { name: 'MAGIC CHESS', logo: 'https://files.catbox.moe/20pncb.webp', url: 'https://bananagamestore.com/magic-chess-go-go' },
+            { name: 'VALORANT', logo: 'https://files.catbox.moe/o7ggke.webp', url: 'https://bananagamestore.com/valorant' },
+            { name: 'BLOOD STRIKE', logo: 'https://files.catbox.moe/rzmi2o.webp', url: 'https://bananagamestore.com/blood-strike' },
+            { name: 'CALL OF DUTY', logo: 'https://files.catbox.moe/xjzqxc.webp', url: 'https://bananagamestore.com/call-of-duty-mobile-id' },
+            { name: 'ROBLOX', logo: 'https://files.catbox.moe/t347k0.webp', url: 'https://bananagamestore.com/roblox' },
+            { name: 'DELTA FORCE', logo: 'https://files.catbox.moe/kkcx3r.webp', url: 'https://bananagamestore.com/delta-force-garena' },
+            { name: 'POINT BLANK', logo: 'https://files.catbox.moe/y9zkye.webp', url: 'https://bananagamestore.com/ppoint-blank-voucher-cash' },
+            { name: 'STEAM', logo: 'https://files.catbox.moe/s7r8fi.webp', url: 'https://bananagamestore.com/steam-voucher-indonesia-rupiah' }
+        ];
+
+        const products = [
+            { id: 1, name: 'Panel Pterodactyl', price: 2000, desc: 'Panel hosting premium dengan performa stabil untuk bot dan game server.', icon: 'fa-server', category: 'hosting', badge: 'hot', variants: [
+                { name: '1GB RAM', price: 2000, stock: 'Tersedia' }, { name: '2GB RAM', price: 3000, stock: 'Tersedia' },
+                { name: '3GB RAM', price: 4000, stock: 'Tersedia' }, { name: '4GB RAM', price: 5000, stock: 'Tersedia' },
+                { name: '5GB RAM', price: 6000, stock: 'Tersedia' }, { name: '6GB RAM', price: 7000, stock: 'Tersedia' },
+                { name: '7GB RAM', price: 8000, stock: 'Tersedia' }, { name: '8GB RAM', price: 9000, stock: 'Tersedia' },
+                { name: '9GB RAM', price: 10000, stock: 'Tersedia' }, { name: '11GB RAM', price: 11000, stock: 'Tersedia' },
+                { name: 'Unlimited RAM', price: 13000, stock: 'Limited' }, { name: 'Reseller Panel', price: 16000, stock: 'Tersedia' },
+                { name: 'Admin Panel', price: 18000, stock: 'Tersedia' }
+            ]},
+            { id: 2, name: 'Jasa Pembuatan Fitur', price: 5000, desc: 'Custom fitur untuk bot WhatsApp sesuai kebutuhan Anda.', icon: 'fa-microchip', category: 'hosting', badge: 'new', variants: [
+                { name: 'Add & Fix Fitur', price: 5000, stock: 'Tersedia' }, { name: 'Auto React Status', price: 15000, stock: 'Tersedia' },
+                { name: 'Security IP', price: 25000, stock: 'Tersedia' }, { name: 'Security User+Pass', price: 15000, stock: 'Tersedia' },
+                { name: 'Autojoin Saluran', price: 10000, stock: 'Tersedia' }, { name: 'Auto Show JKT48', price: 55000, stock: 'Limited' }
+            ]},
+            { id: 3, name: 'Sewa Bot & Jadibot', price: 10000, desc: 'Bot WhatsApp siap pakai 24/7 tanpa perlu setup.', icon: 'fa-robot', category: 'hosting', variants: [
+                { name: '2 Minggu', price: 10000, stock: 'Tersedia' }, { name: '1 Bulan', price: 20000, stock: 'Tersedia' }, { name: 'Lifetime', price: 30000, stock: 'Limited' }
+            ]},
+            { id: 4, name: 'Script Lily Gen 2', price: 30000, desc: 'Script bot WhatsApp 600+ fitur dengan auto react & auto show JKT48.', icon: 'fa-database', category: 'hosting', badge: 'pro', variants: [
+                { name: 'No Update', price: 30000, stock: 'Tersedia' }, { name: 'Free 1x Update', price: 35000, stock: 'Tersedia' }, { name: 'Free 2x Update', price: 45000, stock: 'Tersedia' }
+            ]},
+            { id: 5, name: 'Jasa Rename Script', price: 7000, desc: 'Ubah identitas script bot WA dari 30% hingga 100% full rename.', icon: 'fa-pen-fancy', category: 'hosting', variants: [
+                { name: 'Rename 30%', price: 7000, stock: 'Tersedia' }, { name: 'Rename 60%', price: 12000, stock: 'Tersedia' },
+                { name: 'Rename 80%', price: 15000, stock: 'Tersedia' }, { name: 'Rename 100%', price: 20000, stock: 'Tersedia' }
+            ]},
+            { id: 6, name: 'Domain & Hosting', price: 8000, desc: 'Domain dan hosting website berkualitas dengan panel cPanel.', icon: 'fa-globe', category: 'hosting', variants: [
+                { name: 'Domain .my.id 1th', price: 8000, stock: 'Tersedia' }, { name: 'Domain .biz.id 1th', price: 8000, stock: 'Tersedia' },
+                { name: 'Domain .xyz 1th', price: 75000, stock: 'Tersedia' }, { name: '.xyz + Hosting', price: 550000, stock: 'Tersedia' }
+            ]},
+            { id: 7, name: 'Bot Multi Device', price: 35000, desc: 'Script bot WhatsApp MD dengan fitur modern dan stabil.', icon: 'fa-code-branch', category: 'script', badge: 'hot', variants: [
+                { name: 'Bot MD Basic', price: 35000, stock: 'Tersedia' }, { name: 'Bot MD Premium', price: 75000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
+            ]},
+            { id: 8, name: 'Bot RPG', price: 45000, desc: 'Script bot RPG dengan sistem game, inventory, dan leveling.', icon: 'fa-gamepad', category: 'script', variants: [
+                { name: 'Bot RPG Basic', price: 45000, stock: 'Tersedia' }, { name: 'Bot RPG Full', price: 85000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
+            ]},
+            { id: 9, name: 'Bot Jaga Group', price: 30000, desc: 'Bot keamanan grup dengan welcome, anti-link, dan auto respon.', icon: 'fa-users-cog', category: 'script', variants: [
+                { name: 'Jaga Group Basic', price: 30000, stock: 'Tersedia' }, { name: 'Jaga Group + Pushkontak', price: 70000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
+            ]},
+            { id: 10, name: 'Bot Downloader', price: 40000, desc: 'Bot convert media, downloader sosmed, dan pembuat sticker.', icon: 'fa-download', category: 'script', badge: 'new', variants: [
+                { name: 'Downloader Basic', price: 40000, stock: 'Tersedia' }, { name: 'Convert + Sticker Full', price: 80000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
+            ]},
+            { id: 11, name: 'Bot Auto AI', price: 50000, desc: 'Bot AI pintar untuk chat otomatis dan asisten virtual.', icon: 'fa-brain', category: 'script', badge: 'pro', variants: [
+                { name: 'AI Basic', price: 50000, stock: 'Tersedia' }, { name: 'AI Premium', price: 95000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
+            ]},
+            { id: 12, name: 'Bot Auto Order', price: 55000, desc: 'Bot WhatsApp dengan sistem pembayaran otomatis.', icon: 'fa-credit-card', category: 'script', variants: [
+                { name: 'Auto Order Basic', price: 55000, stock: 'Tersedia' }, { name: 'Auto Order Premium', price: 99000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
+            ]},
+            { id: 13, name: 'Topup All Game', price: 0, desc: 'Topup diamond, UC, dan voucher game favoritmu.', icon: 'fa-gamepad', category: 'topup', isTopup: true, variants: [{ name: 'Pilih Game', price: 0, stock: 'Tersedia' }] },
+
+        ];
+
+        // ============================================================
+        //  STATE
+        // ============================================================
+        let cart = JSON.parse(localStorage.getItem('joellCart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('joellWishlist')) || [];
+        let orders = JSON.parse(localStorage.getItem('joellOrders')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('joellUser')) || null;
+        let currentProductId = null;
+        let selectedVariant = null;
+        let activePromo = null;
+        let currentFilter = 'all';
+        let currentOrderChatId = null;
+        let isAdminLoggedIn = false;
+        let currentAdminChatId = null;
+        let logoClickCount = 0;
+
+        // ============================================================
+        //  FIREBASE REAL-TIME DATABASE INTEGRATION
+        // ============================================================
         const firebaseConfig = {
             apiKey: "AIzaSyDoG6GPBDURvBCzbOOSCQLJknruFys4XEw",
             authDomain: "joell-shop-db3a6.firebaseapp.com",
@@ -4092,122 +4161,6 @@
 
         initCloudSync();
 
-        function sendBrowserNotification(title, body, orderId) {
-            if (!("Notification" in window)) return;
-            if (Notification.permission === "granted") {
-                new Notification(title, { body, icon: 'https://files.catbox.moe/ijemcy.png' });
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission();
-            }
-        }
-
-        function manualRefreshAdmin() {
-            const btn = document.getElementById('adminRefreshBtn');
-            if (btn) btn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i>';
-            
-            if (db) {
-                db.ref('orders').once('value').then(snapshot => {
-                    const data = snapshot.val();
-                    if (data) {
-                        orders = data;
-                        localStorage.setItem('joellOrders', JSON.stringify(orders));
-                        renderAdminOrders();
-                        updateAdminStats();
-                        showToast('Admin', 'Data disinkronkan dari cloud', 'success');
-                    }
-                    if (btn) btn.innerHTML = '<i class="fas fa-sync-alt"></i>';
-                }).catch(err => {
-                    showToast('Error', 'Gagal refresh: ' + err.message, 'error');
-                    if (btn) btn.innerHTML = '<i class="fas fa-sync-alt"></i>';
-                });
-            }
-        }
-
-        const topupGames = [
-            { name: 'FREE FIRE', logo: 'https://files.catbox.moe/5mzzve.webp', url: 'https://bananagamestore.com/free-fire-b' },
-            { name: 'MOBILE LEGENDS', logo: 'https://files.catbox.moe/6l0i99.webp', url: 'https://bananagamestore.com/mobile-legends-b' },
-            { name: 'HONOR OF KINGS', logo: 'https://files.catbox.moe/jr45bw.png', url: 'https://bananagamestore.com/honor-of-kings' },
-            { name: 'PUBG MOBILE', logo: 'https://files.catbox.moe/ja3cb4.webp', url: 'https://bananagamestore.com/pubg-mobile' },
-            { name: 'MAGIC CHESS', logo: 'https://files.catbox.moe/20pncb.webp', url: 'https://bananagamestore.com/magic-chess-go-go' },
-            { name: 'VALORANT', logo: 'https://files.catbox.moe/o7ggke.webp', url: 'https://bananagamestore.com/valorant' },
-            { name: 'BLOOD STRIKE', logo: 'https://files.catbox.moe/rzmi2o.webp', url: 'https://bananagamestore.com/blood-strike' },
-            { name: 'CALL OF DUTY', logo: 'https://files.catbox.moe/xjzqxc.webp', url: 'https://bananagamestore.com/call-of-duty-mobile-id' },
-            { name: 'ROBLOX', logo: 'https://files.catbox.moe/t347k0.webp', url: 'https://bananagamestore.com/roblox' },
-            { name: 'DELTA FORCE', logo: 'https://files.catbox.moe/kkcx3r.webp', url: 'https://bananagamestore.com/delta-force-garena' },
-            { name: 'POINT BLANK', logo: 'https://files.catbox.moe/y9zkye.webp', url: 'https://bananagamestore.com/ppoint-blank-voucher-cash' },
-            { name: 'STEAM', logo: 'https://files.catbox.moe/s7r8fi.webp', url: 'https://bananagamestore.com/steam-voucher-indonesia-rupiah' }
-        ];
-
-        const products = [
-            { id: 1, name: 'Panel Pterodactyl', price: 2000, desc: 'Panel hosting premium dengan performa stabil untuk bot dan game server.', icon: 'fa-server', category: 'hosting', badge: 'hot', variants: [
-                { name: '1GB RAM', price: 2000, stock: 'Tersedia' }, { name: '2GB RAM', price: 3000, stock: 'Tersedia' },
-                { name: '3GB RAM', price: 4000, stock: 'Tersedia' }, { name: '4GB RAM', price: 5000, stock: 'Tersedia' },
-                { name: '5GB RAM', price: 6000, stock: 'Tersedia' }, { name: '6GB RAM', price: 7000, stock: 'Tersedia' },
-                { name: '7GB RAM', price: 8000, stock: 'Tersedia' }, { name: '8GB RAM', price: 9000, stock: 'Tersedia' },
-                { name: '9GB RAM', price: 10000, stock: 'Tersedia' }, { name: '11GB RAM', price: 11000, stock: 'Tersedia' },
-                { name: 'Unlimited RAM', price: 13000, stock: 'Limited' }, { name: 'Reseller Panel', price: 16000, stock: 'Tersedia' },
-                { name: 'Admin Panel', price: 18000, stock: 'Tersedia' }
-            ]},
-            { id: 2, name: 'Jasa Pembuatan Fitur', price: 5000, desc: 'Custom fitur untuk bot WhatsApp sesuai kebutuhan Anda.', icon: 'fa-microchip', category: 'hosting', badge: 'new', variants: [
-                { name: 'Add & Fix Fitur', price: 5000, stock: 'Tersedia' }, { name: 'Auto React Status', price: 15000, stock: 'Tersedia' },
-                { name: 'Security IP', price: 25000, stock: 'Tersedia' }, { name: 'Security User+Pass', price: 15000, stock: 'Tersedia' },
-                { name: 'Autojoin Saluran', price: 10000, stock: 'Tersedia' }, { name: 'Auto Show JKT48', price: 55000, stock: 'Limited' }
-            ]},
-            { id: 3, name: 'Sewa Bot & Jadibot', price: 10000, desc: 'Bot WhatsApp siap pakai 24/7 tanpa perlu setup.', icon: 'fa-robot', category: 'hosting', variants: [
-                { name: '2 Minggu', price: 10000, stock: 'Tersedia' }, { name: '1 Bulan', price: 20000, stock: 'Tersedia' }, { name: 'Lifetime', price: 30000, stock: 'Limited' }
-            ]},
-            { id: 4, name: 'Script Lily Gen 2', price: 30000, desc: 'Script bot WhatsApp 600+ fitur dengan auto react & auto show JKT48.', icon: 'fa-database', category: 'hosting', badge: 'pro', variants: [
-                { name: 'No Update', price: 30000, stock: 'Tersedia' }, { name: 'Free 1x Update', price: 35000, stock: 'Tersedia' }, { name: 'Free 2x Update', price: 45000, stock: 'Tersedia' }
-            ]},
-            { id: 5, name: 'Jasa Rename Script', price: 7000, desc: 'Ubah identitas script bot WA dari 30% hingga 100% full rename.', icon: 'fa-pen-fancy', category: 'hosting', variants: [
-                { name: 'Rename 30%', price: 7000, stock: 'Tersedia' }, { name: 'Rename 60%', price: 12000, stock: 'Tersedia' },
-                { name: 'Rename 80%', price: 15000, stock: 'Tersedia' }, { name: 'Rename 100%', price: 20000, stock: 'Tersedia' }
-            ]},
-            { id: 6, name: 'Domain & Hosting', price: 8000, desc: 'Domain dan hosting website berkualitas dengan panel cPanel.', icon: 'fa-globe', category: 'hosting', variants: [
-                { name: 'Domain .my.id 1th', price: 8000, stock: 'Tersedia' }, { name: 'Domain .biz.id 1th', price: 8000, stock: 'Tersedia' },
-                { name: 'Domain .xyz 1th', price: 75000, stock: 'Tersedia' }, { name: '.xyz + Hosting', price: 550000, stock: 'Tersedia' }
-            ]},
-            { id: 7, name: 'Bot Multi Device', price: 35000, desc: 'Script bot WhatsApp MD dengan fitur modern dan stabil.', icon: 'fa-code-branch', category: 'script', badge: 'hot', variants: [
-                { name: 'Bot MD Basic', price: 35000, stock: 'Tersedia' }, { name: 'Bot MD Premium', price: 75000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
-            ]},
-            { id: 8, name: 'Bot RPG', price: 45000, desc: 'Script bot RPG dengan sistem game, inventory, dan leveling.', icon: 'fa-gamepad', category: 'script', variants: [
-                { name: 'Bot RPG Basic', price: 45000, stock: 'Tersedia' }, { name: 'Bot RPG Full', price: 85000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
-            ]},
-            { id: 9, name: 'Bot Jaga Group', price: 30000, desc: 'Bot keamanan grup dengan welcome, anti-link, dan auto respon.', icon: 'fa-users-cog', category: 'script', variants: [
-                { name: 'Jaga Group Basic', price: 30000, stock: 'Tersedia' }, { name: 'Jaga Group + Pushkontak', price: 70000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
-            ]},
-            { id: 10, name: 'Bot Downloader', price: 40000, desc: 'Bot convert media, downloader sosmed, dan pembuat sticker.', icon: 'fa-download', category: 'script', badge: 'new', variants: [
-                { name: 'Downloader Basic', price: 40000, stock: 'Tersedia' }, { name: 'Convert + Sticker Full', price: 80000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
-            ]},
-            { id: 11, name: 'Bot Auto AI', price: 50000, desc: 'Bot AI pintar untuk chat otomatis dan asisten virtual.', icon: 'fa-brain', category: 'script', badge: 'pro', variants: [
-                { name: 'AI Basic', price: 50000, stock: 'Tersedia' }, { name: 'AI Premium', price: 95000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
-            ]},
-            { id: 12, name: 'Bot Auto Order', price: 55000, desc: 'Bot WhatsApp dengan sistem pembayaran otomatis.', icon: 'fa-credit-card', category: 'script', variants: [
-                { name: 'Auto Order Basic', price: 55000, stock: 'Tersedia' }, { name: 'Auto Order Premium', price: 99000, stock: 'Tersedia' }, { name: 'Custom Request', price: 0, stock: 'Hubungi' }
-            ]},
-            { id: 13, name: 'Topup All Game', price: 0, desc: 'Topup diamond, UC, dan voucher game favoritmu.', icon: 'fa-gamepad', category: 'topup', isTopup: true, variants: [{ name: 'Pilih Game', price: 0, stock: 'Tersedia' }] },
-
-        ];
-
-        // ============================================================
-        //  STATE
-        // ============================================================
-        let cart = JSON.parse(localStorage.getItem('joellCart')) || [];
-        let wishlist = JSON.parse(localStorage.getItem('joellWishlist')) || [];
-        let orders = JSON.parse(localStorage.getItem('joellOrders')) || [];
-        let currentUser = JSON.parse(localStorage.getItem('joellUser')) || null;
-        let currentProductId = null;
-        let selectedVariant = null;
-        let activePromo = null;
-        let currentFilter = 'all';
-        let currentOrderChatId = null;
-        let isAdminLoggedIn = false;
-        let currentAdminChatId = null;
-        let logoClickCount = 0;
-
-        // ============================================================
-        //  BROADCAST CHANNEL (for real-time sync same-browser)
-        // ============================================================
         let bc;
         try {
             bc = new BroadcastChannel('joell_shop_channel');
@@ -4690,7 +4643,7 @@
                 userEmail: document.getElementById('coEmail').value,
                 userPhone: document.getElementById('coPhone').value,
                 address: document.getElementById('coAddress').value,
-                payment: 'manual',
+                payment: 'online',
                 items: [...cart],
                 total: total,
                 status: 'pending',
@@ -4703,7 +4656,12 @@
                     { step: 'Pesanan Selesai', desc: 'Detail produk dikirim ke akun Anda', time: '-', completed: false }
                 ],
                 chat: [
-                    { from: 'admin', text: `Halo ${currentUser.name}! Terima kasih telah memesan. Silakan selesaikan pembayaran melalui tombol di bawah ini agar segera kami proses pesanan #${orderId}.`, paymentBtn: true, time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) }
+                    { 
+                        from: 'admin', 
+                        text: `Halo ${currentUser.name}! Terima kasih telah memesan. Tim kami akan segera memproses pesanan #${orderId}.<br><br>Silakan selesaikan pembayaran Anda melalui tombol di bawah ini:`, 
+                        paymentBtn: true,
+                        time: new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'}) 
+                    }
                 ]
             };
             
@@ -4718,17 +4676,13 @@
             
             document.getElementById('checkoutOverlay').classList.remove('open');
             
-            Swal.fire({
-                title: 'Pesanan Berhasil!',
-                text: 'ID Pesanan: ' + orderId,
-                icon: 'success',
-                confirmButtonText: 'Buka Chat Admin'
-            }).then(() => {
-                navigateTo('orders');
-                setTimeout(() => {
-                    openOrderChat(orderId);
-                }, 500);
-            });
+            // Langsung arahkan ke menu pesanan dan buka chat
+            showToast('Pesanan Dibuat', `ID: ${orderId}. Selesaikan pembayaran di menu Chat.`, 'success', 5000);
+            navigateTo('orders');
+            setTimeout(() => {
+                openOrderChat(orderId);
+            }, 500);
+            renderOrdersList();
         });
 
         // ============================================================
@@ -4766,22 +4720,20 @@
             container.innerHTML = '<div class="orders-list">' + myOrders.map(o => {
                 const itemsText = o.items.map(i => `${i.name} (${i.variant})`).join(', ');
                 return `
-                    <div class="order-card">
-                        <div onclick="openOrderChat('${o.id}')" style="cursor:pointer;">
-                            <div class="order-card-header">
-                                <span class="order-id">#${o.id}</span>
+                    <div class="order-card" onclick="openOrderChat('${o.id}')">
+                        <div class="order-card-header">
+                            <span class="order-id">#${o.id}</span>
+                            <div style="display:flex;align-items:center;gap:8px;">
                                 <span class="order-status ${statusClass[o.status] || 'pending'}">${statusLabel[o.status] || o.status}</span>
-                            </div>
-                            <div class="order-products">${itemsText}</div>
-                            <div class="order-meta">
-                                <span>${new Date(o.createdAt).toLocaleDateString('id-ID')}</span>
-                                <span class="order-total">Rp ${o.total.toLocaleString()}</span>
+                                <button onclick="event.stopPropagation(); deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:var(--red);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.2s;" title="Hapus Riwayat">
+                                    <i class="fas fa-trash-alt" style="font-size:0.8rem;"></i>
+                                </button>
                             </div>
                         </div>
-                        <div style="border-top:1px solid var(--border-subtle);margin-top:10px;padding-top:10px;display:flex;justify-content:flex-end;">
-                            <button onclick="deleteOrder('${o.id}')" style="background:none;border:none;color:#ef4444;font-size:0.8rem;cursor:pointer;display:flex;align-items:center;gap:5px;">
-                                <i class="fas fa-trash-alt"></i> Hapus Riwayat
-                            </button>
+                        <div class="order-products">${itemsText}</div>
+                        <div class="order-meta">
+                            <span>${new Date(o.createdAt).toLocaleDateString('id-ID')}</span>
+                            <span class="order-total">Rp ${o.total.toLocaleString()}</span>
                         </div>
                     </div>
                 `;
@@ -4938,10 +4890,6 @@
             };
             
             document.getElementById('trackResult').style.display = 'block';
-            document.getElementById('trackChatBtn').onclick = () => {
-                navigateTo('orders');
-                setTimeout(() => { openOrderChat(order.id); }, 500);
-            };
             showToast('Tracking', 'Data pesanan ditemukan', 'success');
         });
 
@@ -5029,8 +4977,10 @@
                         <div style="display:flex;justify-content:space-between;align-items:center;">
                             <span style="font-weight:800;color:var(--accent-light);">Rp ${o.total.toLocaleString()}</span>
                             <div style="display:flex;gap:8px;">
+                                <button onclick="deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2);padding:8px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:6px;">
+                                    <i class="fas fa-trash-alt"></i> Hapus
+                                </button>
                                 <button class="admin-chat-btn" onclick="openAdminChat('${o.id}')"><i class="fas fa-comments"></i> Balas Chat</button>
-                                <button class="admin-chat-btn" onclick="deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.2);"><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </div>
                     </div>
@@ -5213,57 +5163,12 @@
             if (e.key === 'Enter') document.getElementById('adminChatSend').click();
         });
 
-        // Export / Import
-        document.getElementById('adminExportBtn').addEventListener('click', () => {
-            const dataStr = JSON.stringify(orders, null, 2);
-            const blob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `joell_orders_${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('Export', 'Data orders berhasil diexport', 'success');
-        });
-
-        document.getElementById('adminExportChatBtn').addEventListener('click', () => {
-            const chatData = orders.map(o => ({ id: o.id, userName: o.userName, chat: o.chat }));
-            const dataStr = JSON.stringify(chatData, null, 2);
-            const blob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `joell_chats_${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('Export', 'Data chat berhasil diexport', 'success');
-        });
-
-        document.getElementById('adminImportFile').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const imported = JSON.parse(event.target.result);
-                    if (Array.isArray(imported)) {
-                        if (confirm(`Import ${imported.length} orders? Ini akan menimpa data orders yang ada.`)) {
-                            orders = imported;
-                            localStorage.setItem('joellOrders', JSON.stringify(orders));
-                            broadcastOrders();
-                            renderAdminOrders();
-                            updateAdminStats();
-                            showToast('Import', 'Data berhasil diimport!', 'success');
-                        }
-                    } else {
-                        showToast('Error', 'Format file tidak valid', 'error');
-                    }
-                } catch {
-                    showToast('Error', 'Gagal membaca file JSON', 'error');
-                }
-            };
-            reader.readAsText(file);
-        });
+        // Export / Import (Disabled since using Cloud Database)
+        /*
+        if (document.getElementById('adminExportBtn')) {
+            document.getElementById('adminExportBtn').addEventListener('click', () => { ... });
+        }
+        */
 
         // ============================================================
         //  ANIME

@@ -5155,57 +5155,12 @@
             if (e.key === 'Enter') document.getElementById('adminChatSend').click();
         });
 
-        // Export / Import
-        document.getElementById('adminExportBtn').addEventListener('click', () => {
-            const dataStr = JSON.stringify(orders, null, 2);
-            const blob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `joell_orders_${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('Export', 'Data orders berhasil diexport', 'success');
-        });
-
-        document.getElementById('adminExportChatBtn').addEventListener('click', () => {
-            const chatData = orders.map(o => ({ id: o.id, userName: o.userName, chat: o.chat }));
-            const dataStr = JSON.stringify(chatData, null, 2);
-            const blob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `joell_chats_${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('Export', 'Data chat berhasil diexport', 'success');
-        });
-
-        document.getElementById('adminImportFile').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const imported = JSON.parse(event.target.result);
-                    if (Array.isArray(imported)) {
-                        if (confirm(`Import ${imported.length} orders? Ini akan menimpa data orders yang ada.`)) {
-                            orders = imported;
-                            localStorage.setItem('joellOrders', JSON.stringify(orders));
-                            broadcastOrders();
-                            renderAdminOrders();
-                            updateAdminStats();
-                            showToast('Import', 'Data berhasil diimport!', 'success');
-                        }
-                    } else {
-                        showToast('Error', 'Format file tidak valid', 'error');
-                    }
-                } catch {
-                    showToast('Error', 'Gagal membaca file JSON', 'error');
-                }
-            };
-            reader.readAsText(file);
-        });
+        // Export / Import (Disabled since using Cloud Database)
+        /*
+        if (document.getElementById('adminExportBtn')) {
+            document.getElementById('adminExportBtn').addEventListener('click', () => { ... });
+        }
+        */
 
         // ============================================================
         //  ANIME

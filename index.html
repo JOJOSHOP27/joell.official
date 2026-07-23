@@ -3946,7 +3946,7 @@
                 </ul>
 
                 <div id="g_id_onload"
-                     data-client_id="598453625335-75q95ljkskfe9em9kkr2a340tbgg3p3m.apps.googleusercontent.com"
+                     data-client_id="598453625335-75q95ljkskfe9em9kkr2a340tbgg3p3m.apps.googleusercontent.com
                      data-context="signin"
                      data-ux_mode="popup"
                      data-callback="handleGoogleLogin"
@@ -4793,6 +4793,22 @@
             });
         }
 
+        // Helper function for relative time
+        function getRelativeTime(timestamp) {
+            const now = Date.now();
+            const diff = now - timestamp;
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (seconds < 60) return 'Baru saja';
+            if (minutes < 60) return `${minutes} menit lalu`;
+            if (hours < 24) return `${hours} jam lalu`;
+            if (days < 7) return `${days} hari lalu`;
+            return new Date(timestamp).toLocaleDateString('id-ID');
+        }
+
         function renderOrdersList() {
             const container = document.getElementById('ordersListContainer');
             const myOrders = currentUser ? orders.filter(o => o.userId === currentUser.id) : [];
@@ -4842,7 +4858,7 @@
                         </div>
                         <div class="order-products">${itemsText}</div>
                         <div class="order-meta">
-                            <span>${new Date(o.createdAt).toLocaleDateString('id-ID')}</span>
+                            <span class="realtime-time" data-time="${o.createdAt}">${getRelativeTime(o.createdAt)}</span>
                             <span class="order-total">Rp ${o.total.toLocaleString()}</span>
                         </div>
                     </div>
@@ -5108,7 +5124,10 @@
                         </div>
                         <div class="admin-order-products">${itemsText}</div>
                         <div style="display:flex;justify-content:space-between;align-items:center;">
-                            <span style="font-weight:800;color:var(--accent-light);">Rp ${o.total.toLocaleString()}</span>
+                            <div style="display:flex;flex-direction:column;gap:2px;">
+                                <span style="font-weight:800;color:var(--accent-light);">Rp ${o.total.toLocaleString()}</span>
+                                <span class="realtime-time" data-time="${o.createdAt}" style="font-size:0.7rem;color:var(--text-muted);">${getRelativeTime(o.createdAt)}</span>
+                            </div>
                             <div style="display:flex;gap:8px;">
                                 <button onclick="deleteOrder('${o.id}')" style="background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.2);padding:8px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:6px;">
                                     <i class="fas fa-trash-alt"></i> Hapus
@@ -5714,6 +5733,14 @@
                 document.querySelectorAll('.detail-overlay.open, .modal-overlay.open, .cart-overlay.open').forEach(el => el.classList.remove('open'));
             }
         });
+
+        // Real-time time updater (every minute)
+        setInterval(() => {
+            document.querySelectorAll('.realtime-time').forEach(el => {
+                const timestamp = parseInt(el.dataset.time);
+                if (timestamp) el.textContent = getRelativeTime(timestamp);
+            });
+        }, 60000);
 
         // Init
         updateUserUI();

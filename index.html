@@ -1644,7 +1644,7 @@
             color: var(--green);
             font-size: 0.8rem;
         }
-        .g_id_signin {
+        #googleSignInBtn {
             display: flex;
             justify-content: center;
             margin-top: 16px;
@@ -4033,21 +4033,7 @@
                     <li><i class="fas fa-check-circle"></i> Notifikasi status pesanan</li>
                 </ul>
 
-                <div id="g_id_onload"
-                     data-client_id="https://598453625335-9313enppiop9nntv0vtg6eea1of32uq8.apps.googleusercontent.com"
-                     data-context="signin"
-                     data-ux_mode="popup"
-                     data-callback="handleGoogleLogin"
-                     data-auto_prompt="false">
-                </div>
-                <div class="g_id_signin"
-                     data-type="standard"
-                     data-shape="pill"
-                     data-theme="filled_black"
-                     data-text="signin_with"
-                     data-size="large"
-                     data-logo_alignment="left">
-                </div>
+                <div id="googleSignInBtn"></div>
             </div>
         </div>
     </div>
@@ -4384,6 +4370,29 @@
             updateUserUI();
             document.getElementById('loginOverlay').classList.remove('open');
             showToast('Login Berhasil', `Selamat datang, ${currentUser.name}!`, 'success');
+        }
+
+        // Inisialisasi Google Sign-In dengan JavaScript API
+        function initGoogleSignIn() {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: "https://598453625335-9313enppiop9nntv0vtg6eea1of32uq8.apps.googleusercontent.com",
+                    callback: handleGoogleLogin,
+                    ux_mode: 'popup'
+                });
+                const btnContainer = document.getElementById('googleSignInBtn');
+                if (btnContainer && !btnContainer.innerHTML.trim()) {
+                    google.accounts.id.renderButton(btnContainer, {
+                        type: 'standard',
+                        shape: 'pill',
+                        theme: 'filled_black',
+                        text: 'signin_with',
+                        size: 'large',
+                        logo_alignment: 'left',
+                        width: '100%'
+                    });
+                }
+            }
         }
 
         function updateUserUI() {
@@ -5894,6 +5903,56 @@
         renderMenus();
         updateCartUI();
         showToast('Selamat Datang', 'JOELL SHOP siap melayani!', 'success', 4000);
+
+        // Render Google Sign-In button (tunggu library GSI siap)
+        let gsiInitialized = false;
+        function tryInitGSI() {
+            if (typeof google !== 'undefined' && google.accounts) {
+                google.accounts.id.initialize({
+                    client_id: "https://598453625335-9313enppiop9nntv0vtg6eea1of32uq8.apps.googleusercontent.com",
+                    callback: handleGoogleLogin,
+                    ux_mode: 'popup'
+                });
+                gsiInitialized = true;
+                renderGoogleButton();
+            } else {
+                setTimeout(tryInitGSI, 200);
+            }
+        }
+
+        function renderGoogleButton() {
+            if (!gsiInitialized) return;
+            const btnContainer = document.getElementById('googleSignInBtn');
+            if (btnContainer) {
+                btnContainer.innerHTML = '';
+                google.accounts.id.renderButton(btnContainer, {
+                    type: 'standard',
+                    shape: 'pill',
+                    theme: 'filled_black',
+                    text: 'signin_with',
+                    size: 'large',
+                    logo_alignment: 'left',
+                    width: '100%'
+                });
+            }
+        }
+
+        // Re-render Google button saat modal login dibuka (karena button ada di dalam modal yang tersembunyi)
+        const loginOverlayEl = document.getElementById('loginOverlay');
+        if (loginOverlayEl) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class') {
+                        if (loginOverlayEl.classList.contains('open') && gsiInitialized) {
+                            setTimeout(renderGoogleButton, 100);
+                        }
+                    }
+                });
+            });
+            observer.observe(loginOverlayEl, { attributes: true });
+        }
+
+        tryInitGSI();
     </script>
 </body>
     </html>
